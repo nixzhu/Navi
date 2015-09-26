@@ -7,21 +7,49 @@
 //
 
 import UIKit
+import CoreData
 
 class AvatarsViewController: UICollectionViewController {
 
-    let users: [User] = [
-        User(name: "NIX A", URL: NSURL(string: "https://raw.githubusercontent.com/onevcat/Kingfisher/master/images/kingfisher-1.jpg")!, localImage: nil),
-        User(name: "NIX B", URL: NSURL(string: "https://raw.githubusercontent.com/onevcat/Kingfisher/master/images/kingfisher-2.jpg")!, localImage: nil),
-        User(name: "NIX C", URL: NSURL(string: "https://raw.githubusercontent.com/onevcat/Kingfisher/master/images/kingfisher-3.jpg")!, localImage: nil),
-        User(name: "NIX D", URL: NSURL(string: "https://raw.githubusercontent.com/onevcat/Kingfisher/master/images/kingfisher-4.jpg")!, localImage: nil),
-        User(name: "NIX E", URL: NSURL(string: "https://raw.githubusercontent.com/onevcat/Kingfisher/master/images/kingfisher-5.jpg")!, localImage: nil),
-        User(name: "NIX F", URL: NSURL(string: "https://raw.githubusercontent.com/onevcat/Kingfisher/master/images/kingfisher-6.jpg")!, localImage: nil),
-        User(name: "NIX G", URL: NSURL(string: "https://raw.githubusercontent.com/onevcat/Kingfisher/master/images/kingfisher-7.jpg")!, localImage: nil),
-        User(name: "NIX H", URL: NSURL(string: "https://raw.githubusercontent.com/onevcat/Kingfisher/master/images/kingfisher-8.jpg")!, localImage: nil),
-        User(name: "NIX I", URL: NSURL(string: "https://raw.githubusercontent.com/onevcat/Kingfisher/master/images/kingfisher-9.jpg")!, localImage: nil),
-        User(name: "NIX J", URL: NSURL(string: "https://raw.githubusercontent.com/onevcat/Kingfisher/master/images/kingfisher-10.jpg")!, localImage: nil),
-    ]
+    lazy var coreDataStack = CoreDataStack()
+
+    lazy var users: [User] = {
+
+        if let users = self.coreDataStack.users() {
+
+            // first time dammy data
+
+            if users.isEmpty {
+
+                if let usersURL = NSBundle.mainBundle().URLForResource("users", withExtension: "plist") {
+
+                    if let users = NSArray(contentsOfURL: usersURL) as? [NSDictionary] {
+
+                        let context = self.coreDataStack.context
+
+                        users.forEach { userInfo in
+
+                            let userEntityDescription = NSEntityDescription.entityForName("User", inManagedObjectContext: context)!
+                            let user = NSManagedObject(entity: userEntityDescription, insertIntoManagedObjectContext: context) as! User
+
+                            user.username = userInfo["username"] as? String
+                            user.avatarURLString = userInfo["avatarURLString"] as? String
+                        }
+                        
+                        self.coreDataStack.saveContext()
+                    }
+                }
+
+                if let users = self.coreDataStack.users() {
+                    return users
+                }
+            }
+
+            return users
+        }
+
+        return []
+        }()
 
     private let avatarCellID = "AvatarCell"
 
@@ -33,6 +61,8 @@ class AvatarsViewController: UICollectionViewController {
 
         collectionView!.backgroundColor = UIColor.whiteColor()
         collectionView!.registerNib(UINib(nibName: avatarCellID, bundle: nil), forCellWithReuseIdentifier: avatarCellID)
+
+
     }
 
     // MARK: UICollectionViewDataSource

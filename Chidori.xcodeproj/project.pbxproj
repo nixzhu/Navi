@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		502A2D311BB6843600B3A6B1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */; settings = {ASSET_TAGS = (); }; };
+		502A2D351BB686A400B3A6B1 /* Chidori.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D331BB686A400B3A6B1 /* Chidori.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		502A2D3F1BB6895700B3A6B1 /* users.plist in Resources */ = {isa = PBXBuildFile; fileRef = 502A2D3E1BB6895700B3A6B1 /* users.plist */; settings = {ASSET_TAGS = (); }; };
+		502A2D411BB68D3400B3A6B1 /* User+Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D401BB68D3400B3A6B1 /* User+Avatar.swift */; settings = {ASSET_TAGS = (); }; };
+		502A2D461BB68DFF00B3A6B1 /* Avatar+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D421BB68DFF00B3A6B1 /* Avatar+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		502A2D471BB68DFF00B3A6B1 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D431BB68DFF00B3A6B1 /* Avatar.swift */; settings = {ASSET_TAGS = (); }; };
+		502A2D481BB68DFF00B3A6B1 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D441BB68DFF00B3A6B1 /* User+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		502A2D491BB68DFF00B3A6B1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D451BB68DFF00B3A6B1 /* User.swift */; settings = {ASSET_TAGS = (); }; };
 		505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */; };
 		505A55E41BB63CFD00159CD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505A55E21BB63CFD00159CD0 /* Main.storyboard */; };
 		505A55E61BB63CFD00159CD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 505A55E51BB63CFD00159CD0 /* Assets.xcassets */; };
@@ -22,7 +30,6 @@
 		505A561A1BB6559800159CD0 /* AvatarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A56191BB6559800159CD0 /* AvatarsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A561C1BB6566F00159CD0 /* AvatarCell.swift */; settings = {ASSET_TAGS = (); }; };
 		505A561F1BB6566F00159CD0 /* AvatarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505A561D1BB6566F00159CD0 /* AvatarCell.xib */; settings = {ASSET_TAGS = (); }; };
-		505A56241BB6595D00159CD0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A56231BB6595D00159CD0 /* User.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +71,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = CoreData/CoreDataStack.swift; sourceTree = "<group>"; };
+		502A2D341BB686A400B3A6B1 /* Chidori.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chidori.xcdatamodel; sourceTree = "<group>"; };
+		502A2D3E1BB6895700B3A6B1 /* users.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = users.plist; path = CoreData/users.plist; sourceTree = "<group>"; };
+		502A2D401BB68D3400B3A6B1 /* User+Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+Avatar.swift"; path = "CoreData/User+Avatar.swift"; sourceTree = "<group>"; };
+		502A2D421BB68DFF00B3A6B1 /* Avatar+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Avatar+CoreDataProperties.swift"; path = "CoreData/Avatar+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		502A2D431BB68DFF00B3A6B1 /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Avatar.swift; path = CoreData/Avatar.swift; sourceTree = "<group>"; };
+		502A2D441BB68DFF00B3A6B1 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "CoreData/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		502A2D451BB68DFF00B3A6B1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = CoreData/User.swift; sourceTree = "<group>"; };
 		505A55DB1BB63CFD00159CD0 /* Chidori.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chidori.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		505A55E31BB63CFD00159CD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,7 +97,6 @@
 		505A56191BB6559800159CD0 /* AvatarsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarsViewController.swift; path = ViewControllers/AvatarsViewController.swift; sourceTree = "<group>"; };
 		505A561C1BB6566F00159CD0 /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarCell.swift; path = Views/Cells/Avatar/AvatarCell.swift; sourceTree = "<group>"; };
 		505A561D1BB6566F00159CD0 /* AvatarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AvatarCell.xib; path = Views/Cells/Avatar/AvatarCell.xib; sourceTree = "<group>"; };
-		505A56231BB6595D00159CD0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +126,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		502A2D321BB6843A00B3A6B1 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				502A2D3E1BB6895700B3A6B1 /* users.plist */,
+				502A2D331BB686A400B3A6B1 /* Chidori.xcdatamodeld */,
+				502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */,
+				502A2D421BB68DFF00B3A6B1 /* Avatar+CoreDataProperties.swift */,
+				502A2D431BB68DFF00B3A6B1 /* Avatar.swift */,
+				502A2D441BB68DFF00B3A6B1 /* User+CoreDataProperties.swift */,
+				502A2D451BB68DFF00B3A6B1 /* User.swift */,
+				502A2D401BB68D3400B3A6B1 /* User+Avatar.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		505A55D21BB63CFC00159CD0 = {
 			isa = PBXGroup;
 			children = (
@@ -136,7 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */,
-				505A56251BB6596500159CD0 /* Models */,
+				502A2D321BB6843A00B3A6B1 /* CoreData */,
 				505A56201BB6567200159CD0 /* Views */,
 				505A561B1BB6559D00159CD0 /* ViewControllers */,
 				505A55E21BB63CFD00159CD0 /* Main.storyboard */,
@@ -199,14 +228,6 @@
 				505A561D1BB6566F00159CD0 /* AvatarCell.xib */,
 			);
 			name = Avatar;
-			sourceTree = "<group>";
-		};
-		505A56251BB6596500159CD0 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				505A56231BB6595D00159CD0 /* User.swift */,
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				505A55E91BB63CFD00159CD0 /* LaunchScreen.storyboard in Resources */,
+				502A2D3F1BB6895700B3A6B1 /* users.plist in Resources */,
 				505A55E61BB63CFD00159CD0 /* Assets.xcassets in Resources */,
 				505A561F1BB6566F00159CD0 /* AvatarCell.xib in Resources */,
 				505A55E41BB63CFD00159CD0 /* Main.storyboard in Resources */,
@@ -354,10 +376,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				505A56241BB6595D00159CD0 /* User.swift in Sources */,
+				502A2D351BB686A400B3A6B1 /* Chidori.xcdatamodeld in Sources */,
+				502A2D461BB68DFF00B3A6B1 /* Avatar+CoreDataProperties.swift in Sources */,
+				502A2D311BB6843600B3A6B1 /* CoreDataStack.swift in Sources */,
 				505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */,
 				505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */,
 				505A561A1BB6559800159CD0 /* AvatarsViewController.swift in Sources */,
+				502A2D471BB68DFF00B3A6B1 /* Avatar.swift in Sources */,
+				502A2D411BB68D3400B3A6B1 /* User+Avatar.swift in Sources */,
+				502A2D491BB68DFF00B3A6B1 /* User.swift in Sources */,
+				502A2D481BB68DFF00B3A6B1 /* User+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +649,7 @@
 				505A560D1BB63F2E00159CD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		505A56121BB63F2E00159CD0 /* Build configuration list for PBXNativeTarget "NaviTests" */ = {
 			isa = XCConfigurationList;
@@ -629,8 +658,23 @@
 				505A560F1BB63F2E00159CD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		502A2D331BB686A400B3A6B1 /* Chidori.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				502A2D341BB686A400B3A6B1 /* Chidori.xcdatamodel */,
+			);
+			currentVersion = 502A2D341BB686A400B3A6B1 /* Chidori.xcdatamodel */;
+			name = Chidori.xcdatamodeld;
+			path = CoreData/Chidori.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 505A55D31BB63CFD00159CD0 /* Project object */;
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A282b" minimumToolsVersion="Xcode 7.0">
+    <entity name="Avatar" representedClassName=".Avatar" syncable="YES">
+        <attribute name="avatarData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="avatarURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="miniAvatarData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="nanoAvatarData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="avatar" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName=".User" syncable="YES">
+        <attribute name="avatarURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="avatar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Avatar" inverseName="user" inverseEntity="Avatar" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="User" positionX="-414" positionY="-162" width="128" height="88"/>
+        <element name="Avatar" positionX="-198" positionY="-99" width="128" height="118"/>
+    </elements>
+</model>
