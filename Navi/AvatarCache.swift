@@ -22,15 +22,15 @@ public class AvatarCache {
 
     struct Request: Hashable {
 
-        let URL: NSURL
+        let avatar: Avatar
         let completion: Completion
 
         var key: String {
-            return URL.absoluteString
+            return avatar.URL.absoluteString
         }
 
         var hashValue: Int {
-            return URL.hashValue // TODO
+            return avatar.URL.hashValue // TODO
         }
     }
 
@@ -51,7 +51,7 @@ public class AvatarCache {
 
         func requestsWithURL(URL: NSURL) -> [Request] {
 
-            return requests.filter({ $0.URL == URL })
+            return requests.filter({ $0.avatar.URL == URL })
         }
 
         mutating func removeRequestsWithKey(key: String) {
@@ -68,7 +68,7 @@ public class AvatarCache {
 
         mutating func removeRequestsWithURL(URL: NSURL) {
 
-            let requestsToRemove = requests.filter({ $0.URL == URL })
+            let requestsToRemove = requests.filter({ $0.avatar.URL == URL })
             print("remove requests.count: \(requests.count), URL: \(URL)")
 
             //requests.forEach({ requestSet.remove($0) })
@@ -95,15 +95,19 @@ public class AvatarCache {
                 $0.completion(avatarImage)
 
                 self.cache.setObject(avatarImage, forKey: $0.key)
+
+                // save image to local
+
+                $0.avatar.saveImage(image)
             })
-            
+
             self.requestPool.removeRequestsWithURL(URL)
         }
     }
 
     public class func retrieveAvatar(avatar: Avatar, completion: Completion) {
 
-        let request = Request(URL: avatar.URL, completion: completion)
+        let request = Request(avatar: avatar, completion: completion)
 
         let key = request.key
 

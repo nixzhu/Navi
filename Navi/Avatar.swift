@@ -11,5 +11,7 @@ public protocol Avatar {
     var name: String { get }
     var URL: NSURL { get }
     var localImage: UIImage? { get }
+
+    func saveImage(image: UIImage)
 }
 
