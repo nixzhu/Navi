@@ -72,7 +72,9 @@ extension CoreDataStack {
     func users() -> [User]? {
 
         let request = NSFetchRequest(entityName: "User")
-
+        let sortDescriptor = NSSortDescriptor(key: "username", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        
         do {
             if let users = try context.executeFetchRequest(request) as? [User] {
                 return users

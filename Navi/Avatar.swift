@@ -30,6 +30,6 @@ public protocol Avatar {
     var style: AvatarStyle { get }
     var localImage: UIImage? { get }
 
-    func saveOriginalImage(image: UIImage)
+    func saveOriginalImage(image: UIImage, styleImage: UIImage)
 }
 

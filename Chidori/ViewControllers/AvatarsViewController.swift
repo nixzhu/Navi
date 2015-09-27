@@ -37,27 +37,64 @@ extension UserAvatar: Navi.Avatar {
 
     var localImage: UIImage? {
 
-        if let avatar = user.avatar, data = avatar.avatarData {
+        switch style {
+
+        case .Rectangle:
+            if let data = user.avatar?.miniAvatarData {
+                return UIImage(data: data)
+            }
+
+        case .RoundedRectangle:
+            if let data = user.avatar?.nanoAvatarData {
+                return UIImage(data: data)
+                //return UIImage(data: data, scale: UIScreen.mainScreen().scale) // make sure png image data with right scale
+            }
+        }
+
+        if let data = user.avatar?.avatarData {
             return UIImage(data: data)
         }
 
         return nil
     }
 
-    func saveOriginalImage(image: UIImage) {
+    func saveOriginalImage(image: UIImage, styleImage: UIImage) {
 
-        guard user.avatar == nil, let context = user.managedObjectContext else {
+        guard let context = user.managedObjectContext else {
             return
         }
 
-        let avatarEntityDescription = NSEntityDescription.entityForName("Avatar", inManagedObjectContext: context)!
-        let avatar = NSManagedObject(entity: avatarEntityDescription, insertIntoManagedObjectContext: context) as! Avatar
+        if user.avatar == nil {
 
-        avatar.avatarURLString = URL.absoluteString
-        avatar.avatarData = UIImageJPEGRepresentation(image, 1.0)
-        // TODO
+            let avatarEntityDescription = NSEntityDescription.entityForName("Avatar", inManagedObjectContext: context)!
+            let avatar = NSManagedObject(entity: avatarEntityDescription, insertIntoManagedObjectContext: context) as! Avatar
 
-        user.avatar = avatar
+            avatar.avatarURLString = URL.absoluteString
+            avatar.avatarData = UIImageJPEGRepresentation(image, 1.0)
+
+            user.avatar = avatar
+        }
+
+        if let avatar = user.avatar {
+
+            switch style {
+
+            case .Rectangle:
+                if avatar.miniAvatarData == nil {
+                    avatar.miniAvatarData = UIImageJPEGRepresentation(styleImage, 1.0)
+                }
+
+            case .RoundedRectangle:
+                if avatar.nanoAvatarData == nil {
+//                    if let newCGImage = styleImage.CGImage {
+//                        let image = UIImage(CGImage: newCGImage, scale: UIScreen.mainScreen().scale, orientation: styleImage.imageOrientation)
+//                        avatar.nanoAvatarData = UIImagePNGRepresentation(image) // use PNG for smooth border
+//                    }
+                    //avatar.nanoAvatarData = UIImagePNGRepresentation(styleImage) // use PNG for smooth border
+                    avatar.nanoAvatarData = UIImageJPEGRepresentation(styleImage, 1.0)
+                }
+            }
+        }
 
         context.trySave()
     }
@@ -139,7 +176,7 @@ class AvatarsViewController: UICollectionViewController {
 
         let avatarStyle: AvatarStyle
         if indexPath.item % 2 == 0 {
-            avatarStyle = .RoundedRectangle(size: CGSize(width: 40, height: 30), cornerRadius: 5, borderWidth: 0)
+            avatarStyle = .RoundedRectangle(size: CGSize(width: 40, height: 30), cornerRadius: 5, borderWidth: 2)
         } else {
             avatarStyle = .Rectangle(size: CGSize(width: 40, height: 40))
         }

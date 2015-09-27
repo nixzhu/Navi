@@ -170,7 +170,7 @@ extension UIImage {
         CGContextDrawImage(bitmapContext, imageRect, image.CGImage)
 
         if let newCGImage = CGBitmapContextCreateImage(bitmapContext) {
-            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: .Up) // TODO
+            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: .Up)
         }
 
         return nil

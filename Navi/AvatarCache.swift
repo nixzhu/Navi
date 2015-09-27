@@ -97,7 +97,7 @@ public class AvatarCache {
 
                         // save original image to local
 
-                        request.avatar.saveOriginalImage(image)
+                        request.avatar.saveOriginalImage(image, styleImage: avatarImage)
                     }
                 }
             })
