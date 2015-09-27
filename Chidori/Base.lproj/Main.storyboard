@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Avatars View Controller-->
@@ -49,24 +48,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="46c-iF-2TZ" customClass="AvatarView" customModule="Navi">
-                                <rect key="frame" x="16" y="162" width="343" height="343"/>
+                                <rect key="frame" x="46" y="192" width="283" height="283"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="46c-iF-2TZ" secondAttribute="height" multiplier="1:1" id="SYl-z2-sZy"/>
+                                    <constraint firstAttribute="width" secondItem="46c-iF-2TZ" secondAttribute="height" multiplier="1:1" id="QZc-x5-Bxu"/>
+                                    <constraint firstAttribute="width" constant="283" id="x8Y-hK-Qkn"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="46c-iF-2TZ" firstAttribute="leading" secondItem="Qu3-mw-MgD" secondAttribute="leadingMargin" id="55q-uD-cPh"/>
-                            <constraint firstItem="46c-iF-2TZ" firstAttribute="centerX" secondItem="Qu3-mw-MgD" secondAttribute="centerX" id="Qaj-hR-Qts"/>
-                            <constraint firstItem="46c-iF-2TZ" firstAttribute="centerY" secondItem="Qu3-mw-MgD" secondAttribute="centerY" id="xBh-j0-K6w"/>
+                            <constraint firstItem="46c-iF-2TZ" firstAttribute="centerX" secondItem="Qu3-mw-MgD" secondAttribute="centerX" id="6Pm-0z-TMX"/>
+                            <constraint firstItem="46c-iF-2TZ" firstAttribute="centerY" secondItem="Qu3-mw-MgD" secondAttribute="centerY" id="aUt-5K-ZAJ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="avatarView" destination="46c-iF-2TZ" id="1Zw-Hy-C1T"/>
+                        <outlet property="avatarViewWidthConstraint" destination="x8Y-hK-Qkn" id="h8E-jf-BJE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kqT-Te-MA1" userLabel="First Responder" sceneMemberID="firstResponder"/>

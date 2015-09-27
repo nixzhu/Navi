@@ -10,18 +10,38 @@ import UIKit
 
 public class AvatarView: UIView {
 
-    lazy var placeholderImageView = UIImageView()
-    lazy var avatarImageView = UIImageView()
+    public lazy var placeholderImageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .ScaleAspectFill
+        view.clipsToBounds = true
+        return view
+        }()
+    
+    public lazy var avatarImageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .Center
+        view.clipsToBounds = true
+        return view
+        }()
 
-    public override func didMoveToSuperview() {
-        super.didMoveToSuperview()
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+
+        makeUI()
+    }
+
+    override public init(frame: CGRect) {
+        super.init(frame: frame)
+
+        makeUI()
+    }
+
+    func makeUI() {
 
         backgroundColor = UIColor.clearColor()
 
         placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-
-        avatarImageView.contentMode = .Center
 
         addSubview(placeholderImageView)
         addSubview(avatarImageView)
@@ -43,6 +63,8 @@ public class AvatarView: UIView {
         NSLayoutConstraint.activateConstraints(avatarImageViewConstraintsH)
         NSLayoutConstraint.activateConstraints(avatarImageViewConstraintsV)
     }
+
+    // MARK: API
 
     public func setAvatar(avatar: Avatar) {
 

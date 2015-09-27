@@ -13,33 +13,31 @@ class ProfileViewController: UIViewController {
 
     var user: User?
 
-    var isShowingAvatar = false
-
     @IBOutlet weak var avatarView: AvatarView!
+    @IBOutlet weak var avatarViewWidthConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Profile"
+
+        updateAvatarViewWithSize(CGSize(width: 300, height: 300))
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    private func updateAvatarViewWithSize(size: CGSize) {
 
-        if !isShowingAvatar {
+        avatarViewWidthConstraint.constant = size.width
 
-            guard let user = user else {
-                return
-            }
+        view.layoutIfNeeded()
 
-            let avatarStyle: AvatarStyle = .Rectangle(size: avatarView.bounds.size)
-            let userAvatar = UserAvatar(user: user, avatarStyle: avatarStyle)
-
-            avatarView.setAvatar(userAvatar)
-            
-            
-            isShowingAvatar = true
+        guard let user = user else {
+            return
         }
+
+        let avatarStyle: AvatarStyle = .Rectangle(size: size)
+        let userAvatar = UserAvatar(user: user, avatarStyle: avatarStyle)
+
+        avatarView.setAvatar(userAvatar)
     }
 }
 
