@@ -45,7 +45,7 @@ extension UserAvatar: Navi.Avatar {
         return nil
     }
 
-    var localStyleImage: UIImage? {
+    var localStyledImage: UIImage? {
 
         switch style {
 
@@ -66,7 +66,7 @@ extension UserAvatar: Navi.Avatar {
         return nil
     }
 
-    func saveOriginalImage(image: UIImage, styleImage: UIImage) {
+    func saveOriginalImage(originalImage: UIImage, styledImage: UIImage) {
 
         guard let context = user.managedObjectContext else {
             return
@@ -80,7 +80,7 @@ extension UserAvatar: Navi.Avatar {
             let avatar = NSManagedObject(entity: avatarEntityDescription, insertIntoManagedObjectContext: context) as! Avatar
 
             avatar.avatarURLString = URL.absoluteString
-            avatar.originalAvatarData = UIImageJPEGRepresentation(image, 1.0)
+            avatar.originalAvatarData = UIImageJPEGRepresentation(originalImage, 1.0)
 
             user.avatar = avatar
 
@@ -93,14 +93,14 @@ extension UserAvatar: Navi.Avatar {
 
             case .Rectangle:
                 if avatar.miniSquareAvatarData == nil {
-                    avatar.miniSquareAvatarData = UIImagePNGRepresentation(styleImage)
+                    avatar.miniSquareAvatarData = UIImagePNGRepresentation(styledImage)
 
                     isDirty = true
                 }
 
             case .RoundedRectangle:
                 if avatar.miniRoundAvatarData == nil {
-                    avatar.miniRoundAvatarData = UIImagePNGRepresentation(styleImage)
+                    avatar.miniRoundAvatarData = UIImagePNGRepresentation(styledImage)
 
                     isDirty = true
                 }

@@ -97,7 +97,7 @@ public class AvatarCache {
 
                         // save original image to local
 
-                        request.avatar.saveOriginalImage(image, styleImage: avatarImage)
+                        request.avatar.saveOriginalImage(image, styledImage: avatarImage)
                     }
                 }
             })
@@ -118,7 +118,7 @@ public class AvatarCache {
         } else {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
 
-                if let image = avatar.localStyleImage {
+                if let image = avatar.localStyledImage {
 
                     dispatch_async(dispatch_get_main_queue()) {
                         completion(image)

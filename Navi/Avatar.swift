@@ -44,8 +44,8 @@ public protocol Avatar {
     var URL: NSURL { get }
     var style: AvatarStyle { get }
     var localOriginalImage: UIImage? { get }
-    var localStyleImage: UIImage? { get }
+    var localStyledImage: UIImage? { get }
 
-    func saveOriginalImage(image: UIImage, styleImage: UIImage)
+    func saveOriginalImage(originalImage: UIImage, styledImage: UIImage)
 }
 
