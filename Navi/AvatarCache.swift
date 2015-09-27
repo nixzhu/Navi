@@ -144,7 +144,13 @@ public class AvatarCache {
                                 } else {
                                     if let data = NSData(contentsOfURL: URL), image = UIImage(data: data) {
                                         sharedInstance.completeRequestsWithURL(URL, image: image)
-                                        print("download")
+                                        print("download success")
+
+                                    } else {
+                                        dispatch_async(dispatch_get_main_queue()) {
+                                            sharedInstance.requestPool.removeRequestsWithURL(URL)
+                                            print("download failed")
+                                        }
                                     }
                                 }
                             }

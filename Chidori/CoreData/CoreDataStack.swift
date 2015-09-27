@@ -15,10 +15,10 @@ extension NSManagedObjectContext {
         if hasChanges {
             do {
                 try save()
-                print("normal")
+                print("save success")
 
             } catch let error as NSError {
-                print("Could not save: \(error)")
+                print("Error: could not save: \(error)")
             }
         }
     }
@@ -53,7 +53,7 @@ class CoreDataStack {
             store = try psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: options)
 
         } catch let error {
-            print("Error adding persistent store: \(error)")
+            print("Error: adding persistent store: \(error)")
             abort()
         }
     }
