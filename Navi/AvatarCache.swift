@@ -9,7 +9,7 @@
 import UIKit
 
 func ==(lhs: AvatarCache.Request, rhs: AvatarCache.Request) -> Bool {
-    return lhs.hashValue == rhs.hashValue // TODO
+    return lhs.key == rhs.key
 }
 
 public class AvatarCache {
@@ -20,17 +20,13 @@ public class AvatarCache {
 
     public typealias Completion = UIImage -> Void
 
-    struct Request: Hashable {
+    struct Request: Equatable {
 
         let avatar: Avatar
         let completion: Completion
 
         var key: String {
-            return avatar.URL.absoluteString
-        }
-
-        var hashValue: Int {
-            return avatar.URL.hashValue // TODO
+            return avatar.style.hashString + avatar.URL.absoluteString
         }
     }
 
@@ -71,7 +67,6 @@ public class AvatarCache {
             let requestsToRemove = requests.filter({ $0.avatar.URL == URL })
             print("remove requests.count: \(requests.count), URL: \(URL)")
 
-            //requests.forEach({ requestSet.remove($0) })
             requestsToRemove.forEach({
                 if let index = requests.indexOf($0) {
                     requests.removeAtIndex(index)
@@ -88,17 +83,23 @@ public class AvatarCache {
 
             let requests = self.requestPool.requestsWithURL(URL)
 
-            requests.forEach({
+            requests.forEach({ request in
 
-                let avatarImage = image // TODO, style
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
 
-                $0.completion(avatarImage)
+                    let avatarImage = image.avatarImageWithStyle(request.avatar.style)
 
-                self.cache.setObject(avatarImage, forKey: $0.key)
+                    dispatch_async(dispatch_get_main_queue()) {
 
-                // save image to local
+                        request.completion(avatarImage)
 
-                $0.avatar.saveImage(image)
+                        self.cache.setObject(avatarImage, forKey: request.key)
+
+                        // save original image to local
+
+                        request.avatar.saveOriginalImage(image)
+                    }
+                }
             })
 
             self.requestPool.removeRequestsWithURL(URL)

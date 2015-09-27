@@ -21,6 +21,8 @@ public class AvatarView: UIView {
         placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
 
+        avatarImageView.contentMode = .Center
+
         addSubview(placeholderImageView)
         addSubview(avatarImageView)
 

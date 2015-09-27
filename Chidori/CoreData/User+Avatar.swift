@@ -19,6 +19,10 @@ extension User: Navi.Avatar {
         return NSURL(string: avatarURLString!)!
     }
 
+    var style: AvatarStyle {
+        return .Rectangle(size: CGSize(width: 20, height: 20))
+    }
+
     var localImage: UIImage? {
 
         if let avatar = avatar, data = avatar.avatarData {
@@ -28,7 +32,7 @@ extension User: Navi.Avatar {
         return nil
     }
 
-    func saveImage(image: UIImage) {
+    func saveOriginalImage(image: UIImage) {
 
         let coreDataStack = CoreDataStack()
 
