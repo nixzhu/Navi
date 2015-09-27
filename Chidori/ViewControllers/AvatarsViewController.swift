@@ -8,6 +8,60 @@
 
 import UIKit
 import CoreData
+import Navi
+
+class UserAvatar {
+
+    let user: User
+    let avatarStyle: AvatarStyle
+
+    init(user: User, avatarStyle: AvatarStyle) {
+        self.user = user
+        self.avatarStyle = avatarStyle
+    }
+}
+
+extension UserAvatar: Navi.Avatar {
+
+    var name: String {
+        return user.username!
+    }
+
+    var URL: NSURL {
+        return NSURL(string: user.avatarURLString!)!
+    }
+
+    var style: AvatarStyle {
+        return avatarStyle
+    }
+
+    var localImage: UIImage? {
+
+        if let avatar = user.avatar, data = avatar.avatarData {
+            return UIImage(data: data)
+        }
+
+        return nil
+    }
+
+    func saveOriginalImage(image: UIImage) {
+
+        guard user.avatar == nil, let context = user.managedObjectContext else {
+            return
+        }
+
+        let avatarEntityDescription = NSEntityDescription.entityForName("Avatar", inManagedObjectContext: context)!
+        let avatar = NSManagedObject(entity: avatarEntityDescription, insertIntoManagedObjectContext: context) as! Avatar
+
+        avatar.avatarURLString = URL.absoluteString
+        avatar.avatarData = UIImageJPEGRepresentation(image, 1.0)
+        // TODO
+
+        user.avatar = avatar
+
+        context.trySave()
+    }
+}
 
 class AvatarsViewController: UICollectionViewController {
 
@@ -17,7 +71,7 @@ class AvatarsViewController: UICollectionViewController {
 
         if let users = self.coreDataStack.users() {
 
-            // first time dammy data
+            // first time dummy data
 
             if users.isEmpty {
 
@@ -36,7 +90,7 @@ class AvatarsViewController: UICollectionViewController {
                             user.avatarURLString = userInfo["avatarURLString"] as? String
                         }
                         
-                        self.coreDataStack.saveContext()
+                        context.trySave()
                     }
                 }
 
@@ -61,8 +115,6 @@ class AvatarsViewController: UICollectionViewController {
 
         collectionView!.backgroundColor = UIColor.whiteColor()
         collectionView!.registerNib(UINib(nibName: avatarCellID, bundle: nil), forCellWithReuseIdentifier: avatarCellID)
-
-
     }
 
     // MARK: UICollectionViewDataSource
@@ -84,8 +136,9 @@ class AvatarsViewController: UICollectionViewController {
         cell.backgroundColor = UIColor.lightGrayColor()
 
         let user = users[indexPath.item % users.count]
+        let userAvatar = UserAvatar(user: user, avatarStyle: .Rectangle(size: CGSize(width: 50, height: 40)))
 
-        cell.avatarView.setAvatar(user)
+        cell.avatarView.setAvatar(userAvatar)
 
         return cell
     }

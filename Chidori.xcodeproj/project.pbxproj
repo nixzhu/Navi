@@ -10,7 +10,6 @@
 		502A2D311BB6843600B3A6B1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */; settings = {ASSET_TAGS = (); }; };
 		502A2D351BB686A400B3A6B1 /* Chidori.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D331BB686A400B3A6B1 /* Chidori.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		502A2D3F1BB6895700B3A6B1 /* users.plist in Resources */ = {isa = PBXBuildFile; fileRef = 502A2D3E1BB6895700B3A6B1 /* users.plist */; settings = {ASSET_TAGS = (); }; };
-		502A2D411BB68D3400B3A6B1 /* User+Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D401BB68D3400B3A6B1 /* User+Avatar.swift */; settings = {ASSET_TAGS = (); }; };
 		502A2D461BB68DFF00B3A6B1 /* Avatar+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D421BB68DFF00B3A6B1 /* Avatar+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		502A2D471BB68DFF00B3A6B1 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D431BB68DFF00B3A6B1 /* Avatar.swift */; settings = {ASSET_TAGS = (); }; };
 		502A2D481BB68DFF00B3A6B1 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D441BB68DFF00B3A6B1 /* User+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
@@ -75,7 +74,6 @@
 		502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = CoreData/CoreDataStack.swift; sourceTree = "<group>"; };
 		502A2D341BB686A400B3A6B1 /* Chidori.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chidori.xcdatamodel; sourceTree = "<group>"; };
 		502A2D3E1BB6895700B3A6B1 /* users.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = users.plist; path = CoreData/users.plist; sourceTree = "<group>"; };
-		502A2D401BB68D3400B3A6B1 /* User+Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+Avatar.swift"; path = "CoreData/User+Avatar.swift"; sourceTree = "<group>"; };
 		502A2D421BB68DFF00B3A6B1 /* Avatar+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Avatar+CoreDataProperties.swift"; path = "CoreData/Avatar+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		502A2D431BB68DFF00B3A6B1 /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Avatar.swift; path = CoreData/Avatar.swift; sourceTree = "<group>"; };
 		502A2D441BB68DFF00B3A6B1 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "CoreData/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 				502A2D431BB68DFF00B3A6B1 /* Avatar.swift */,
 				502A2D441BB68DFF00B3A6B1 /* User+CoreDataProperties.swift */,
 				502A2D451BB68DFF00B3A6B1 /* User.swift */,
-				502A2D401BB68D3400B3A6B1 /* User+Avatar.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -386,7 +383,6 @@
 				505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */,
 				505A561A1BB6559800159CD0 /* AvatarsViewController.swift in Sources */,
 				502A2D471BB68DFF00B3A6B1 /* Avatar.swift in Sources */,
-				502A2D411BB68D3400B3A6B1 /* User+Avatar.swift in Sources */,
 				502A2D491BB68DFF00B3A6B1 /* User.swift in Sources */,
 				502A2D481BB68DFF00B3A6B1 /* User+CoreDataProperties.swift in Sources */,
 			);

@@ -8,6 +8,22 @@
 
 import CoreData
 
+extension NSManagedObjectContext {
+
+    func trySave() {
+
+        if hasChanges {
+            do {
+                try save()
+                print("normal")
+
+            } catch let error as NSError {
+                print("Could not save: \(error)")
+            }
+        }
+    }
+}
+
 class CoreDataStack {
 
     let model: NSManagedObjectModel
@@ -39,19 +55,6 @@ class CoreDataStack {
         } catch let error {
             print("Error adding persistent store: \(error)")
             abort()
-        }
-    }
-
-    func saveContext() {
-
-        if context.hasChanges {
-            do {
-                try context.save()
-                print("normal")
-
-            } catch let error as NSError {
-                print("Could not save: \(error)")
-            }
         }
     }
 
