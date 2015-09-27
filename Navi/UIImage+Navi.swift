@@ -184,14 +184,17 @@ extension UIImage {
 extension UIImage {
 
     func hasAlpha() -> Bool {
+
         let alpha = CGImageGetAlphaInfo(CGImage)
 
-        return (
-            alpha == .First ||
-                alpha == .Last ||
-                alpha == .PremultipliedFirst ||
-                alpha == .PremultipliedLast
-        )
+        switch alpha {
+
+        case .First, .Last, .PremultipliedFirst, .PremultipliedLast:
+            return true
+
+        default:
+            return false
+        }
     }
 
     func imageWithAlpha() -> UIImage {
@@ -203,12 +206,11 @@ extension UIImage {
         let width = CGImageGetWidth(CGImage) * Int(screenScale)
         let height = CGImageGetHeight(CGImage) * Int(screenScale)
 
-        let offscreenContext = CGBitmapContextCreate(nil, width, height, 8, 0, CGImageGetColorSpace(CGImage), CGBitmapInfo(rawValue: CGBitmapInfo.ByteOrderDefault.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue).rawValue)
+        let offscreenContext = CGBitmapContextCreate(nil, width, height, CGImageGetBitsPerComponent(CGImage), 0, CGImageGetColorSpace(CGImage), CGBitmapInfo(rawValue: CGBitmapInfo.ByteOrderDefault.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue).rawValue)
         
         CGContextDrawImage(offscreenContext, CGRect(origin: CGPointZero, size: CGSize(width: width, height: height)), CGImage)
         
         if let alphaCGImage = CGBitmapContextCreateImage(offscreenContext) {
-            //return UIImage(CGImage: alphaCGImage)
             return UIImage(CGImage: alphaCGImage, scale: screenScale, orientation: imageOrientation)
         } else {
             return self
