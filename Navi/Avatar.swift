@@ -8,7 +8,22 @@
 
 import Foundation
 
-public enum AvatarStyle {
+public func ==(lhs: AvatarStyle, rhs: AvatarStyle) -> Bool {
+
+    switch (lhs, rhs) {
+
+    case (.Rectangle(let sizeA), .Rectangle(let sizeB)) where sizeA == sizeB:
+        return true
+
+    case (.RoundedRectangle(let sizeA, let cornerRadiusA, let borderWidthA), .RoundedRectangle(let sizeB, let cornerRadiusB, let borderWidthB)) where (sizeA == sizeB && cornerRadiusA == cornerRadiusB && borderWidthA == borderWidthB):
+        return true
+
+    default:
+        return false
+    }
+}
+
+public enum AvatarStyle: Equatable {
 
     case Rectangle(size: CGSize)
     case RoundedRectangle(size: CGSize, cornerRadius: CGFloat, borderWidth: CGFloat)

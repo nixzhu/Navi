@@ -9,6 +9,8 @@
 import CoreData
 import Navi
 
+private let screenScale = UIScreen.mainScreen().scale
+
 class UserAvatar {
 
     let user: User
@@ -36,7 +38,7 @@ extension UserAvatar: Navi.Avatar {
 
     var localOriginalImage: UIImage? {
 
-        if let data = user.avatar?.avatarData {
+        if let data = user.avatar?.originalAvatarData {
             return UIImage(data: data)
         }
 
@@ -47,17 +49,18 @@ extension UserAvatar: Navi.Avatar {
 
         switch style {
 
-        case .Rectangle:
-            if let data = user.avatar?.miniAvatarData {
-                //return UIImage(data: data)
-                return UIImage(data: data, scale: 2)
+        case squareAvatarStyle:
+            if let data = user.avatar?.miniSquareAvatarData {
+                return UIImage(data: data, scale: screenScale)
             }
 
-        case .RoundedRectangle:
-            if let data = user.avatar?.nanoAvatarData {
-                //return UIImage(data: data)
-                return UIImage(data: data, scale: 2)
+        case roundAvatarStyle:
+            if let data = user.avatar?.miniRoundAvatarData {
+                return UIImage(data: data, scale: screenScale)
             }
+
+        default:
+            break
         }
 
         return nil
@@ -69,15 +72,19 @@ extension UserAvatar: Navi.Avatar {
             return
         }
 
+        var isDirty = false
+
         if user.avatar == nil {
 
             let avatarEntityDescription = NSEntityDescription.entityForName("Avatar", inManagedObjectContext: context)!
             let avatar = NSManagedObject(entity: avatarEntityDescription, insertIntoManagedObjectContext: context) as! Avatar
 
             avatar.avatarURLString = URL.absoluteString
-            avatar.avatarData = UIImageJPEGRepresentation(image, 1.0)
+            avatar.originalAvatarData = UIImageJPEGRepresentation(image, 1.0)
 
             user.avatar = avatar
+
+            isDirty = true
         }
 
         if let avatar = user.avatar {
@@ -85,20 +92,24 @@ extension UserAvatar: Navi.Avatar {
             switch style {
 
             case .Rectangle:
-                if avatar.miniAvatarData == nil {
-                    //avatar.miniAvatarData = UIImageJPEGRepresentation(styleImage, 1.0)
-                    avatar.miniAvatarData = UIImagePNGRepresentation(styleImage)
+                if avatar.miniSquareAvatarData == nil {
+                    avatar.miniSquareAvatarData = UIImagePNGRepresentation(styleImage)
+
+                    isDirty = true
                 }
 
             case .RoundedRectangle:
-                if avatar.nanoAvatarData == nil {
-                    //avatar.nanoAvatarData = UIImageJPEGRepresentation(styleImage, 1.0)
-                    avatar.miniAvatarData = UIImagePNGRepresentation(styleImage)
+                if avatar.miniRoundAvatarData == nil {
+                    avatar.miniRoundAvatarData = UIImagePNGRepresentation(styleImage)
+
+                    isDirty = true
                 }
             }
         }
-        
-        context.trySave()
+
+        if isDirty {
+            context.trySave()
+        }
     }
 }
 

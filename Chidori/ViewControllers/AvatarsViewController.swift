@@ -10,6 +10,9 @@ import UIKit
 import CoreData
 import Navi
 
+let squareAvatarStyle: AvatarStyle = .Rectangle(size: CGSize(width: 60, height: 60))
+let roundAvatarStyle: AvatarStyle = .RoundedRectangle(size: CGSize(width: 60, height: 60), cornerRadius: 30, borderWidth: 0)
+
 class AvatarsViewController: UICollectionViewController {
 
     lazy var coreDataStack = CoreDataStack()
@@ -93,14 +96,7 @@ class AvatarsViewController: UICollectionViewController {
         cell.backgroundColor = UIColor.darkGrayColor()
 
         let user = users[indexPath.item % users.count]
-
-        let avatarStyle: AvatarStyle
-        if indexPath.item % 2 == 0 {
-            avatarStyle = .RoundedRectangle(size: CGSize(width: 60, height: 60), cornerRadius: 21, borderWidth: 0)
-        } else {
-            avatarStyle = .Rectangle(size: CGSize(width: 60, height: 60))
-        }
-
+        let avatarStyle = (indexPath.item % 2 == 0) ? squareAvatarStyle : roundAvatarStyle
         let userAvatar = UserAvatar(user: user, avatarStyle: avatarStyle)
 
         cell.avatarView.setAvatar(userAvatar)
