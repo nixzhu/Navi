@@ -30,7 +30,7 @@ public class AvatarCache {
         }
     }
 
-    struct RequestPool {
+    private struct RequestPool {
 
         private var requests: [Request]
 
@@ -42,7 +42,6 @@ public class AvatarCache {
         mutating func addRequest(request: Request) {
 
             requests.append(request)
-            print("requests.count: \(requests.count)")
         }
 
         func requestsWithURL(URL: NSURL) -> [Request] {
@@ -50,22 +49,9 @@ public class AvatarCache {
             return requests.filter({ $0.avatar.URL == URL })
         }
 
-        mutating func removeRequestsWithKey(key: String) {
-
-            let requestsToRemove = requests.filter({ $0.key == key })
-            print("remove requests.count: \(requests.count), key: \(key)")
-
-            requestsToRemove.forEach({
-                if let index = requests.indexOf($0) {
-                    requests.removeAtIndex(index)
-                }
-            })
-        }
-
         mutating func removeRequestsWithURL(URL: NSURL) {
 
             let requestsToRemove = requests.filter({ $0.avatar.URL == URL })
-            print("remove requests.count: \(requests.count), URL: \(URL)")
 
             requestsToRemove.forEach({
                 if let index = requests.indexOf($0) {
@@ -75,7 +61,7 @@ public class AvatarCache {
         }
     }
 
-    var requestPool = RequestPool()
+    private var requestPool = RequestPool()
 
     private func completeRequestsWithURL(URL: NSURL, image: UIImage) {
 
@@ -95,7 +81,7 @@ public class AvatarCache {
 
                         self.cache.setObject(avatarImage, forKey: request.key)
 
-                        // save original image to local
+                        // save images to local
 
                         request.avatar.saveOriginalImage(image, styledImage: avatarImage)
                     }
@@ -105,6 +91,8 @@ public class AvatarCache {
             self.requestPool.removeRequestsWithURL(URL)
         }
     }
+
+    // MARK: API
 
     public class func retrieveAvatar(avatar: Avatar, completion: Completion) {
 
@@ -122,7 +110,6 @@ public class AvatarCache {
 
                     dispatch_async(dispatch_get_main_queue()) {
                         completion(image)
-                        print("use local image")
                     }
 
                 } else {
@@ -133,7 +120,7 @@ public class AvatarCache {
                         let URL = avatar.URL
 
                         if sharedInstance.requestPool.requestsWithURL(URL).count > 1 {
-                            print("do nothing")
+                            // do nothing
 
                         } else {
                             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
@@ -144,12 +131,10 @@ public class AvatarCache {
                                 } else {
                                     if let data = NSData(contentsOfURL: URL), image = UIImage(data: data) {
                                         sharedInstance.completeRequestsWithURL(URL, image: image)
-                                        print("download success")
 
                                     } else {
                                         dispatch_async(dispatch_get_main_queue()) {
                                             sharedInstance.requestPool.removeRequestsWithURL(URL)
-                                            print("download failed")
                                         }
                                     }
                                 }
