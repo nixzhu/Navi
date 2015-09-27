@@ -136,7 +136,15 @@ class AvatarsViewController: UICollectionViewController {
         cell.backgroundColor = UIColor.lightGrayColor()
 
         let user = users[indexPath.item % users.count]
-        let userAvatar = UserAvatar(user: user, avatarStyle: .Rectangle(size: CGSize(width: 50, height: 40)))
+
+        let avatarStyle: AvatarStyle
+        if indexPath.item % 2 == 0 {
+            avatarStyle = .RoundedRectangle(size: CGSize(width: 40, height: 30), cornerRadius: 5, borderWidth: 0)
+        } else {
+            avatarStyle = .Rectangle(size: CGSize(width: 40, height: 40))
+        }
+
+        let userAvatar = UserAvatar(user: user, avatarStyle: avatarStyle)
 
         cell.avatarView.setAvatar(userAvatar)
 

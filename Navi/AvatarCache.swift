@@ -42,7 +42,7 @@ public class AvatarCache {
         mutating func addRequest(request: Request) {
 
             requests.append(request)
-            print("requestSet.count: \(requests.count)")
+            print("requests.count: \(requests.count)")
         }
 
         func requestsWithURL(URL: NSURL) -> [Request] {

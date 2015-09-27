@@ -1,17 +1,16 @@
 //
 //  UIImage+Navi.swift
-//  Chidori
+//  Navi
 //
 //  Created by NIX on 15/9/27.
 //  Copyright © 2015年 nixWork. All rights reserved.
 //
 
 import UIKit
-import CoreImage
+
+private let screenScale = UIScreen.mainScreen().scale
 
 // MARK: - API
-
-let deviceScale = UIScreen.mainScreen().scale
 
 extension UIImage {
 
@@ -50,7 +49,7 @@ extension UIImage {
         CGContextDrawImage(bitmapContext, drawTransposed ? transposedRect : newRect, CGImage)
 
         if let newCGImage = CGBitmapContextCreateImage(bitmapContext) {
-            return UIImage(CGImage: newCGImage, scale: deviceScale, orientation: .Up)
+            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: .Up)
         }
 
         return nil
@@ -110,7 +109,7 @@ extension UIImage {
 
         if let newCGImage = CGImageCreateWithImageInRect(CGImage, bounds) {
 
-            return UIImage(CGImage: newCGImage, scale: deviceScale, orientation: .Up)
+            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: .Up)
         }
 
         return nil
@@ -118,7 +117,7 @@ extension UIImage {
 
     func centerCropWithSize(size: CGSize) -> UIImage? {
 
-        let size = CGSize(width: size.width * deviceScale, height: size.height * deviceScale)
+        let size = CGSize(width: size.width * screenScale, height: size.height * screenScale)
 
         let horizontalRatio = size.width / self.size.width
         let verticalRatio = size.height / self.size.height
@@ -155,13 +154,15 @@ extension UIImage {
 
         let image = imageWithAlpha()
 
-        let cornerRadius = cornerRadius * deviceScale
+        let cornerRadius = cornerRadius * screenScale
 
         let bitmapContext = CGBitmapContextCreate(nil, Int(image.size.width), Int(image.size.height), CGImageGetBitsPerComponent(image.CGImage), 0, CGImageGetColorSpace(image.CGImage), CGImageGetBitmapInfo(image.CGImage).rawValue)
 
-        let imageRect = CGRect(origin: CGPointZero, size: image.size)
+        let size = CGSize(width: self.size.width * screenScale, height: self.size.height * screenScale)
 
-        let path = UIBezierPath(roundedRect: CGRectIntegral(CGRectInset(imageRect, borderWidth * deviceScale, borderWidth * deviceScale)), cornerRadius: cornerRadius)
+        let imageRect = CGRect(origin: CGPointZero, size: size)
+
+        let path = UIBezierPath(roundedRect: CGRectIntegral(CGRectInset(imageRect, borderWidth * screenScale, borderWidth * screenScale)), cornerRadius: cornerRadius)
 
         CGContextAddPath(bitmapContext, path.CGPath)
         CGContextClip(bitmapContext)
@@ -169,7 +170,7 @@ extension UIImage {
         CGContextDrawImage(bitmapContext, imageRect, image.CGImage)
 
         if let newCGImage = CGBitmapContextCreateImage(bitmapContext) {
-            return UIImage(CGImage: newCGImage, scale: deviceScale, orientation: .Up)
+            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: .Up) // TODO
         }
 
         return nil
@@ -197,15 +198,15 @@ extension UIImage {
             return self
         }
 
-        let width = CGImageGetWidth(CGImage)
-        let height = CGImageGetHeight(CGImage)
+        let width = CGImageGetWidth(CGImage) * Int(screenScale)
+        let height = CGImageGetHeight(CGImage) * Int(screenScale)
 
         let offscreenContext = CGBitmapContextCreate(nil, width, height, 8, 0, CGImageGetColorSpace(CGImage), CGBitmapInfo(rawValue: CGBitmapInfo.ByteOrderDefault.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue).rawValue)
         
         CGContextDrawImage(offscreenContext, CGRect(origin: CGPointZero, size: CGSize(width: width, height: height)), CGImage)
         
         if let alphaCGImage = CGBitmapContextCreateImage(offscreenContext) {
-            return UIImage(CGImage: alphaCGImage, scale: deviceScale, orientation: .Up)
+            return UIImage(CGImage: alphaCGImage, scale: screenScale, orientation: .Up)
         } else {
             return self
         }
