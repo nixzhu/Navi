@@ -28,7 +28,8 @@ public protocol Avatar {
     var name: String { get }
     var URL: NSURL { get }
     var style: AvatarStyle { get }
-    var localImage: UIImage? { get }
+    var localOriginalImage: UIImage? { get }
+    var localStyleImage: UIImage? { get }
 
     func saveOriginalImage(image: UIImage, styleImage: UIImage)
 }

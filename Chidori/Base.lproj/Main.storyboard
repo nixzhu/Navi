@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZlE-CT-bEb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="QfT-J0-Jo0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Avatars View Controller-->
@@ -10,7 +12,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="AvatarsViewController" id="ZlE-CT-bEb" customClass="AvatarsViewController" customModule="Chidori" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5CY-xe-fgI">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eEA-gc-XDb">
@@ -25,10 +27,71 @@
                             <outlet property="delegate" destination="ZlE-CT-bEb" id="4K0-s6-Bdf"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="NvF-O0-vDi"/>
+                    <connections>
+                        <segue destination="7xt-m1-Iad" kind="show" identifier="showProfile" id="ndy-An-H73"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uq4-X8-SRa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="186" y="443"/>
+            <point key="canvasLocation" x="695.5" y="442.5"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="F3K-RN-H4o">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewController" id="7xt-m1-Iad" customClass="ProfileViewController" customModule="Chidori" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Azw-lB-xIg"/>
+                        <viewControllerLayoutGuide type="bottom" id="7o4-xU-DVz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Qu3-mw-MgD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="46c-iF-2TZ" customClass="AvatarView" customModule="Navi">
+                                <rect key="frame" x="16" y="162" width="343" height="343"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="46c-iF-2TZ" secondAttribute="height" multiplier="1:1" id="SYl-z2-sZy"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="46c-iF-2TZ" firstAttribute="leading" secondItem="Qu3-mw-MgD" secondAttribute="leadingMargin" id="55q-uD-cPh"/>
+                            <constraint firstItem="46c-iF-2TZ" firstAttribute="centerX" secondItem="Qu3-mw-MgD" secondAttribute="centerX" id="Qaj-hR-Qts"/>
+                            <constraint firstItem="46c-iF-2TZ" firstAttribute="centerY" secondItem="Qu3-mw-MgD" secondAttribute="centerY" id="xBh-j0-K6w"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="avatarView" destination="46c-iF-2TZ" id="1Zw-Hy-C1T"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kqT-Te-MA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1185.5" y="442.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="XP0-cU-D9L">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QfT-J0-Jo0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gdP-ZB-H30">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZlE-CT-bEb" kind="relationship" relationship="rootViewController" id="P3D-NH-4VQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X51-tw-wuO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="207.5" y="442.5"/>
         </scene>
     </scenes>
 </document>

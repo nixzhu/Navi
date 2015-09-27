@@ -116,29 +116,37 @@ public class AvatarCache {
             completion(image)
 
         } else {
-            dispatch_async(dispatch_get_main_queue()) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
 
-                // 缓存失效，移除对应 key 的请求
-                //sharedInstance.requestPool.removeRequestsWithKey(key)
+                if let image = avatar.localStyleImage {
 
-                sharedInstance.requestPool.addRequest(request)
-
-                let URL = avatar.URL
-
-                if sharedInstance.requestPool.requestsWithURL(URL).count > 1 {
-                    // Do nothing
-                    print("do nothing")
+                    dispatch_async(dispatch_get_main_queue()) {
+                        completion(image)
+                        print("use local image")
+                    }
 
                 } else {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                    dispatch_async(dispatch_get_main_queue()) {
 
-                        if let image = avatar.localImage {
-                            sharedInstance.completeRequestsWithURL(URL, image: image)
+                        sharedInstance.requestPool.addRequest(request)
+
+                        let URL = avatar.URL
+
+                        if sharedInstance.requestPool.requestsWithURL(URL).count > 1 {
+                            print("do nothing")
 
                         } else {
-                            if let data = NSData(contentsOfURL: URL), image = UIImage(data: data) {
-                                sharedInstance.completeRequestsWithURL(URL, image: image)
-                                print("download")
+                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+
+                                if let image = avatar.localOriginalImage {
+                                    sharedInstance.completeRequestsWithURL(URL, image: image)
+
+                                } else {
+                                    if let data = NSData(contentsOfURL: URL), image = UIImage(data: data) {
+                                        sharedInstance.completeRequestsWithURL(URL, image: image)
+                                        print("download")
+                                    }
+                                }
                             }
                         }
                     }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826971BB841A3007D6993 /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		5008269A1BB84330007D6993 /* UserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826991BB84330007D6993 /* UserAvatar.swift */; settings = {ASSET_TAGS = (); }; };
 		502A2D311BB6843600B3A6B1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */; settings = {ASSET_TAGS = (); }; };
 		502A2D351BB686A400B3A6B1 /* Chidori.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D331BB686A400B3A6B1 /* Chidori.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		502A2D3F1BB6895700B3A6B1 /* users.plist in Resources */ = {isa = PBXBuildFile; fileRef = 502A2D3E1BB6895700B3A6B1 /* users.plist */; settings = {ASSET_TAGS = (); }; };
@@ -71,6 +73,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		500826971BB841A3007D6993 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = ViewControllers/ProfileViewController.swift; sourceTree = "<group>"; };
+		500826991BB84330007D6993 /* UserAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAvatar.swift; path = Models/UserAvatar.swift; sourceTree = "<group>"; };
 		502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = CoreData/CoreDataStack.swift; sourceTree = "<group>"; };
 		502A2D341BB686A400B3A6B1 /* Chidori.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chidori.xcdatamodel; sourceTree = "<group>"; };
 		502A2D3E1BB6895700B3A6B1 /* users.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = users.plist; path = CoreData/users.plist; sourceTree = "<group>"; };
@@ -126,6 +130,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5008269B1BB84334007D6993 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				500826991BB84330007D6993 /* UserAvatar.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		502A2D321BB6843A00B3A6B1 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +177,7 @@
 			children = (
 				505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */,
 				502A2D321BB6843A00B3A6B1 /* CoreData */,
+				5008269B1BB84334007D6993 /* Models */,
 				505A56201BB6567200159CD0 /* Views */,
 				505A561B1BB6559D00159CD0 /* ViewControllers */,
 				505A55E21BB63CFD00159CD0 /* Main.storyboard */,
@@ -201,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				505A56191BB6559800159CD0 /* AvatarsViewController.swift */,
+				500826971BB841A3007D6993 /* ProfileViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -377,7 +391,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				502A2D351BB686A400B3A6B1 /* Chidori.xcdatamodeld in Sources */,
+				5008269A1BB84330007D6993 /* UserAvatar.swift in Sources */,
 				502A2D311BB6843600B3A6B1 /* CoreDataStack.swift in Sources */,
+				500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */,
 				50FEA73B1BB7FF470099FD0D /* User+CoreDataProperties.swift in Sources */,
 				50FEA73E1BB7FF470099FD0D /* Avatar.swift in Sources */,
 				505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */,
