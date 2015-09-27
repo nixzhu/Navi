@@ -152,23 +152,54 @@ extension UIImage {
 
 extension UIImage {
 
+    private func CGContextAddRoundedRect(context: CGContext, rect: CGRect, ovalWidth: CGFloat, ovalHeight: CGFloat) {
+
+        if ovalWidth <= 0 || ovalHeight <= 0 {
+            CGContextAddRect(context, rect)
+
+        } else {
+            CGContextSaveGState(context)
+
+            CGContextTranslateCTM(context, CGRectGetMinX(rect), CGRectGetMinY(rect))
+
+            CGContextScaleCTM(context, ovalWidth, ovalHeight)
+
+            let fw = CGRectGetWidth(rect) / ovalWidth
+            let fh = CGRectGetHeight(rect) / ovalHeight
+
+            CGContextMoveToPoint(context, fw, fh/2)
+            CGContextAddArcToPoint(context, fw, fh, fw/2, fh, 1)
+            CGContextAddArcToPoint(context, 0, fh, 0, fh/2, 1)
+            CGContextAddArcToPoint(context, 0, 0, fw/2, 0, 1)
+            CGContextAddArcToPoint(context, fw, 0, fw, fh/2, 1)
+            CGContextClosePath(context)
+
+            CGContextRestoreGState(context)
+        }
+    }
+
     func roundWithCornerRadius(cornerRadius: CGFloat, borderWidth: CGFloat) -> UIImage? {
 
         let image = imageWithAlpha()
 
         let cornerRadius = cornerRadius * screenScale
 
-        let bitmapContext = CGBitmapContextCreate(nil, Int(image.size.width), Int(image.size.height), CGImageGetBitsPerComponent(image.CGImage), 0, CGImageGetColorSpace(image.CGImage), CGImageGetBitmapInfo(image.CGImage).rawValue)
+        guard let bitmapContext = CGBitmapContextCreate(nil, Int(image.size.width), Int(image.size.height), CGImageGetBitsPerComponent(image.CGImage), 0, CGImageGetColorSpace(image.CGImage), CGImageGetBitmapInfo(image.CGImage).rawValue) else {
+            return nil
+        }
 
         let size = CGSize(width: self.size.width * screenScale, height: self.size.height * screenScale)
 
-        let imageRect = CGRect(origin: CGPointZero, size: size)
+        CGContextBeginPath(bitmapContext)
 
-        let path = UIBezierPath(roundedRect: CGRectIntegral(CGRectInset(imageRect, borderWidth * screenScale, borderWidth * screenScale)), cornerRadius: cornerRadius)
+        let rect = CGRect(x: borderWidth, y: borderWidth, width: size.width - borderWidth * 2, height: size.height - borderWidth * 2)
+        CGContextAddRoundedRect(bitmapContext, rect: rect, ovalWidth: cornerRadius, ovalHeight: cornerRadius)
 
-        CGContextAddPath(bitmapContext, path.CGPath)
+        CGContextClosePath(bitmapContext)
+
         CGContextClip(bitmapContext)
 
+        let imageRect = CGRect(origin: CGPointZero, size: size)
         CGContextDrawImage(bitmapContext, imageRect, image.CGImage)
 
         if let newCGImage = CGBitmapContextCreateImage(bitmapContext) {

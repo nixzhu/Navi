@@ -161,13 +161,13 @@ class AvatarsViewController: UICollectionViewController {
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(avatarCellID, forIndexPath: indexPath) as! AvatarCell
 
-        cell.backgroundColor = UIColor.lightGrayColor()
+        cell.backgroundColor = UIColor.darkGrayColor()
 
         let user = users[indexPath.item % users.count]
 
         let avatarStyle: AvatarStyle
         if indexPath.item % 2 == 0 {
-            avatarStyle = .RoundedRectangle(size: CGSize(width: 50, height: 50), cornerRadius: 10, borderWidth: 0)
+            avatarStyle = .RoundedRectangle(size: CGSize(width: 60, height: 60), cornerRadius: 21, borderWidth: 0)
         } else {
             avatarStyle = .Rectangle(size: CGSize(width: 60, height: 60))
         }
