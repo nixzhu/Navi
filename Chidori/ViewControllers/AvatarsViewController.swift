@@ -47,7 +47,6 @@ extension UserAvatar: Navi.Avatar {
         case .RoundedRectangle:
             if let data = user.avatar?.nanoAvatarData {
                 return UIImage(data: data)
-                //return UIImage(data: data, scale: UIScreen.mainScreen().scale) // make sure png image data with right scale
             }
         }
 
@@ -86,11 +85,6 @@ extension UserAvatar: Navi.Avatar {
 
             case .RoundedRectangle:
                 if avatar.nanoAvatarData == nil {
-//                    if let newCGImage = styleImage.CGImage {
-//                        let image = UIImage(CGImage: newCGImage, scale: UIScreen.mainScreen().scale, orientation: styleImage.imageOrientation)
-//                        avatar.nanoAvatarData = UIImagePNGRepresentation(image) // use PNG for smooth border
-//                    }
-                    //avatar.nanoAvatarData = UIImagePNGRepresentation(styleImage) // use PNG for smooth border
                     avatar.nanoAvatarData = UIImageJPEGRepresentation(styleImage, 1.0)
                 }
             }
@@ -147,9 +141,6 @@ class AvatarsViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
         collectionView!.backgroundColor = UIColor.whiteColor()
         collectionView!.registerNib(UINib(nibName: avatarCellID, bundle: nil), forCellWithReuseIdentifier: avatarCellID)
     }
@@ -176,9 +167,9 @@ class AvatarsViewController: UICollectionViewController {
 
         let avatarStyle: AvatarStyle
         if indexPath.item % 2 == 0 {
-            avatarStyle = .RoundedRectangle(size: CGSize(width: 40, height: 30), cornerRadius: 5, borderWidth: 2)
+            avatarStyle = .RoundedRectangle(size: CGSize(width: 50, height: 50), cornerRadius: 10, borderWidth: 0)
         } else {
-            avatarStyle = .Rectangle(size: CGSize(width: 40, height: 40))
+            avatarStyle = .Rectangle(size: CGSize(width: 60, height: 60))
         }
 
         let userAvatar = UserAvatar(user: user, avatarStyle: avatarStyle)
@@ -187,36 +178,5 @@ class AvatarsViewController: UICollectionViewController {
 
         return cell
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
 }
 

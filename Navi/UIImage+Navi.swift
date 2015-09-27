@@ -8,6 +8,8 @@
 
 import UIKit
 
+// ref http://vocaro.com/trevor/blog/2009/10/12/resize-a-uiimage-the-right-way/comment-page-1/
+
 private let screenScale = UIScreen.mainScreen().scale
 
 // MARK: - API
@@ -49,7 +51,7 @@ extension UIImage {
         CGContextDrawImage(bitmapContext, drawTransposed ? transposedRect : newRect, CGImage)
 
         if let newCGImage = CGBitmapContextCreateImage(bitmapContext) {
-            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: .Up)
+            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: imageOrientation)
         }
 
         return nil
@@ -109,7 +111,7 @@ extension UIImage {
 
         if let newCGImage = CGImageCreateWithImageInRect(CGImage, bounds) {
 
-            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: .Up)
+            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: imageOrientation)
         }
 
         return nil
@@ -206,7 +208,8 @@ extension UIImage {
         CGContextDrawImage(offscreenContext, CGRect(origin: CGPointZero, size: CGSize(width: width, height: height)), CGImage)
         
         if let alphaCGImage = CGBitmapContextCreateImage(offscreenContext) {
-            return UIImage(CGImage: alphaCGImage, scale: screenScale, orientation: .Up)
+            //return UIImage(CGImage: alphaCGImage)
+            return UIImage(CGImage: alphaCGImage, scale: screenScale, orientation: imageOrientation)
         } else {
             return self
         }
