@@ -20,7 +20,7 @@ extension User: Navi.Avatar {
     }
 
     var style: AvatarStyle {
-        return .Rectangle(size: CGSize(width: 20, height: 20))
+        return .Rectangle(size: CGSize(width: 40, height: 40))
     }
 
     var localImage: UIImage? {

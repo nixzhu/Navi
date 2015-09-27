@@ -11,6 +11,8 @@ import CoreImage
 
 // MARK: - API
 
+let deviceScale = UIScreen.mainScreen().scale
+
 extension UIImage {
 
     func avatarImageWithStyle(avatarStyle: AvatarStyle) -> UIImage {
@@ -48,7 +50,7 @@ extension UIImage {
         CGContextDrawImage(bitmapContext, drawTransposed ? transposedRect : newRect, CGImage)
 
         if let newCGImage = CGBitmapContextCreateImage(bitmapContext) {
-            return UIImage(CGImage: newCGImage)
+            return UIImage(CGImage: newCGImage, scale: deviceScale, orientation: .Up)
         }
 
         return nil
@@ -107,7 +109,8 @@ extension UIImage {
     func cropWithBounds(bounds: CGRect) -> UIImage? {
 
         if let newCGImage = CGImageCreateWithImageInRect(CGImage, bounds) {
-            return UIImage(CGImage: newCGImage)
+
+            return UIImage(CGImage: newCGImage, scale: deviceScale, orientation: .Up)
         }
 
         return nil
@@ -115,8 +118,7 @@ extension UIImage {
 
     func centerCropWithSize(size: CGSize) -> UIImage? {
 
-        let scale = UIScreen.mainScreen().scale
-        let size = CGSize(width: size.width * scale, height: size.height * scale)
+        let size = CGSize(width: size.width * deviceScale, height: size.height * deviceScale)
 
         let horizontalRatio = size.width / self.size.width
         let verticalRatio = size.height / self.size.height
@@ -153,15 +155,13 @@ extension UIImage {
 
         let image = imageWithAlpha()
 
-        let cornerRadius = cornerRadius * UIScreen.mainScreen().scale
+        let cornerRadius = cornerRadius * deviceScale
 
         let bitmapContext = CGBitmapContextCreate(nil, Int(image.size.width), Int(image.size.height), CGImageGetBitsPerComponent(image.CGImage), 0, CGImageGetColorSpace(image.CGImage), CGImageGetBitmapInfo(image.CGImage).rawValue)
 
         let imageRect = CGRect(origin: CGPointZero, size: image.size)
 
-        let scale = UIScreen.mainScreen().scale
-
-        let path = UIBezierPath(roundedRect: CGRectIntegral(CGRectInset(imageRect, borderWidth * scale, borderWidth * scale)), cornerRadius: cornerRadius)
+        let path = UIBezierPath(roundedRect: CGRectIntegral(CGRectInset(imageRect, borderWidth * deviceScale, borderWidth * deviceScale)), cornerRadius: cornerRadius)
 
         CGContextAddPath(bitmapContext, path.CGPath)
         CGContextClip(bitmapContext)
@@ -169,7 +169,7 @@ extension UIImage {
         CGContextDrawImage(bitmapContext, imageRect, image.CGImage)
 
         if let newCGImage = CGBitmapContextCreateImage(bitmapContext) {
-            return UIImage(CGImage: newCGImage)
+            return UIImage(CGImage: newCGImage, scale: deviceScale, orientation: .Up)
         }
 
         return nil
@@ -205,7 +205,7 @@ extension UIImage {
         CGContextDrawImage(offscreenContext, CGRect(origin: CGPointZero, size: CGSize(width: width, height: height)), CGImage)
         
         if let alphaCGImage = CGBitmapContextCreateImage(offscreenContext) {
-            return UIImage(CGImage: alphaCGImage)
+            return UIImage(CGImage: alphaCGImage, scale: deviceScale, orientation: .Up)
         } else {
             return self
         }
