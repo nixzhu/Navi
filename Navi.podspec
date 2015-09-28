@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary     = "Focus on avatar caching."
 
   s.description = <<-DESC
-                   Navi design for avatar caching, with style.
+                   Navi is designed for avatar caching, with style.
                    DESC
 
   s.homepage    = "https://github.com/nixzhu/Navi"

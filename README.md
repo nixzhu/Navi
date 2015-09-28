@@ -5,7 +5,7 @@
 
 # Navi
 
-Navi design for avatar caching, with style. 
+Navi is designed for avatar caching, with style. 
 
 The name of **Navi** from movie [Avatar](https://en.wikipedia.org/wiki/Avatar_(2009_film)).
 
