@@ -49,3 +49,10 @@ public protocol Avatar {
     func saveOriginalImage(originalImage: UIImage, styledImage: UIImage)
 }
 
+extension Avatar {
+
+    var key: String {
+        return style.hashString + URL.absoluteString
+    }
+}
+

@@ -26,7 +26,7 @@ public class AvatarCache {
         let completion: Completion
 
         var key: String {
-            return avatar.style.hashString + avatar.URL.absoluteString
+            return avatar.key
         }
     }
 

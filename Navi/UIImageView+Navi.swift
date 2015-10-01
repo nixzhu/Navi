@@ -8,25 +8,25 @@
 
 import UIKit
 
-private var avatarURLKey: Void?
+private var avatarKeyAssociatedObject: Void?
 
 public extension UIImageView {
 
-    private var navi_avatarURL: NSURL? {
-        return objc_getAssociatedObject(self, &avatarURLKey) as? NSURL
+    private var navi_avatarKey: String? {
+        return objc_getAssociatedObject(self, &avatarKeyAssociatedObject) as? String
     }
 
-    private func navi_setAvatarURL(URL: NSURL) {
-        objc_setAssociatedObject(self, &avatarURLKey, URL, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    private func navi_setAvatarKey(avatarKey: String) {
+        objc_setAssociatedObject(self, &avatarKeyAssociatedObject, avatarKey, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 
     public func navi_setAvatar(avatar: Avatar) {
 
-        navi_setAvatarURL(avatar.URL)
+        navi_setAvatarKey(avatar.key)
 
         AvatarCache.retrieveAvatar(avatar) { [weak self] image in
 
-            guard let URL = self?.navi_avatarURL where URL == avatar.URL else {
+            guard let avatarKey = self?.navi_avatarKey where avatarKey == avatar.key else {
                 return
             }
 
