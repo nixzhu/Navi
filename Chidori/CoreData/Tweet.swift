@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  Tweet.swift
 //  Chidori
 //
 //  Created by NIX on 15/10/2.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class User: NSManagedObject {
+class Tweet: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

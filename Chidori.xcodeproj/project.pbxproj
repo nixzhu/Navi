@@ -28,10 +28,15 @@
 		505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A561C1BB6566F00159CD0 /* AvatarCell.swift */; settings = {ASSET_TAGS = (); }; };
 		505A561F1BB6566F00159CD0 /* AvatarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505A561D1BB6566F00159CD0 /* AvatarCell.xib */; settings = {ASSET_TAGS = (); }; };
 		50970C9C1BBD252D001BFB19 /* UIImageView+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970C9B1BBD252D001BFB19 /* UIImageView+Navi.swift */; settings = {ASSET_TAGS = (); }; };
-		50FEA73B1BB7FF470099FD0D /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FEA7371BB7FF470099FD0D /* User+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
-		50FEA73C1BB7FF470099FD0D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FEA7381BB7FF470099FD0D /* User.swift */; settings = {ASSET_TAGS = (); }; };
-		50FEA73D1BB7FF470099FD0D /* Avatar+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FEA7391BB7FF470099FD0D /* Avatar+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
-		50FEA73E1BB7FF470099FD0D /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FEA73A1BB7FF470099FD0D /* Avatar.swift */; settings = {ASSET_TAGS = (); }; };
+		50970C9E1BBD9151001BFB19 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970C9D1BBD9151001BFB19 /* TimelineViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		50970CA51BBD9EFC001BFB19 /* Avatar+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970C9F1BBD9EFC001BFB19 /* Avatar+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		50970CA61BBD9EFC001BFB19 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CA01BBD9EFC001BFB19 /* Avatar.swift */; settings = {ASSET_TAGS = (); }; };
+		50970CA71BBD9EFC001BFB19 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CA11BBD9EFC001BFB19 /* User+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		50970CA81BBD9EFC001BFB19 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CA21BBD9EFC001BFB19 /* User.swift */; settings = {ASSET_TAGS = (); }; };
+		50970CA91BBD9EFC001BFB19 /* Tweet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CA31BBD9EFC001BFB19 /* Tweet+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		50970CAA1BBD9EFC001BFB19 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CA41BBD9EFC001BFB19 /* Tweet.swift */; settings = {ASSET_TAGS = (); }; };
+		50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */; settings = {ASSET_TAGS = (); }; };
+		50970CAE1BBDA4BA001BFB19 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,10 +102,15 @@
 		505A561C1BB6566F00159CD0 /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarCell.swift; path = Views/Cells/Avatar/AvatarCell.swift; sourceTree = "<group>"; };
 		505A561D1BB6566F00159CD0 /* AvatarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AvatarCell.xib; path = Views/Cells/Avatar/AvatarCell.xib; sourceTree = "<group>"; };
 		50970C9B1BBD252D001BFB19 /* UIImageView+Navi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Navi.swift"; sourceTree = "<group>"; };
-		50FEA7371BB7FF470099FD0D /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "CoreData/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		50FEA7381BB7FF470099FD0D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = CoreData/User.swift; sourceTree = "<group>"; };
-		50FEA7391BB7FF470099FD0D /* Avatar+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Avatar+CoreDataProperties.swift"; path = "CoreData/Avatar+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		50FEA73A1BB7FF470099FD0D /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Avatar.swift; path = CoreData/Avatar.swift; sourceTree = "<group>"; };
+		50970C9D1BBD9151001BFB19 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineViewController.swift; path = ViewControllers/TimelineViewController.swift; sourceTree = "<group>"; };
+		50970C9F1BBD9EFC001BFB19 /* Avatar+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Avatar+CoreDataProperties.swift"; path = "CoreData/Avatar+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		50970CA01BBD9EFC001BFB19 /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Avatar.swift; path = CoreData/Avatar.swift; sourceTree = "<group>"; };
+		50970CA11BBD9EFC001BFB19 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "CoreData/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		50970CA21BBD9EFC001BFB19 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = CoreData/User.swift; sourceTree = "<group>"; };
+		50970CA31BBD9EFC001BFB19 /* Tweet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Tweet+CoreDataProperties.swift"; path = "CoreData/Tweet+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		50970CA41BBD9EFC001BFB19 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tweet.swift; path = CoreData/Tweet.swift; sourceTree = "<group>"; };
+		50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetCell.swift; path = Views/Cells/Tweet/TweetCell.swift; sourceTree = "<group>"; };
+		50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetCell.xib; path = Views/Cells/Tweet/TweetCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,13 +151,15 @@
 		502A2D321BB6843A00B3A6B1 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				50970C9F1BBD9EFC001BFB19 /* Avatar+CoreDataProperties.swift */,
+				50970CA01BBD9EFC001BFB19 /* Avatar.swift */,
+				50970CA11BBD9EFC001BFB19 /* User+CoreDataProperties.swift */,
+				50970CA21BBD9EFC001BFB19 /* User.swift */,
+				50970CA31BBD9EFC001BFB19 /* Tweet+CoreDataProperties.swift */,
+				50970CA41BBD9EFC001BFB19 /* Tweet.swift */,
 				502A2D3E1BB6895700B3A6B1 /* users.plist */,
 				502A2D331BB686A400B3A6B1 /* Chidori.xcdatamodeld */,
 				502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */,
-				50FEA7371BB7FF470099FD0D /* User+CoreDataProperties.swift */,
-				50FEA7381BB7FF470099FD0D /* User.swift */,
-				50FEA7391BB7FF470099FD0D /* Avatar+CoreDataProperties.swift */,
-				50FEA73A1BB7FF470099FD0D /* Avatar.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -215,6 +227,7 @@
 			children = (
 				505A56191BB6559800159CD0 /* AvatarsViewController.swift */,
 				500826971BB841A3007D6993 /* ProfileViewController.swift */,
+				50970C9D1BBD9151001BFB19 /* TimelineViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -231,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				505A56221BB6568700159CD0 /* Avatar */,
+				50970CAF1BBDA4BD001BFB19 /* Tweet */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -242,6 +256,15 @@
 				505A561D1BB6566F00159CD0 /* AvatarCell.xib */,
 			);
 			name = Avatar;
+			sourceTree = "<group>";
+		};
+		50970CAF1BBDA4BD001BFB19 /* Tweet */ = {
+			isa = PBXGroup;
+			children = (
+				50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */,
+				50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */,
+			);
+			name = Tweet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,6 +389,7 @@
 				505A55E61BB63CFD00159CD0 /* Assets.xcassets in Resources */,
 				505A561F1BB6566F00159CD0 /* AvatarCell.xib in Resources */,
 				505A55E41BB63CFD00159CD0 /* Main.storyboard in Resources */,
+				50970CAE1BBDA4BA001BFB19 /* TweetCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,14 +417,18 @@
 				502A2D351BB686A400B3A6B1 /* Chidori.xcdatamodeld in Sources */,
 				5008269A1BB84330007D6993 /* UserAvatar.swift in Sources */,
 				502A2D311BB6843600B3A6B1 /* CoreDataStack.swift in Sources */,
+				50970CAA1BBD9EFC001BFB19 /* Tweet.swift in Sources */,
+				50970CA91BBD9EFC001BFB19 /* Tweet+CoreDataProperties.swift in Sources */,
 				500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */,
-				50FEA73B1BB7FF470099FD0D /* User+CoreDataProperties.swift in Sources */,
-				50FEA73E1BB7FF470099FD0D /* Avatar.swift in Sources */,
+				50970C9E1BBD9151001BFB19 /* TimelineViewController.swift in Sources */,
 				505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */,
-				50FEA73D1BB7FF470099FD0D /* Avatar+CoreDataProperties.swift in Sources */,
+				50970CA51BBD9EFC001BFB19 /* Avatar+CoreDataProperties.swift in Sources */,
+				50970CA71BBD9EFC001BFB19 /* User+CoreDataProperties.swift in Sources */,
+				50970CA81BBD9EFC001BFB19 /* User.swift in Sources */,
 				505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */,
+				50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */,
+				50970CA61BBD9EFC001BFB19 /* Avatar.swift in Sources */,
 				505A561A1BB6559800159CD0 /* AvatarsViewController.swift in Sources */,
-				50FEA73C1BB7FF470099FD0D /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

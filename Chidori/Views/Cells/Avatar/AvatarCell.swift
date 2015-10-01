@@ -21,7 +21,7 @@ class AvatarCell: UICollectionViewCell {
 
     func configureWithAvatar(avatar: Navi.Avatar) {
 
-       imageView.navi_setAvatar(avatar)
+        imageView.navi_setAvatar(avatar)
     }
 }
 

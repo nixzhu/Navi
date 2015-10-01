@@ -1,5 +1,5 @@
 //
-//  User+CoreDataProperties.swift
+//  Tweet+CoreDataProperties.swift
 //  Chidori
 //
 //  Created by NIX on 15/10/2.
@@ -12,11 +12,9 @@
 import Foundation
 import CoreData
 
-extension User {
+extension Tweet {
 
-    @NSManaged var avatarURLString: String?
-    @NSManaged var username: String?
-    @NSManaged var avatar: Avatar?
-    @NSManaged var tweets: NSSet?
+    @NSManaged var message: String?
+    @NSManaged var user: User?
 
 }
