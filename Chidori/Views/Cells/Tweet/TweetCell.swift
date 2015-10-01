@@ -17,7 +17,6 @@ class TweetCell: UITableViewCell {
 
     func configureWithFeed(feed: Feed) {
 
-        avatarImageView.backgroundColor = UIColor.lightGrayColor()
         avatarImageView.navi_setAvatar(feed as Navi.Avatar)
         usernameLabel.text = feed.username
         messageLabel.text = feed.message

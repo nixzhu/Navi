@@ -22,8 +22,6 @@ public extension UIImageView {
 
     public func navi_setAvatar(avatar: Avatar) {
 
-        print(avatar.URL)
-
         navi_setAvatarKey(avatar.key)
 
         AvatarPod.wakeAvatar(avatar) { [weak self] image in

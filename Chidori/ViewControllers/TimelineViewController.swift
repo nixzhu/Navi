@@ -12,6 +12,7 @@ import Social
 import Navi
 
 struct Feed {
+
     let username: String
     let avatarURLString: String
     let message: String
@@ -20,6 +21,20 @@ struct Feed {
 extension Feed: Navi.Avatar {
 
     var URL: NSURL {
+
+        // try construct original URL from normal one
+
+        if let URL = NSURL(string: avatarURLString), lastPathComponent = URL.lastPathComponent, pathExtension = URL.pathExtension {
+
+            let underscoreParts = lastPathComponent.componentsSeparatedByString("_normal")
+
+            if underscoreParts.count == 2 {
+
+                let name = underscoreParts[0]
+                return URL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(name + "." + pathExtension)
+            }
+        }
+
         return NSURL(string: avatarURLString)!
     }
 
@@ -64,7 +79,7 @@ class TimelineViewController: UITableViewController {
             let feedURL = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")!
 
             let parameters = [
-                "count": 15,
+                "count": 50,
             ]
 
             let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: feedURL, parameters: parameters)
@@ -98,6 +113,8 @@ class TimelineViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        title = "Timeline"
 
         tableView.registerNib(UINib(nibName: tweetCellID, bundle: nil), forCellReuseIdentifier: tweetCellID)
         tableView.tableFooterView = UIView()
