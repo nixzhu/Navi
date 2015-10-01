@@ -27,6 +27,7 @@
 		505A561A1BB6559800159CD0 /* AvatarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A56191BB6559800159CD0 /* AvatarsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A561C1BB6566F00159CD0 /* AvatarCell.swift */; settings = {ASSET_TAGS = (); }; };
 		505A561F1BB6566F00159CD0 /* AvatarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505A561D1BB6566F00159CD0 /* AvatarCell.xib */; settings = {ASSET_TAGS = (); }; };
+		50970C9C1BBD252D001BFB19 /* UIImageView+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970C9B1BBD252D001BFB19 /* UIImageView+Navi.swift */; settings = {ASSET_TAGS = (); }; };
 		50FEA73B1BB7FF470099FD0D /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FEA7371BB7FF470099FD0D /* User+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		50FEA73C1BB7FF470099FD0D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FEA7381BB7FF470099FD0D /* User.swift */; settings = {ASSET_TAGS = (); }; };
 		50FEA73D1BB7FF470099FD0D /* Avatar+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FEA7391BB7FF470099FD0D /* Avatar+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
@@ -95,6 +96,7 @@
 		505A56191BB6559800159CD0 /* AvatarsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarsViewController.swift; path = ViewControllers/AvatarsViewController.swift; sourceTree = "<group>"; };
 		505A561C1BB6566F00159CD0 /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarCell.swift; path = Views/Cells/Avatar/AvatarCell.swift; sourceTree = "<group>"; };
 		505A561D1BB6566F00159CD0 /* AvatarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AvatarCell.xib; path = Views/Cells/Avatar/AvatarCell.xib; sourceTree = "<group>"; };
+		50970C9B1BBD252D001BFB19 /* UIImageView+Navi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Navi.swift"; sourceTree = "<group>"; };
 		50FEA7371BB7FF470099FD0D /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "CoreData/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		50FEA7381BB7FF470099FD0D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = CoreData/User.swift; sourceTree = "<group>"; };
 		50FEA7391BB7FF470099FD0D /* Avatar+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Avatar+CoreDataProperties.swift"; path = "CoreData/Avatar+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				505A56171BB640E500159CD0 /* Avatar.swift */,
 				505A56131BB6404800159CD0 /* AvatarCache.swift */,
 				502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */,
+				50970C9B1BBD252D001BFB19 /* UIImageView+Navi.swift */,
 				505A55F91BB63F2E00159CD0 /* Info.plist */,
 			);
 			path = Navi;
@@ -407,6 +410,7 @@
 			files = (
 				505A56181BB640E600159CD0 /* Avatar.swift in Sources */,
 				505A56141BB6404800159CD0 /* AvatarCache.swift in Sources */,
+				50970C9C1BBD252D001BFB19 /* UIImageView+Navi.swift in Sources */,
 				502A2D4B1BB7A19300B3A6B1 /* UIImage+Navi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

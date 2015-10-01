@@ -21,9 +21,7 @@ class AvatarCell: UICollectionViewCell {
 
     func configureWithAvatar(avatar: Navi.Avatar) {
 
-        AvatarCache.retrieveAvatar(avatar) { [weak self] image in
-            self?.imageView.image = image
-        }
+       imageView.navi_setAvatar(avatar)
     }
 }
 

@@ -32,9 +32,7 @@ class ProfileViewController: UIViewController {
         let avatarStyle: AvatarStyle = .Rectangle(size: size)
         let userAvatar = UserAvatar(user: user, avatarStyle: avatarStyle)
 
-        AvatarCache.retrieveAvatar(userAvatar) { [weak self] image in
-            self?.avatarImageView.image = image
-        }
+        avatarImageView.navi_setAvatar(userAvatar)
     }
 }
 
