@@ -39,8 +39,10 @@ extension UIImage {
 
     func resizeToSize(size: CGSize, withTransform transform: CGAffineTransform, drawTransposed: Bool, interpolationQuality: CGInterpolationQuality) -> UIImage? {
 
-        let newRect = CGRectIntegral(CGRect(origin: CGPointZero, size: size))
-        let transposedRect = CGRect(origin: CGPointZero, size: CGSize(width: size.height, height: size.width))
+        let pixelSize = CGSize(width: size.width * screenScale, height: size.height * screenScale)
+
+        let newRect = CGRectIntegral(CGRect(origin: CGPointZero, size: pixelSize))
+        let transposedRect = CGRect(origin: CGPointZero, size: CGSize(width: pixelSize.height, height: pixelSize.width))
 
         let bitmapContext = CGBitmapContextCreate(nil, Int(newRect.width), Int(newRect.height), CGImageGetBitsPerComponent(CGImage), 0, CGImageGetColorSpace(CGImage), CGImageGetBitmapInfo(CGImage).rawValue)
 
@@ -119,10 +121,10 @@ extension UIImage {
 
     func centerCropWithSize(size: CGSize) -> UIImage? {
 
-        let size = CGSize(width: size.width * screenScale, height: size.height * screenScale)
+        let pixelSize = CGSize(width: size.width * screenScale, height: size.height * screenScale)
 
-        let horizontalRatio = size.width / self.size.width
-        let verticalRatio = size.height / self.size.height
+        let horizontalRatio = pixelSize.width / self.size.width
+        let verticalRatio = pixelSize.height / self.size.height
 
         let ratio: CGFloat
 
@@ -133,16 +135,16 @@ extension UIImage {
             ratio = horizontalRatio
 
             originalX = 0
-            originalY = (self.size.height - size.height / ratio) / 2
+            originalY = (self.size.height - pixelSize.height / ratio) / 2
 
         } else {
             ratio = verticalRatio
 
-            originalX = (self.size.width - size.width / ratio) / 2
+            originalX = (self.size.width - pixelSize.width / ratio) / 2
             originalY = 0
         }
 
-        let bounds = CGRect(x: originalX, y: originalY, width: size.width / ratio, height: size.height / ratio)
+        let bounds = CGRect(x: originalX, y: originalY, width: pixelSize.width / ratio, height: pixelSize.height / ratio)
 
         return cropWithBounds(bounds)?.resizeToSize(size, withInterpolationQuality: .Default)
     }
@@ -183,23 +185,24 @@ extension UIImage {
         let image = imageWithAlpha()
 
         let cornerRadius = cornerRadius * screenScale
+        let borderWidth = borderWidth * screenScale
 
-        guard let bitmapContext = CGBitmapContextCreate(nil, Int(image.size.width), Int(image.size.height), CGImageGetBitsPerComponent(image.CGImage), 0, CGImageGetColorSpace(image.CGImage), CGImageGetBitmapInfo(image.CGImage).rawValue) else {
+        let pixelSize = CGSize(width: image.size.width * screenScale, height: image.size.height * screenScale)
+
+        guard let bitmapContext = CGBitmapContextCreate(nil, Int(pixelSize.width), Int(pixelSize.height), CGImageGetBitsPerComponent(image.CGImage), 0, CGImageGetColorSpace(image.CGImage), CGImageGetBitmapInfo(image.CGImage).rawValue) else {
             return nil
         }
 
-        let size = CGSize(width: self.size.width * screenScale, height: self.size.height * screenScale)
-
         CGContextBeginPath(bitmapContext)
 
-        let rect = CGRect(x: borderWidth, y: borderWidth, width: size.width - borderWidth * 2, height: size.height - borderWidth * 2)
+        let rect = CGRect(x: borderWidth, y: borderWidth, width: pixelSize.width - borderWidth * 2, height: pixelSize.height - borderWidth * 2)
         CGContextAddRoundedRect(bitmapContext, rect: rect, ovalWidth: cornerRadius, ovalHeight: cornerRadius)
 
         CGContextClosePath(bitmapContext)
 
         CGContextClip(bitmapContext)
 
-        let imageRect = CGRect(origin: CGPointZero, size: size)
+        let imageRect = CGRect(origin: CGPointZero, size: pixelSize)
         CGContextDrawImage(bitmapContext, imageRect, image.CGImage)
 
         if let newCGImage = CGBitmapContextCreateImage(bitmapContext) {
@@ -234,12 +237,11 @@ extension UIImage {
             return self
         }
 
-        let width = CGImageGetWidth(CGImage) * Int(screenScale)
-        let height = CGImageGetHeight(CGImage) * Int(screenScale)
+        let pixelSize = CGSize(width: self.size.width * screenScale, height: self.size.height * screenScale)
 
-        let offscreenContext = CGBitmapContextCreate(nil, width, height, CGImageGetBitsPerComponent(CGImage), 0, CGImageGetColorSpace(CGImage), CGBitmapInfo(rawValue: CGBitmapInfo.ByteOrderDefault.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue).rawValue)
+        let offscreenContext = CGBitmapContextCreate(nil, Int(pixelSize.width), Int(pixelSize.height), CGImageGetBitsPerComponent(CGImage), 0, CGImageGetColorSpace(CGImage), CGBitmapInfo(rawValue: CGBitmapInfo.ByteOrderDefault.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue).rawValue)
         
-        CGContextDrawImage(offscreenContext, CGRect(origin: CGPointZero, size: CGSize(width: width, height: height)), CGImage)
+        CGContextDrawImage(offscreenContext, CGRect(origin: CGPointZero, size: pixelSize), CGImage)
         
         if let alphaCGImage = CGBitmapContextCreateImage(offscreenContext) {
             return UIImage(CGImage: alphaCGImage, scale: screenScale, orientation: imageOrientation)
