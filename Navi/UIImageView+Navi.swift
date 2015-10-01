@@ -24,7 +24,7 @@ public extension UIImageView {
 
         navi_setAvatarKey(avatar.key)
 
-        AvatarCache.retrieveAvatar(avatar) { [weak self] image in
+        AvatarPod.wakeAvatar(avatar) { [weak self] image in
 
             guard let avatarKey = self?.navi_avatarKey where avatarKey == avatar.key else {
                 return

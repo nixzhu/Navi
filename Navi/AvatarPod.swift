@@ -1,5 +1,5 @@
 //
-//  AvatarCache.swift
+//  AvatarPod.swift
 //  Navi
 //
 //  Created by NIX on 15/9/26.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-func ==(lhs: AvatarCache.Request, rhs: AvatarCache.Request) -> Bool {
+func ==(lhs: AvatarPod.Request, rhs: AvatarPod.Request) -> Bool {
     return lhs.key == rhs.key
 }
 
-public class AvatarCache {
+public class AvatarPod {
 
-    static let sharedInstance = AvatarCache()
+    static let sharedInstance = AvatarPod()
 
     let cache = NSCache()
 
@@ -94,7 +94,7 @@ public class AvatarCache {
 
     // MARK: API
 
-    public class func retrieveAvatar(avatar: Avatar, completion: Completion) {
+    public class func wakeAvatar(avatar: Avatar, completion: Completion) {
 
         let request = Request(avatar: avatar, completion: completion)
 
