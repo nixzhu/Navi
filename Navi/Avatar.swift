@@ -40,9 +40,9 @@ public enum AvatarStyle: Equatable {
 
 public protocol Avatar {
 
-    var name: String { get }
     var URL: NSURL { get }
     var style: AvatarStyle { get }
+    var placeholderImage: UIImage? { get }
     var localOriginalImage: UIImage? { get }
     var localStyledImage: UIImage? { get }
 

@@ -17,6 +17,7 @@ class UserAvatar {
     let avatarStyle: AvatarStyle
 
     init(user: User, avatarStyle: AvatarStyle) {
+
         self.user = user
         self.avatarStyle = avatarStyle
     }
@@ -24,16 +25,27 @@ class UserAvatar {
 
 extension UserAvatar: Navi.Avatar {
 
-    var name: String {
-        return user.username!
-    }
-
     var URL: NSURL {
         return NSURL(string: user.avatarURLString!)!
     }
 
     var style: AvatarStyle {
         return avatarStyle
+    }
+
+    var placeholderImage: UIImage? {
+
+        switch style {
+
+        case squareAvatarStyle:
+            return UIImage(named: "square_avatar_placeholder")
+
+        case roundAvatarStyle:
+            return UIImage(named: "round_avatar_placeholder")
+
+        default:
+            return nil
+        }
     }
 
     var localOriginalImage: UIImage? {
@@ -92,6 +104,7 @@ extension UserAvatar: Navi.Avatar {
             switch style {
 
             case .Rectangle:
+
                 if avatar.miniSquareAvatarData == nil {
                     avatar.miniSquareAvatarData = UIImagePNGRepresentation(styledImage)
 
@@ -99,6 +112,7 @@ extension UserAvatar: Navi.Avatar {
                 }
 
             case .RoundedRectangle:
+
                 if avatar.miniRoundAvatarData == nil {
                     avatar.miniRoundAvatarData = UIImagePNGRepresentation(styledImage)
 

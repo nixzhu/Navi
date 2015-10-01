@@ -11,11 +11,19 @@ import Navi
 
 class AvatarCell: UICollectionViewCell {
 
-    @IBOutlet weak var avatarView: AvatarView!
+    @IBOutlet weak var imageView: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        imageView.contentMode = .Center
+    }
+
+    func configureWithAvatar(avatar: Navi.Avatar) {
+
+        AvatarCache.retrieveAvatar(avatar) { [weak self] image in
+            self?.imageView.image = image
+        }
     }
 }
 

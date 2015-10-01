@@ -104,6 +104,10 @@ public class AvatarCache {
             completion(image)
 
         } else {
+            if let placeholderImage = avatar.placeholderImage {
+                completion(placeholderImage)
+            }
+
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
 
                 if let image = avatar.localStyledImage {

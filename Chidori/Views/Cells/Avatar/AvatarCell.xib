@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -13,25 +13,24 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="187" height="187"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BiG-xu-sdn" customClass="AvatarView" customModule="Navi">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h2e-LM-wvR">
                         <rect key="frame" x="0.0" y="0.0" width="187" height="187"/>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                    </imageView>
                 </subviews>
                 <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <animations/>
             <constraints>
-                <constraint firstItem="BiG-xu-sdn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="9gF-Xq-e4p"/>
-                <constraint firstAttribute="trailing" secondItem="BiG-xu-sdn" secondAttribute="trailing" id="KAs-nZ-Zb5"/>
-                <constraint firstItem="BiG-xu-sdn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="P9n-Zh-jQ3"/>
-                <constraint firstAttribute="bottom" secondItem="BiG-xu-sdn" secondAttribute="bottom" id="o4p-bv-e9u"/>
+                <constraint firstItem="h2e-LM-wvR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="083-Tk-Fsl"/>
+                <constraint firstAttribute="trailing" secondItem="h2e-LM-wvR" secondAttribute="trailing" id="Wb2-9Y-5GP"/>
+                <constraint firstItem="h2e-LM-wvR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qpo-oF-EkM"/>
+                <constraint firstAttribute="bottom" secondItem="h2e-LM-wvR" secondAttribute="bottom" id="wGc-Hr-Za8"/>
             </constraints>
             <size key="customSize" width="187" height="187"/>
             <connections>
-                <outlet property="avatarView" destination="BiG-xu-sdn" id="gMJ-VS-UfI"/>
+                <outlet property="imageView" destination="h2e-LM-wvR" id="aij-li-TuU"/>
             </connections>
             <point key="canvasLocation" x="243.5" y="452.5"/>
         </collectionViewCell>

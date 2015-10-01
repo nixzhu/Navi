@@ -93,13 +93,11 @@ class AvatarsViewController: UICollectionViewController {
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(avatarCellID, forIndexPath: indexPath) as! AvatarCell
 
-        cell.backgroundColor = UIColor.darkGrayColor()
-
         let user = users[indexPath.item % users.count]
         let avatarStyle = (indexPath.item % 2 == 0) ? squareAvatarStyle : roundAvatarStyle
         let userAvatar = UserAvatar(user: user, avatarStyle: avatarStyle)
 
-        cell.avatarView.setAvatar(userAvatar)
+        cell.configureWithAvatar(userAvatar)
 
         return cell
     }
