@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="QfT-J0-Jo0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="QfT-J0-Jo0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Avatars View Controller-->
@@ -47,26 +46,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="46c-iF-2TZ" customClass="AvatarView" customModule="Navi">
-                                <rect key="frame" x="46" y="192" width="283" height="283"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yNy-2b-IO5">
+                                <rect key="frame" x="38" y="184" width="300" height="300"/>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="46c-iF-2TZ" secondAttribute="height" multiplier="1:1" id="QZc-x5-Bxu"/>
-                                    <constraint firstAttribute="width" constant="283" id="x8Y-hK-Qkn"/>
+                                    <constraint firstAttribute="width" constant="300" id="6T6-l7-eT9"/>
+                                    <constraint firstAttribute="height" constant="300" id="Tf2-uD-ucW"/>
                                 </constraints>
-                            </view>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="46c-iF-2TZ" firstAttribute="centerX" secondItem="Qu3-mw-MgD" secondAttribute="centerX" id="6Pm-0z-TMX"/>
-                            <constraint firstItem="46c-iF-2TZ" firstAttribute="centerY" secondItem="Qu3-mw-MgD" secondAttribute="centerY" id="aUt-5K-ZAJ"/>
+                            <constraint firstItem="yNy-2b-IO5" firstAttribute="centerY" secondItem="Qu3-mw-MgD" secondAttribute="centerY" id="HaP-dc-j8S"/>
+                            <constraint firstItem="yNy-2b-IO5" firstAttribute="centerX" secondItem="Qu3-mw-MgD" secondAttribute="centerX" id="TAK-Xr-0zK"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="avatarView" destination="46c-iF-2TZ" id="1Zw-Hy-C1T"/>
-                        <outlet property="avatarViewWidthConstraint" destination="x8Y-hK-Qkn" id="h8E-jf-BJE"/>
+                        <outlet property="avatarImageView" destination="yNy-2b-IO5" id="czh-Py-YMs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kqT-Te-MA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
