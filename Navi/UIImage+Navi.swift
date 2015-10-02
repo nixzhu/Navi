@@ -22,6 +22,9 @@ extension UIImage {
 
         switch avatarStyle {
 
+        case .Original:
+            return self
+
         case .Rectangle(let size):
             avatarImage = centerCropWithSize(size)
 

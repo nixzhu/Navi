@@ -103,6 +103,9 @@ extension UserAvatar: Navi.Avatar {
 
             switch style {
 
+            case .Original:
+                break
+
             case .Rectangle:
 
                 if avatar.miniSquareAvatarData == nil {

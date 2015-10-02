@@ -12,6 +12,9 @@ public func ==(lhs: AvatarStyle, rhs: AvatarStyle) -> Bool {
 
     switch (lhs, rhs) {
 
+    case (.Original, .Original):
+        return true
+
     case (.Rectangle(let sizeA), .Rectangle(let sizeB)) where sizeA == sizeB:
         return true
 
@@ -25,13 +28,20 @@ public func ==(lhs: AvatarStyle, rhs: AvatarStyle) -> Bool {
 
 public enum AvatarStyle: Equatable {
 
+    case Original
     case Rectangle(size: CGSize)
     case RoundedRectangle(size: CGSize, cornerRadius: CGFloat, borderWidth: CGFloat)
 
     var hashString: String {
+
         switch self {
+
+        case .Original:
+            return "Original-"
+
         case .Rectangle(let size):
             return "Rectangle-\(size)-"
+
         case .RoundedRectangle(let size, let cornerRadius, let borderWidth):
             return "RoundedRectangle-\(size)-\(cornerRadius)-\(borderWidth)-"
         }

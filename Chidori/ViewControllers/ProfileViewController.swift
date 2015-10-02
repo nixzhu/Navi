@@ -29,7 +29,7 @@ class ProfileViewController: UIViewController {
             return
         }
 
-        let avatarStyle: AvatarStyle = .Rectangle(size: size)
+        let avatarStyle: AvatarStyle = .Original
         let userAvatar = UserAvatar(user: user, avatarStyle: avatarStyle)
 
         avatarImageView.navi_setAvatar(userAvatar)
