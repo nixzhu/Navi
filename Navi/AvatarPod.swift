@@ -78,13 +78,13 @@ public class AvatarPod {
                     dispatch_async(dispatch_get_main_queue()) {
 
                         request.completion(avatarImage)
-
-                        self.cache.setObject(avatarImage, forKey: request.key)
-
-                        // save images to local
-
-                        request.avatar.saveOriginalImage(image, styledImage: avatarImage)
                     }
+
+                    self.cache.setObject(avatarImage, forKey: request.key)
+
+                    // save images to local
+
+                    request.avatar.saveOriginalImage(image, styledImage: avatarImage)
                 }
             })
 

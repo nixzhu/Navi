@@ -14,8 +14,21 @@ class AvatarsViewController: UICollectionViewController {
 
     lazy var coreDataStack = CoreDataStack()
 
-    lazy var users: [User] = {
-        return self.coreDataStack.users() ?? []
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+
+        let fetchRequest = NSFetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "createdUnixTime", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.fetchBatchSize = 20
+
+        let context = self.coreDataStack.context
+
+        let userEntityDescription = NSEntityDescription.entityForName("User", inManagedObjectContext: context)!
+        fetchRequest.entity = userEntityDescription
+
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+
+        return fetchedResultsController
         }()
 
     private let avatarCellID = "AvatarCell"
@@ -27,9 +40,20 @@ class AvatarsViewController: UICollectionViewController {
 
         collectionView!.backgroundColor = UIColor.whiteColor()
         collectionView!.registerNib(UINib(nibName: avatarCellID, bundle: nil), forCellWithReuseIdentifier: avatarCellID)
+        collectionView!.alwaysBounceVertical = true
     }
 
-    // MARK: 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("fetchedResultsController.performFetch: \(error)")
+        }
+    }
+
+    // MARK: Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
@@ -44,19 +68,19 @@ class AvatarsViewController: UICollectionViewController {
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 
-        return 1
+        return fetchedResultsController.sections?.count ?? 0
     }
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        return users.count * 5
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(avatarCellID, forIndexPath: indexPath) as! AvatarCell
 
-        let user = users[indexPath.item % users.count]
+        let user = fetchedResultsController.objectAtIndexPath(indexPath) as! User
         let userAvatar = UserAvatar(user: user, avatarStyle: squareAvatarStyle)
 
         cell.configureWithAvatar(userAvatar)
@@ -66,7 +90,7 @@ class AvatarsViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
-        let user = users[indexPath.item % users.count]
+        let user = fetchedResultsController.objectAtIndexPath(indexPath) as! User
         performSegueWithIdentifier("showProfile", sender: user)
     }
 }
