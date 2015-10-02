@@ -48,7 +48,7 @@ class TimelineViewController: UITableViewController {
                         print("can not get tweets!")
                         return
                 }
-                print("tweetsData: \(tweetsData)")
+                //print("tweetsData: \(tweetsData)")
 
                 dispatch_async(dispatch_get_main_queue()) {
 

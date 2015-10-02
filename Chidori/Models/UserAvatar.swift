@@ -43,7 +43,12 @@ extension UserAvatar: Navi.Avatar {
             if underscoreParts.count == 2 {
 
                 let name = underscoreParts[0]
-                return URL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(name + "." + pathExtension)
+
+                if pathExtension == "" {
+                    return URL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(name)
+                } else {
+                    return URL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(name + "." + pathExtension)
+                }
             }
         }
 
