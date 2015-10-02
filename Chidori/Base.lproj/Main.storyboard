@@ -74,7 +74,7 @@
         <scene sceneID="XP0-cU-D9L">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QfT-J0-Jo0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="topRated" id="eui-yr-Uhn"/>
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="eui-yr-Uhn"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gdP-ZB-H30">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
