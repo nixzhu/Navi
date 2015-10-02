@@ -121,6 +121,12 @@ extension UserAvatar: Navi.Avatar {
 
         if let avatar = user.avatar {
 
+            if avatar.originalAvatarData.length == 0, let data = UIImageJPEGRepresentation(originalImage, 1.0) {
+                realm.write {
+                    avatar.originalAvatarData = data
+                }
+            }
+
             switch style {
 
             case .Rectangle:
