@@ -10,49 +10,12 @@ import UIKit
 import CoreData
 import Navi
 
-let squareAvatarStyle: AvatarStyle = .Rectangle(size: CGSize(width: 60, height: 60))
-let roundAvatarStyle: AvatarStyle = .RoundedRectangle(size: CGSize(width: 60, height: 60), cornerRadius: 30, borderWidth: 0)
-
 class AvatarsViewController: UICollectionViewController {
 
     lazy var coreDataStack = CoreDataStack()
 
     lazy var users: [User] = {
-
-        if let users = self.coreDataStack.users() {
-
-            // first time dummy data
-
-            if users.isEmpty {
-
-                if let usersURL = NSBundle.mainBundle().URLForResource("users", withExtension: "plist") {
-
-                    if let users = NSArray(contentsOfURL: usersURL) as? [NSDictionary] {
-
-                        let context = self.coreDataStack.context
-
-                        users.forEach { userInfo in
-
-                            let userEntityDescription = NSEntityDescription.entityForName("User", inManagedObjectContext: context)!
-                            let user = NSManagedObject(entity: userEntityDescription, insertIntoManagedObjectContext: context) as! User
-
-                            user.username = userInfo["username"] as? String
-                            user.avatarURLString = userInfo["avatarURLString"] as? String
-                        }
-                        
-                        context.trySave()
-                    }
-                }
-
-                if let users = self.coreDataStack.users() {
-                    return users
-                }
-            }
-
-            return users
-        }
-
-        return []
+        return self.coreDataStack.users() ?? []
         }()
 
     private let avatarCellID = "AvatarCell"
@@ -94,8 +57,7 @@ class AvatarsViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(avatarCellID, forIndexPath: indexPath) as! AvatarCell
 
         let user = users[indexPath.item % users.count]
-        let avatarStyle = (indexPath.item % 2 == 0) ? squareAvatarStyle : roundAvatarStyle
-        let userAvatar = UserAvatar(user: user, avatarStyle: avatarStyle)
+        let userAvatar = UserAvatar(user: user, avatarStyle: squareAvatarStyle)
 
         cell.configureWithAvatar(userAvatar)
 

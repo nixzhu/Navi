@@ -23,6 +23,9 @@ class UserAvatar {
     }
 }
 
+let squareAvatarStyle: AvatarStyle = .Rectangle(size: CGSize(width: 60, height: 60))
+let roundAvatarStyle: AvatarStyle = .RoundedRectangle(size: CGSize(width: 60, height: 60), cornerRadius: 30, borderWidth: 0)
+
 extension UserAvatar: Navi.Avatar {
 
     var URL: NSURL {

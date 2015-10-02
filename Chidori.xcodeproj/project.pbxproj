@@ -11,7 +11,6 @@
 		5008269A1BB84330007D6993 /* UserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826991BB84330007D6993 /* UserAvatar.swift */; settings = {ASSET_TAGS = (); }; };
 		502A2D311BB6843600B3A6B1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */; settings = {ASSET_TAGS = (); }; };
 		502A2D351BB686A400B3A6B1 /* Chidori.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D331BB686A400B3A6B1 /* Chidori.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
-		502A2D3F1BB6895700B3A6B1 /* users.plist in Resources */ = {isa = PBXBuildFile; fileRef = 502A2D3E1BB6895700B3A6B1 /* users.plist */; settings = {ASSET_TAGS = (); }; };
 		502A2D4B1BB7A19300B3A6B1 /* UIImage+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */; settings = {ASSET_TAGS = (); }; };
 		505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */; };
 		505A55E41BB63CFD00159CD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505A55E21BB63CFD00159CD0 /* Main.storyboard */; };
@@ -83,7 +82,6 @@
 		500826991BB84330007D6993 /* UserAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAvatar.swift; path = Models/UserAvatar.swift; sourceTree = "<group>"; };
 		502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = CoreData/CoreDataStack.swift; sourceTree = "<group>"; };
 		502A2D341BB686A400B3A6B1 /* Chidori.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chidori.xcdatamodel; sourceTree = "<group>"; };
-		502A2D3E1BB6895700B3A6B1 /* users.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = users.plist; path = CoreData/users.plist; sourceTree = "<group>"; };
 		502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Navi.swift"; sourceTree = "<group>"; };
 		505A55DB1BB63CFD00159CD0 /* Chidori.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chidori.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -159,7 +157,6 @@
 				50970CC21BBEBCD9001BFB19 /* Avatar.swift */,
 				50970CC31BBEBCD9001BFB19 /* User+CoreDataProperties.swift */,
 				50970CC41BBEBCD9001BFB19 /* User.swift */,
-				502A2D3E1BB6895700B3A6B1 /* users.plist */,
 				502A2D331BB686A400B3A6B1 /* Chidori.xcdatamodeld */,
 				502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */,
 			);
@@ -396,7 +393,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				505A55E91BB63CFD00159CD0 /* LaunchScreen.storyboard in Resources */,
-				502A2D3F1BB6895700B3A6B1 /* users.plist in Resources */,
 				505A55E61BB63CFD00159CD0 /* Assets.xcassets in Resources */,
 				505A561F1BB6566F00159CD0 /* AvatarCell.xib in Resources */,
 				505A55E41BB63CFD00159CD0 /* Main.storyboard in Resources */,
