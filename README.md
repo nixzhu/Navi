@@ -22,13 +22,13 @@ Check the demo for more information.
 ### CocoaPods
 
 ```ruby
-pod 'Navi', '~> 0.0.1'
+pod 'Navi', '~> 0.1'
 ```
 
 ### Carthage
 
 ```ogdl
-github "nixzhu/Navi" >= 0.0.1
+github "nixzhu/Navi" >= 0.1
 ```
 
 ## Contact

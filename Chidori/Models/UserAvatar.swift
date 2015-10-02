@@ -106,7 +106,7 @@ extension UserAvatar: Navi.Avatar {
             case .Rectangle:
 
                 if avatar.miniSquareAvatarData == nil {
-                    avatar.miniSquareAvatarData = UIImagePNGRepresentation(styledImage)
+                    avatar.miniSquareAvatarData = UIImageJPEGRepresentation(styledImage, 1.0)
 
                     isDirty = true
                 }
