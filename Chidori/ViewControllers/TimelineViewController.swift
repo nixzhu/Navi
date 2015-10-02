@@ -18,6 +18,7 @@ class TimelineViewController: UITableViewController {
 
     private lazy var dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
+        formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         formatter.dateStyle = .LongStyle
         formatter.formatterBehavior = .Behavior10_4
         formatter.dateFormat = "EEE MMM dd HH:mm:ss Z yyyy"
@@ -47,7 +48,7 @@ class TimelineViewController: UITableViewController {
                         print("can not get tweets!")
                         return
                 }
-                //print("tweetsData: \(tweetsData)")
+                print("tweetsData: \(tweetsData)")
 
                 dispatch_async(dispatch_get_main_queue()) {
 
@@ -72,14 +73,18 @@ class TimelineViewController: UITableViewController {
                         let tweet = Tweet.getOrCreateWithTweetID(tweetID, inRealm: realm)
 
                         realm.write {
-                            tweet.createdUnixTime = self?.dateFormatter.dateFromString(tweetCreatedDateString)?.timeIntervalSince1970 ?? NSDate().timeIntervalSince1970
+                            if let unixTime = self?.dateFormatter.dateFromString(tweetCreatedDateString)?.timeIntervalSince1970 {
+                                tweet.createdUnixTime = unixTime
+                            }
                             tweet.message = message
                         }
 
                         let user = User.getOrCreateWithUserID(userID, inRealm: realm)
 
                         realm.write {
-                            user.createdUnixTime = self?.dateFormatter.dateFromString(userCreatedDateString)?.timeIntervalSince1970 ?? NSDate().timeIntervalSince1970
+                            if let unixTime = self?.dateFormatter.dateFromString(userCreatedDateString)?.timeIntervalSince1970 {
+                                user.createdUnixTime = unixTime
+                            }
                             user.username = username
                             user.avatarURLString = avatarURLString
                         }
