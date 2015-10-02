@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
             return UIImage(CIImage: resultCIImage)
         })
 
-        let userAvatar = UserAvatar(user: user, avatarStyle: avatarStyle)
+        let userAvatar = UserAvatar(userID: user.userID, avatarStyle: avatarStyle)
 
         avatarImageView.navi_setAvatar(userAvatar)
     }

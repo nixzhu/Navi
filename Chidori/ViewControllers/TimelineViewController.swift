@@ -9,31 +9,10 @@
 import UIKit
 import Accounts
 import Social
-import CoreData
+import RealmSwift
 import Navi
 
 class TimelineViewController: UITableViewController {
-
-    lazy var coreDataStack = CoreDataStack()
-
-    lazy var fetchedResultsController: NSFetchedResultsController = {
-
-        let fetchRequest = NSFetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "createdUnixTime", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        fetchRequest.fetchBatchSize = 20
-
-        let context = self.coreDataStack.context
-
-        let tweetEntityDescription = NSEntityDescription.entityForName("Tweet", inManagedObjectContext: context)!
-        fetchRequest.entity = tweetEntityDescription
-
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-
-        fetchedResultsController.delegate = self
-
-        return fetchedResultsController
-        }()
 
     lazy var accountStore = ACAccountStore()
 
@@ -65,13 +44,14 @@ class TimelineViewController: UITableViewController {
                 guard let
                     json = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)),
                     tweetsData = json as? [[NSObject: AnyObject]] else {
+                        print("can not get tweets!")
                         return
                 }
                 //print("tweetsData: \(tweetsData)")
 
                 dispatch_async(dispatch_get_main_queue()) {
 
-                    guard let context = self?.coreDataStack.context else {
+                    guard let realm = try? Realm() else {
                         return
                     }
 
@@ -89,74 +69,44 @@ class TimelineViewController: UITableViewController {
                                 return
                         }
 
-                        var tweet: Tweet?
+                        let tweet = Tweet.getOrCreateWithTweetID(tweetID, inRealm: realm)
 
-                        let tweetRequest = NSFetchRequest(entityName: "Tweet")
-                        tweetRequest.predicate = NSPredicate(format: "tweetID = %@", tweetID)
-
-                        do {
-                            if let tweets = try context.executeFetchRequest(tweetRequest) as? [Tweet] {
-                                if tweets.isEmpty {
-                                    let tweetEntityDescription = NSEntityDescription.entityForName("Tweet", inManagedObjectContext: context)!
-                                    let newTweet = NSManagedObject(entity: tweetEntityDescription, insertIntoManagedObjectContext: context) as! Tweet
-
-                                    newTweet.tweetID = tweetID
-                                    newTweet.createdUnixTime = self?.dateFormatter.dateFromString(tweetCreatedDateString)?.timeIntervalSince1970 ?? NSDate().timeIntervalSince1970
-                                    newTweet.message = message
-
-                                    tweet = newTweet
-
-                                } else {
-                                    tweet = tweets.first
-                                }
-                            }
-
-                        } catch let error as NSError {
-                            print(error)
+                        realm.write {
+                            tweet.createdUnixTime = self?.dateFormatter.dateFromString(tweetCreatedDateString)?.timeIntervalSince1970 ?? NSDate().timeIntervalSince1970
+                            tweet.message = message
                         }
 
-                        var user: User?
+                        let user = User.getOrCreateWithUserID(userID, inRealm: realm)
 
-                        let userRequest = NSFetchRequest(entityName: "User")
-                        userRequest.predicate = NSPredicate(format: "userID = %@", userID)
-
-                        do {
-                            if let users = try context.executeFetchRequest(userRequest) as? [User] {
-                                if users.isEmpty {
-                                    let userEntityDescription = NSEntityDescription.entityForName("User", inManagedObjectContext: context)!
-                                    let newUser = NSManagedObject(entity: userEntityDescription, insertIntoManagedObjectContext: context) as! User
-
-                                    newUser.userID = userID
-                                    newUser.createdUnixTime = self?.dateFormatter.dateFromString(userCreatedDateString)?.timeIntervalSince1970 ?? NSDate().timeIntervalSince1970
-
-                                    user = newUser
-
-                                } else {
-                                    user = users.first
-                                }
-
-                                // update
-                                user?.username = username
-                                user?.avatarURLString = avatarURLString
-                            }
-
-                        } catch let error as NSError {
-                            print(error)
+                        realm.write {
+                            user.createdUnixTime = self?.dateFormatter.dateFromString(userCreatedDateString)?.timeIntervalSince1970 ?? NSDate().timeIntervalSince1970
+                            user.username = username
+                            user.avatarURLString = avatarURLString
                         }
 
-                        tweet?.user = user
+                        realm.write {
+                            tweet.creator = user
+                        }
                     })
 
-                    context.trySave()
+                    self?.tableView.reloadData()
                 }
             }
         }
     }
 
+    var realm: Realm!
+
+    lazy var tweets: Results<Tweet> = {
+        return self.realm.objects(Tweet).sorted("createdUnixTime", ascending: false)
+        }()
+
     let tweetCellID = "TweetCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        realm = try! Realm()
 
         title = "Timeline"
 
@@ -165,12 +115,6 @@ class TimelineViewController: UITableViewController {
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 80
-
-        do {
-            try fetchedResultsController.performFetch()
-        } catch let error as NSError {
-            print("fetchedResultsController.performFetch: \(error)")
-        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -197,12 +141,12 @@ class TimelineViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 
-        return fetchedResultsController.sections?.count ?? 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return tweets.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -216,51 +160,50 @@ class TimelineViewController: UITableViewController {
 
     private func configureCell(cell: TweetCell, atIndexPath indexPath: NSIndexPath) {
 
-        let tweet = fetchedResultsController.objectAtIndexPath(indexPath) as! Tweet
-
+        let tweet = tweets[indexPath.row]
         cell.configureWithTweet(tweet)
     }
 }
 
-// MARK: - NSFetchedResultsControllerDelegate
-
-extension TimelineViewController: NSFetchedResultsControllerDelegate {
-
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-
-        tableView.beginUpdates()
-    }
-
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-
-        switch type {
-
-        case .Insert:
-            if let newIndexPath = newIndexPath {
-                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
-            }
-
-        case .Delete:
-            if let indexPath = indexPath {
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            }
-
-        case .Move:
-            if let indexPath = indexPath, newIndexPath = newIndexPath {
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
-            }
-
-        case .Update:
-            if let indexPath = indexPath, cell = tableView.cellForRowAtIndexPath(indexPath) as? TweetCell {
-                configureCell(cell, atIndexPath: indexPath)
-            }
-        }
-    }
-
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-
-        tableView.endUpdates()
-    }
-}
+//// MARK: - NSFetchedResultsControllerDelegate
+//
+//extension TimelineViewController: NSFetchedResultsControllerDelegate {
+//
+//    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+//
+//        tableView.beginUpdates()
+//    }
+//
+//    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+//
+//        switch type {
+//
+//        case .Insert:
+//            if let newIndexPath = newIndexPath {
+//                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+//            }
+//
+//        case .Delete:
+//            if let indexPath = indexPath {
+//                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+//            }
+//
+//        case .Move:
+//            if let indexPath = indexPath, newIndexPath = newIndexPath {
+//                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+//                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+//            }
+//
+//        case .Update:
+//            if let indexPath = indexPath, cell = tableView.cellForRowAtIndexPath(indexPath) as? TweetCell {
+//                configureCell(cell, atIndexPath: indexPath)
+//            }
+//        }
+//    }
+//
+//    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+//
+//        tableView.endUpdates()
+//    }
+//}
 

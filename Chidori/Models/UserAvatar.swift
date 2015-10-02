@@ -6,19 +6,23 @@
 //  Copyright © 2015年 nixWork. All rights reserved.
 //
 
-import CoreData
+import RealmSwift
 import Navi
 
 private let screenScale = UIScreen.mainScreen().scale
 
 class UserAvatar {
 
-    let user: User
+    let userID: String
     let avatarStyle: AvatarStyle
 
-    init(user: User, avatarStyle: AvatarStyle) {
+    var user: User {
+        return User.getOrCreateWithUserID(userID, inRealm: try! Realm())
+    }
 
-        self.user = user
+    init(userID: String, avatarStyle: AvatarStyle) {
+
+        self.userID = userID
         self.avatarStyle = avatarStyle
     }
 }
@@ -32,7 +36,7 @@ extension UserAvatar: Navi.Avatar {
 
         // try construct original URL from normal one
 
-        if let URL = NSURL(string: user.avatarURLString!), lastPathComponent = URL.lastPathComponent, pathExtension = URL.pathExtension {
+        if let URL = NSURL(string: user.avatarURLString), lastPathComponent = URL.lastPathComponent, pathExtension = URL.pathExtension {
 
             let underscoreParts = lastPathComponent.componentsSeparatedByString("_normal")
 
@@ -43,7 +47,7 @@ extension UserAvatar: Navi.Avatar {
             }
         }
 
-        return NSURL(string: user.avatarURLString!)!
+        return NSURL(string: user.avatarURLString)!
     }
 
     var style: AvatarStyle {
@@ -97,23 +101,17 @@ extension UserAvatar: Navi.Avatar {
 
     func saveOriginalImage(originalImage: UIImage, styledImage: UIImage) {
 
-        guard let context = user.managedObjectContext else {
+        guard let realm = user.realm else {
             return
         }
 
-        var isDirty = false
-
         if user.avatar == nil {
 
-            let avatarEntityDescription = NSEntityDescription.entityForName("Avatar", inManagedObjectContext: context)!
-            let avatar = NSManagedObject(entity: avatarEntityDescription, insertIntoManagedObjectContext: context) as! Avatar
+            let avatar = Avatar.getOrCreateWithAvatarURLString(user.avatarURLString, inRealm: realm)
 
-            avatar.avatarURLString = URL.absoluteString
-            avatar.originalAvatarData = UIImageJPEGRepresentation(originalImage, 1.0)
-
-            user.avatar = avatar
-
-            isDirty = true
+            realm.write {
+                self.user.avatar = avatar
+            }
         }
 
         if let avatar = user.avatar {
@@ -122,27 +120,23 @@ extension UserAvatar: Navi.Avatar {
 
             case .Rectangle:
 
-                if avatar.miniSquareAvatarData == nil {
-                    avatar.miniSquareAvatarData = UIImageJPEGRepresentation(styledImage, 1.0)
-
-                    isDirty = true
+                if avatar.miniSquareAvatarData.length == 0, let data = UIImageJPEGRepresentation(styledImage, 1.0) {
+                    realm.write {
+                        avatar.miniSquareAvatarData = data
+                    }
                 }
 
             case .RoundedRectangle:
 
-                if avatar.miniRoundAvatarData == nil {
-                    avatar.miniRoundAvatarData = UIImagePNGRepresentation(styledImage)
-
-                    isDirty = true
+                if avatar.miniRoundAvatarData.length == 0, let data = UIImagePNGRepresentation(styledImage) {
+                    realm.write {
+                        avatar.miniRoundAvatarData = data
+                    }
                 }
 
             default:
                 break
             }
-        }
-
-        if isDirty {
-            context.trySave()
         }
     }
 }

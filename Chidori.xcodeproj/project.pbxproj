@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826971BB841A3007D6993 /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		5008269A1BB84330007D6993 /* UserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826991BB84330007D6993 /* UserAvatar.swift */; settings = {ASSET_TAGS = (); }; };
-		502A2D311BB6843600B3A6B1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */; settings = {ASSET_TAGS = (); }; };
-		502A2D351BB686A400B3A6B1 /* Chidori.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D331BB686A400B3A6B1 /* Chidori.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		502A2D4B1BB7A19300B3A6B1 /* UIImage+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */; settings = {ASSET_TAGS = (); }; };
 		505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */; };
 		505A55E41BB63CFD00159CD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505A55E21BB63CFD00159CD0 /* Main.storyboard */; };
@@ -31,12 +29,11 @@
 		50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */; settings = {ASSET_TAGS = (); }; };
 		50970CAE1BBDA4BA001BFB19 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */; settings = {ASSET_TAGS = (); }; };
 		50970CB11BBE9ECA001BFB19 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CB01BBE9ECA001BFB19 /* Filter.swift */; settings = {ASSET_TAGS = (); }; };
-		50970CC51BBEBCD9001BFB19 /* Tweet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CBF1BBEBCD9001BFB19 /* Tweet+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
-		50970CC61BBEBCD9001BFB19 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CC01BBEBCD9001BFB19 /* Tweet.swift */; settings = {ASSET_TAGS = (); }; };
-		50970CC71BBEBCD9001BFB19 /* Avatar+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CC11BBEBCD9001BFB19 /* Avatar+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
-		50970CC81BBEBCD9001BFB19 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CC21BBEBCD9001BFB19 /* Avatar.swift */; settings = {ASSET_TAGS = (); }; };
-		50970CC91BBEBCD9001BFB19 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CC31BBEBCD9001BFB19 /* User+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
-		50970CCA1BBEBCD9001BFB19 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CC41BBEBCD9001BFB19 /* User.swift */; settings = {ASSET_TAGS = (); }; };
+		50970CCC1BBEF957001BFB19 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50970CCB1BBEF957001BFB19 /* Realm.framework */; };
+		50970CCD1BBEF957001BFB19 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 50970CCB1BBEF957001BFB19 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		50970CCF1BBEF95D001BFB19 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50970CCE1BBEF95D001BFB19 /* RealmSwift.framework */; };
+		50970CD01BBEF95D001BFB19 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 50970CCE1BBEF95D001BFB19 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		50970CD41BBEFA3F001BFB19 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CD31BBEFA3F001BFB19 /* Models.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +67,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				50970CCD1BBEF957001BFB19 /* Realm.framework in Embed Frameworks */,
 				505A560B1BB63F2E00159CD0 /* Navi.framework in Embed Frameworks */,
+				50970CD01BBEF95D001BFB19 /* RealmSwift.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,8 +79,6 @@
 /* Begin PBXFileReference section */
 		500826971BB841A3007D6993 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = ViewControllers/ProfileViewController.swift; sourceTree = "<group>"; };
 		500826991BB84330007D6993 /* UserAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAvatar.swift; path = Models/UserAvatar.swift; sourceTree = "<group>"; };
-		502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = CoreData/CoreDataStack.swift; sourceTree = "<group>"; };
-		502A2D341BB686A400B3A6B1 /* Chidori.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chidori.xcdatamodel; sourceTree = "<group>"; };
 		502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Navi.swift"; sourceTree = "<group>"; };
 		505A55DB1BB63CFD00159CD0 /* Chidori.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chidori.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,12 +102,9 @@
 		50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetCell.swift; path = Views/Cells/Tweet/TweetCell.swift; sourceTree = "<group>"; };
 		50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetCell.xib; path = Views/Cells/Tweet/TweetCell.xib; sourceTree = "<group>"; };
 		50970CB01BBE9ECA001BFB19 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Helpers/Filter.swift; sourceTree = "<group>"; };
-		50970CBF1BBEBCD9001BFB19 /* Tweet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Tweet+CoreDataProperties.swift"; path = "CoreData/Tweet+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		50970CC01BBEBCD9001BFB19 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tweet.swift; path = CoreData/Tweet.swift; sourceTree = "<group>"; };
-		50970CC11BBEBCD9001BFB19 /* Avatar+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Avatar+CoreDataProperties.swift"; path = "CoreData/Avatar+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		50970CC21BBEBCD9001BFB19 /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Avatar.swift; path = CoreData/Avatar.swift; sourceTree = "<group>"; };
-		50970CC31BBEBCD9001BFB19 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "CoreData/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		50970CC41BBEBCD9001BFB19 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = CoreData/User.swift; sourceTree = "<group>"; };
+		50970CCB1BBEF957001BFB19 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Chidori/Realm/Realm.framework; sourceTree = "<group>"; };
+		50970CCE1BBEF95D001BFB19 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Chidori/Realm/RealmSwift.framework; sourceTree = "<group>"; };
+		50970CD31BBEFA3F001BFB19 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Models.swift; path = Chidori/Realm/Models.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +112,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50970CCC1BBEF957001BFB19 /* Realm.framework in Frameworks */,
 				505A560A1BB63F2E00159CD0 /* Navi.framework in Frameworks */,
+				50970CCF1BBEF95D001BFB19 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,21 +144,6 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		502A2D321BB6843A00B3A6B1 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				50970CBF1BBEBCD9001BFB19 /* Tweet+CoreDataProperties.swift */,
-				50970CC01BBEBCD9001BFB19 /* Tweet.swift */,
-				50970CC11BBEBCD9001BFB19 /* Avatar+CoreDataProperties.swift */,
-				50970CC21BBEBCD9001BFB19 /* Avatar.swift */,
-				50970CC31BBEBCD9001BFB19 /* User+CoreDataProperties.swift */,
-				50970CC41BBEBCD9001BFB19 /* User.swift */,
-				502A2D331BB686A400B3A6B1 /* Chidori.xcdatamodeld */,
-				502A2D301BB6843600B3A6B1 /* CoreDataStack.swift */,
-			);
-			name = CoreData;
-			sourceTree = "<group>";
-		};
 		505A55D21BB63CFC00159CD0 = {
 			isa = PBXGroup;
 			children = (
@@ -187,7 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */,
-				502A2D321BB6843A00B3A6B1 /* CoreData */,
+				50970CD11BBEF966001BFB19 /* Realm */,
 				5008269B1BB84334007D6993 /* Models */,
 				50970CB21BBE9ECE001BFB19 /* Helpers */,
 				505A56201BB6567200159CD0 /* Views */,
@@ -275,6 +256,17 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		50970CD11BBEF966001BFB19 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				50970CCE1BBEF95D001BFB19 /* RealmSwift.framework */,
+				50970CCB1BBEF957001BFB19 /* Realm.framework */,
+				50970CD31BBEFA3F001BFB19 /* Models.swift */,
+			);
+			name = Realm;
+			path = ..;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -297,6 +289,7 @@
 				505A55D81BB63CFD00159CD0 /* Frameworks */,
 				505A55D91BB63CFD00159CD0 /* Resources */,
 				505A56111BB63F2E00159CD0 /* Embed Frameworks */,
+				50970CD21BBEF9C6001BFB19 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -416,26 +409,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		50970CD21BBEF9C6001BFB19 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		505A55D71BB63CFD00159CD0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				502A2D351BB686A400B3A6B1 /* Chidori.xcdatamodeld in Sources */,
+				50970CD41BBEFA3F001BFB19 /* Models.swift in Sources */,
 				5008269A1BB84330007D6993 /* UserAvatar.swift in Sources */,
-				502A2D311BB6843600B3A6B1 /* CoreDataStack.swift in Sources */,
-				50970CC61BBEBCD9001BFB19 /* Tweet.swift in Sources */,
-				50970CCA1BBEBCD9001BFB19 /* User.swift in Sources */,
-				50970CC81BBEBCD9001BFB19 /* Avatar.swift in Sources */,
 				500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */,
-				50970CC71BBEBCD9001BFB19 /* Avatar+CoreDataProperties.swift in Sources */,
 				50970C9E1BBD9151001BFB19 /* TimelineViewController.swift in Sources */,
-				50970CC91BBEBCD9001BFB19 /* User+CoreDataProperties.swift in Sources */,
 				505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */,
 				505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */,
 				50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */,
 				50970CB11BBE9ECA001BFB19 /* Filter.swift in Sources */,
-				50970CC51BBEBCD9001BFB19 /* Tweet+CoreDataProperties.swift in Sources */,
 				505A561A1BB6559800159CD0 /* AvatarsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,6 +589,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Chidori/Realm",
+				);
 				INFOPLIST_FILE = Chidori/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nixWork.Chidori;
@@ -599,6 +605,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Chidori/Realm",
+				);
 				INFOPLIST_FILE = Chidori/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nixWork.Chidori;
@@ -713,20 +723,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		502A2D331BB686A400B3A6B1 /* Chidori.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				502A2D341BB686A400B3A6B1 /* Chidori.xcdatamodel */,
-			);
-			currentVersion = 502A2D341BB686A400B3A6B1 /* Chidori.xcdatamodel */;
-			name = Chidori.xcdatamodeld;
-			path = CoreData/Chidori.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 505A55D31BB63CFD00159CD0 /* Project object */;
 }

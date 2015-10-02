@@ -17,14 +17,14 @@ class TweetCell: UITableViewCell {
 
     func configureWithTweet(tweet: Tweet) {
 
-        if let user = tweet.user {
-            let userAvatar = UserAvatar(user: user, avatarStyle: roundAvatarStyle)
+        if let user = tweet.creator {
+            let userAvatar = UserAvatar(userID: user.userID, avatarStyle: roundAvatarStyle)
             avatarImageView.navi_setAvatar(userAvatar)
         } else {
             avatarImageView.image = nil
         }
 
-        usernameLabel.text = tweet.user?.username
+        usernameLabel.text = tweet.creator?.username
         messageLabel.text = tweet.message
     }
 }
