@@ -21,6 +21,9 @@ public func ==(lhs: AvatarStyle, rhs: AvatarStyle) -> Bool {
     case (.RoundedRectangle(let sizeA, let cornerRadiusA, let borderWidthA), .RoundedRectangle(let sizeB, let cornerRadiusB, let borderWidthB)) where (sizeA == sizeB && cornerRadiusA == cornerRadiusB && borderWidthA == borderWidthB):
         return true
 
+    case (.Free(let nameA, _), .Free(let nameB, _)) where nameA == nameB:
+        return true
+
     default:
         return false
     }
@@ -31,6 +34,9 @@ public enum AvatarStyle: Equatable {
     case Original
     case Rectangle(size: CGSize)
     case RoundedRectangle(size: CGSize, cornerRadius: CGFloat, borderWidth: CGFloat)
+
+    public typealias Transform = UIImage -> UIImage?
+    case Free(name: String, transform: Transform)
 
     var hashString: String {
 
@@ -44,6 +50,9 @@ public enum AvatarStyle: Equatable {
 
         case .RoundedRectangle(let size, let cornerRadius, let borderWidth):
             return "RoundedRectangle-\(size)-\(cornerRadius)-\(borderWidth)-"
+
+        case .Free(let name, _):
+            return "Free-\(name)-"
         }
     }
 }

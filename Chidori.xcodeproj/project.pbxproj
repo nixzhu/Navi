@@ -37,6 +37,7 @@
 		50970CAA1BBD9EFC001BFB19 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CA41BBD9EFC001BFB19 /* Tweet.swift */; settings = {ASSET_TAGS = (); }; };
 		50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */; settings = {ASSET_TAGS = (); }; };
 		50970CAE1BBDA4BA001BFB19 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */; settings = {ASSET_TAGS = (); }; };
+		50970CB11BBE9ECA001BFB19 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CB01BBE9ECA001BFB19 /* Filter.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		50970CA41BBD9EFC001BFB19 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tweet.swift; path = CoreData/Tweet.swift; sourceTree = "<group>"; };
 		50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetCell.swift; path = Views/Cells/Tweet/TweetCell.swift; sourceTree = "<group>"; };
 		50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetCell.xib; path = Views/Cells/Tweet/TweetCell.xib; sourceTree = "<group>"; };
+		50970CB01BBE9ECA001BFB19 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Helpers/Filter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 				505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */,
 				502A2D321BB6843A00B3A6B1 /* CoreData */,
 				5008269B1BB84334007D6993 /* Models */,
+				50970CB21BBE9ECE001BFB19 /* Helpers */,
 				505A56201BB6567200159CD0 /* Views */,
 				505A561B1BB6559D00159CD0 /* ViewControllers */,
 				505A55E21BB63CFD00159CD0 /* Main.storyboard */,
@@ -265,6 +268,14 @@
 				50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */,
 			);
 			name = Tweet;
+			sourceTree = "<group>";
+		};
+		50970CB21BBE9ECE001BFB19 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				50970CB01BBE9ECA001BFB19 /* Filter.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,6 +438,7 @@
 				50970CA81BBD9EFC001BFB19 /* User.swift in Sources */,
 				505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */,
 				50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */,
+				50970CB11BBE9ECA001BFB19 /* Filter.swift in Sources */,
 				50970CA61BBD9EFC001BFB19 /* Avatar.swift in Sources */,
 				505A561A1BB6559800159CD0 /* AvatarsViewController.swift in Sources */,
 			);

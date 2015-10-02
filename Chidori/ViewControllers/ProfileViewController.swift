@@ -29,7 +29,19 @@ class ProfileViewController: UIViewController {
             return
         }
 
-        let avatarStyle: AvatarStyle = .Original
+        let avatarStyle: AvatarStyle = .Free(name: "NIX", transform: { image in
+
+            guard let sourceCIImage = CIImage(image: image) else {
+                return nil
+            }
+
+            let filter = blurWithRadius(3) +++ overlayWithColor(UIColor.redColor().colorWithAlphaComponent(0.5))
+
+            let resultCIImage = filter(sourceCIImage)
+
+            return UIImage(CIImage: resultCIImage)
+        })
+
         let userAvatar = UserAvatar(user: user, avatarStyle: avatarStyle)
 
         avatarImageView.navi_setAvatar(userAvatar)

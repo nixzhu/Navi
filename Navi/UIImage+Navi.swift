@@ -30,6 +30,9 @@ extension UIImage {
 
         case .RoundedRectangle(let size, let cornerRadius, let borderWidth):
             avatarImage = centerCropWithSize(size)?.roundWithCornerRadius(cornerRadius, borderWidth: borderWidth)
+
+        case .Free(_, let transform):
+            avatarImage = transform(self)
         }
 
         return avatarImage ?? self
