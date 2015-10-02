@@ -16,6 +16,8 @@ extension User {
 
     @NSManaged var avatarURLString: String?
     @NSManaged var username: String?
+    @NSManaged var userID: String?
+    @NSManaged var createdUnixTime: NSNumber?
     @NSManaged var avatar: Avatar?
     @NSManaged var tweets: NSSet?
 

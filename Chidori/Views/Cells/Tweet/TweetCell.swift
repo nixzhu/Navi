@@ -15,11 +15,17 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
 
-    func configureWithFeed(feed: Feed) {
+    func configureWithTweet(tweet: Tweet) {
 
-        avatarImageView.navi_setAvatar(feed as Navi.Avatar)
-        usernameLabel.text = feed.username
-        messageLabel.text = feed.message
+        if let user = tweet.user {
+            let userAvatar = UserAvatar(user: user, avatarStyle: roundAvatarStyle)
+            avatarImageView.navi_setAvatar(userAvatar)
+        } else {
+            avatarImageView.image = nil
+        }
+
+        usernameLabel.text = tweet.user?.username
+        messageLabel.text = tweet.message
     }
 }
 

@@ -108,7 +108,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2yQ-Un-6uT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1507.5" y="1232.5"/>
+            <point key="canvasLocation" x="1507.5" y="-329.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="0b3-2n-kNG">
@@ -122,13 +122,13 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="QfT-J0-Jo0" kind="relationship" relationship="viewControllers" id="Ok0-wy-f86"/>
                         <segue destination="rnS-Oo-r3S" kind="relationship" relationship="viewControllers" id="eKV-Cb-Rn6"/>
+                        <segue destination="QfT-J0-Jo0" kind="relationship" relationship="viewControllers" id="Ok0-wy-f86"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dcK-RB-8MA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="461.5" y="815.5"/>
+            <point key="canvasLocation" x="499.5" y="39.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uVW-Ms-AAa">
@@ -148,7 +148,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vy3-fC-uP2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1019.5" y="1232.5"/>
+            <point key="canvasLocation" x="1019.5" y="-329.5"/>
         </scene>
     </scenes>
 </document>

@@ -26,6 +26,20 @@ class UserAvatar {
 extension UserAvatar: Navi.Avatar {
 
     var URL: NSURL {
+
+        // try construct original URL from normal one
+
+        if let URL = NSURL(string: user.avatarURLString!), lastPathComponent = URL.lastPathComponent, pathExtension = URL.pathExtension {
+
+            let underscoreParts = lastPathComponent.componentsSeparatedByString("_normal")
+
+            if underscoreParts.count == 2 {
+
+                let name = underscoreParts[0]
+                return URL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(name + "." + pathExtension)
+            }
+        }
+
         return NSURL(string: user.avatarURLString!)!
     }
 

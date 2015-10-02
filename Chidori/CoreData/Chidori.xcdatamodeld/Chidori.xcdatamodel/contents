@@ -8,18 +8,22 @@
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="avatar" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Tweet" representedClassName=".Tweet" syncable="YES">
+        <attribute name="createdUnixTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tweetID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="tweets" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="avatarURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdUnixTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="avatar" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Avatar" inverseName="user" inverseEntity="Avatar" syncable="YES"/>
         <relationship name="tweets" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Tweet" inverseName="user" inverseEntity="Tweet" syncable="YES"/>
     </entity>
     <elements>
         <element name="Avatar" positionX="-198" positionY="-99" width="128" height="118"/>
-        <element name="User" positionX="-414" positionY="-162" width="128" height="103"/>
-        <element name="Tweet" positionX="-306" positionY="-81" width="128" height="73"/>
+        <element name="User" positionX="-414" positionY="-162" width="128" height="133"/>
+        <element name="Tweet" positionX="-306" positionY="-81" width="128" height="103"/>
     </elements>
 </model>

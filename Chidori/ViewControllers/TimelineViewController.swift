@@ -9,66 +9,41 @@
 import UIKit
 import Accounts
 import Social
+import CoreData
 import Navi
-
-struct Feed {
-
-    let username: String
-    let avatarURLString: String
-    let message: String
-}
-
-extension Feed: Navi.Avatar {
-
-    var URL: NSURL {
-
-        // try construct original URL from normal one
-
-        if let URL = NSURL(string: avatarURLString), lastPathComponent = URL.lastPathComponent, pathExtension = URL.pathExtension {
-
-            let underscoreParts = lastPathComponent.componentsSeparatedByString("_normal")
-
-            if underscoreParts.count == 2 {
-
-                let name = underscoreParts[0]
-                return URL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(name + "." + pathExtension)
-            }
-        }
-
-        return NSURL(string: avatarURLString)!
-    }
-
-    var style: AvatarStyle {
-        return .RoundedRectangle(size: CGSize(width: 60, height: 60), cornerRadius: 30, borderWidth: 0)
-    }
-
-    var placeholderImage: UIImage? {
-        return UIImage(named: "round_avatar_placeholder")
-    }
-
-    var localOriginalImage: UIImage? {
-        return nil
-    }
-
-    var localStyledImage: UIImage? {
-        return nil
-    }
-
-    func saveOriginalImage(originalImage: UIImage, styledImage: UIImage) {
-    }
-}
 
 class TimelineViewController: UITableViewController {
 
+    lazy var coreDataStack = CoreDataStack()
+
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+
+        let fetchRequest = NSFetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "createdUnixTime", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.fetchBatchSize = 20
+
+        let context = self.coreDataStack.context
+
+        let tweetEntityDescription = NSEntityDescription.entityForName("Tweet", inManagedObjectContext: context)!
+        fetchRequest.entity = tweetEntityDescription
+
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+
+        fetchedResultsController.delegate = self
+
+        return fetchedResultsController
+        }()
+
     lazy var accountStore = ACAccountStore()
 
-    var feeds = [Feed]() {
-        didSet {
-            dispatch_async(dispatch_get_main_queue()) { [weak self] in
-                self?.tableView.reloadData()
-            }
-        }
-    }
+    private lazy var dateFormatter: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .LongStyle
+        formatter.formatterBehavior = .Behavior10_4
+        formatter.dateFormat = "EEE MMM dd HH:mm:ss Z yyyy"
+        return formatter
+        }()
 
     var twitterAccount: ACAccount? {
         willSet {
@@ -76,35 +51,104 @@ class TimelineViewController: UITableViewController {
                 return
             }
 
-            let feedURL = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")!
+            let homeTimelineURL = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")!
 
             let parameters = [
                 "count": 50,
             ]
 
-            let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: feedURL, parameters: parameters)
+            let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: homeTimelineURL, parameters: parameters)
             request.account = twitterAccount
 
             request.performRequestWithHandler { [weak self] data, response, error in
 
                 guard let
                     json = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)),
-                    feedsData = json as? [[NSObject: AnyObject]] else {
+                    tweetsData = json as? [[NSObject: AnyObject]] else {
                         return
                 }
-                //print("feedsData: \(feedsData)")
+                //print("tweetsData: \(tweetsData)")
 
-                self?.feeds = feedsData.map({ feedInfo in
-                    guard let
-                        userInfo = feedInfo["user"] as? [NSObject: AnyObject],
-                        username = userInfo["screen_name"] as? String,
-                        avatarURLString = userInfo["profile_image_url_https"] as? String,
-                        message = feedInfo["text"] as? String else {
-                            return nil
+                dispatch_async(dispatch_get_main_queue()) {
+
+                    guard let context = self?.coreDataStack.context else {
+                        return
                     }
 
-                    return Feed(username: username, avatarURLString: avatarURLString, message: message)
-                }).flatMap({ $0 })
+                    tweetsData.forEach({ tweetInfo in
+
+                        guard let
+                            tweetID = tweetInfo["id_str"] as? String,
+                            tweetCreatedDateString = tweetInfo["created_at"] as? String,
+                            message = tweetInfo["text"] as? String,
+                            userInfo = tweetInfo["user"] as? [NSObject: AnyObject],
+                            userID = userInfo["id_str"] as? String,
+                            userCreatedDateString = userInfo["created_at"] as? String,
+                            username = userInfo["screen_name"] as? String,
+                            avatarURLString = userInfo["profile_image_url_https"] as? String else {
+                                return
+                        }
+
+                        var tweet: Tweet?
+
+                        let tweetRequest = NSFetchRequest(entityName: "Tweet")
+                        tweetRequest.predicate = NSPredicate(format: "tweetID = %@", tweetID)
+
+                        do {
+                            if let tweets = try context.executeFetchRequest(tweetRequest) as? [Tweet] {
+                                if tweets.isEmpty {
+                                    let tweetEntityDescription = NSEntityDescription.entityForName("Tweet", inManagedObjectContext: context)!
+                                    let newTweet = NSManagedObject(entity: tweetEntityDescription, insertIntoManagedObjectContext: context) as! Tweet
+
+                                    newTweet.tweetID = tweetID
+                                    newTweet.createdUnixTime = self?.dateFormatter.dateFromString(tweetCreatedDateString)?.timeIntervalSince1970 ?? NSDate().timeIntervalSince1970
+                                    newTweet.message = message
+
+                                    tweet = newTweet
+
+                                } else {
+                                    tweet = tweets.first
+                                }
+                            }
+
+                        } catch let error as NSError {
+                            print(error)
+                        }
+
+                        var user: User?
+
+                        let userRequest = NSFetchRequest(entityName: "User")
+                        userRequest.predicate = NSPredicate(format: "userID = %@", userID)
+
+                        do {
+                            if let users = try context.executeFetchRequest(userRequest) as? [User] {
+                                if users.isEmpty {
+                                    let userEntityDescription = NSEntityDescription.entityForName("User", inManagedObjectContext: context)!
+                                    let newUser = NSManagedObject(entity: userEntityDescription, insertIntoManagedObjectContext: context) as! User
+
+                                    newUser.userID = userID
+                                    newUser.createdUnixTime = self?.dateFormatter.dateFromString(userCreatedDateString)?.timeIntervalSince1970 ?? NSDate().timeIntervalSince1970
+
+                                    user = newUser
+
+                                } else {
+                                    user = users.first
+                                }
+
+                                // update
+                                user?.username = username
+                                user?.avatarURLString = avatarURLString
+                            }
+
+                        } catch let error as NSError {
+                            print(error)
+                        }
+
+                        tweet?.user = user
+                    })
+
+                    context.trySave()
+                }
             }
         }
     }
@@ -121,6 +165,12 @@ class TimelineViewController: UITableViewController {
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 80
+
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("fetchedResultsController.performFetch: \(error)")
+        }
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -147,22 +197,70 @@ class TimelineViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 
-        return 1
+        return fetchedResultsController.sections?.count ?? 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return feeds.count
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier(tweetCellID, forIndexPath: indexPath) as! TweetCell
 
-        let feed = feeds[indexPath.row]
-        cell.configureWithFeed(feed)
+        configureCell(cell, atIndexPath: indexPath)
 
         return cell
+    }
+
+    private func configureCell(cell: TweetCell, atIndexPath indexPath: NSIndexPath) {
+
+        let tweet = fetchedResultsController.objectAtIndexPath(indexPath) as! Tweet
+
+        cell.configureWithTweet(tweet)
+    }
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension TimelineViewController: NSFetchedResultsControllerDelegate {
+
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+
+        tableView.beginUpdates()
+    }
+
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+
+        switch type {
+
+        case .Insert:
+            if let newIndexPath = newIndexPath {
+                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            }
+
+        case .Delete:
+            if let indexPath = indexPath {
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
+
+        case .Move:
+            if let indexPath = indexPath, newIndexPath = newIndexPath {
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            }
+
+        case .Update:
+            if let indexPath = indexPath, cell = tableView.cellForRowAtIndexPath(indexPath) as? TweetCell {
+                configureCell(cell, atIndexPath: indexPath)
+            }
+        }
+    }
+
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+
+        tableView.endUpdates()
     }
 }
 
