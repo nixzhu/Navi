@@ -13,9 +13,32 @@ The name of **Navi** from movie [Avatar](https://en.wikipedia.org/wiki/Avatar_(2
 
 Swift 2.0, iOS 8.0
 
-## Example
+## Usage
+
+1. Make your User conform Avatar protocol.
+
+	``` swift
+	protocol Avatar {
+
+	    var URL: NSURL { get }
+	    var style: AvatarStyle { get }
+	    var placeholderImage: UIImage? { get }
+	    var localOriginalImage: UIImage? { get }
+	    var localStyledImage: UIImage? { get }
+
+	    func saveOriginalImage(originalImage: UIImage, styledImage: UIImage)
+	}
+	```
+
+2. And, set avatar for your avatarImageView
+
+	``` swift
+	avatarImageView.navi_setAvatar(userAvatar)
+	```
 
 Check the demo for more information.
+
+另有[中文介绍](https://github.com/nixzhu/dev-blog/blob/master/2015-10-08-navi.md)。
 
 ## Installation
 
