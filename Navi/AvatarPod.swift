@@ -92,7 +92,7 @@ public class AvatarPod {
         }
     }
 
-    // MARK: API
+    // MARK: - API
 
     public class func wakeAvatar(avatar: Avatar, completion: Completion) {
 

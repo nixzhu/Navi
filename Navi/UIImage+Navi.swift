@@ -8,7 +8,8 @@
 
 import UIKit
 
-// ref http://vocaro.com/trevor/blog/2009/10/12/resize-a-uiimage-the-right-way/comment-page-1/
+// ref http://vocaro.com/trevor/blog/2009/10/12/resize-a-uiimage-the-right-way/
+// but with better scale handle
 
 private let screenScale = UIScreen.mainScreen().scale
 
@@ -66,9 +67,11 @@ extension UIImage {
     }
 
     func transformForOrientationWithSize(size: CGSize) -> CGAffineTransform {
+
         var transform = CGAffineTransformIdentity
 
         switch imageOrientation {
+
         case .Down, .DownMirrored:
             transform = CGAffineTransformTranslate(transform, size.width, size.height)
             transform = CGAffineTransformRotate(transform, CGFloat(M_PI))
@@ -86,6 +89,7 @@ extension UIImage {
         }
 
         switch imageOrientation {
+
         case .UpMirrored, .DownMirrored:
             transform = CGAffineTransformTranslate(transform, size.width, 0)
             transform = CGAffineTransformScale(transform, -1, 1)
@@ -212,7 +216,7 @@ extension UIImage {
         CGContextDrawImage(bitmapContext, imageRect, image.CGImage)
 
         if let newCGImage = CGBitmapContextCreateImage(bitmapContext) {
-            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: .Up)
+            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: imageOrientation)
         }
 
         return nil
@@ -251,6 +255,7 @@ extension UIImage {
         
         if let alphaCGImage = CGBitmapContextCreateImage(offscreenContext) {
             return UIImage(CGImage: alphaCGImage, scale: screenScale, orientation: imageOrientation)
+
         } else {
             return self
         }
