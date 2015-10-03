@@ -10,6 +10,7 @@
 		500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826971BB841A3007D6993 /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		5008269A1BB84330007D6993 /* UserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826991BB84330007D6993 /* UserAvatar.swift */; settings = {ASSET_TAGS = (); }; };
 		502A2D4B1BB7A19300B3A6B1 /* UIImage+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */; settings = {ASSET_TAGS = (); }; };
+		5057A2921BBFE5C700D3A876 /* UIFont+Chidori.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A2911BBFE5C700D3A876 /* UIFont+Chidori.swift */; settings = {ASSET_TAGS = (); }; };
 		505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */; };
 		505A55E41BB63CFD00159CD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505A55E21BB63CFD00159CD0 /* Main.storyboard */; };
 		505A55E61BB63CFD00159CD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 505A55E51BB63CFD00159CD0 /* Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		500826971BB841A3007D6993 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = ViewControllers/ProfileViewController.swift; sourceTree = "<group>"; };
 		500826991BB84330007D6993 /* UserAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAvatar.swift; path = Models/UserAvatar.swift; sourceTree = "<group>"; };
 		502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Navi.swift"; sourceTree = "<group>"; };
+		5057A2911BBFE5C700D3A876 /* UIFont+Chidori.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Chidori.swift"; path = "Extensions/UIFont+Chidori.swift"; sourceTree = "<group>"; };
 		505A55DB1BB63CFD00159CD0 /* Chidori.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chidori.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		505A55E31BB63CFD00159CD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -144,6 +146,14 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		5057A2931BBFE5CC00D3A876 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5057A2911BBFE5C700D3A876 /* UIFont+Chidori.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		505A55D21BB63CFC00159CD0 = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +181,7 @@
 				50970CD11BBEF966001BFB19 /* Realm */,
 				5008269B1BB84334007D6993 /* Models */,
 				50970CB21BBE9ECE001BFB19 /* Helpers */,
+				5057A2931BBFE5CC00D3A876 /* Extensions */,
 				505A56201BB6567200159CD0 /* Views */,
 				505A561B1BB6559D00159CD0 /* ViewControllers */,
 				505A55E21BB63CFD00159CD0 /* Main.storyboard */,
@@ -435,6 +446,7 @@
 				500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */,
 				50970C9E1BBD9151001BFB19 /* TimelineViewController.swift in Sources */,
 				505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */,
+				5057A2921BBFE5C700D3A876 /* UIFont+Chidori.swift in Sources */,
 				505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */,
 				50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */,
 				50970CB11BBE9ECA001BFB19 /* Filter.swift in Sources */,

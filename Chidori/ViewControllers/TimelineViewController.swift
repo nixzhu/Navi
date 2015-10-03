@@ -118,8 +118,8 @@ class TimelineViewController: UITableViewController {
         tableView.registerNib(UINib(nibName: tweetCellID, bundle: nil), forCellReuseIdentifier: tweetCellID)
         tableView.tableFooterView = UIView()
 
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 80
+        //tableView.rowHeight = UITableViewAutomaticDimension
+        //tableView.estimatedRowHeight = 80
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -141,6 +141,8 @@ class TimelineViewController: UITableViewController {
             }
         }
     }
+
+
 
     // MARK: - Table view data source
 
@@ -170,6 +172,12 @@ class TimelineViewController: UITableViewController {
 
         let tweet = tweets[indexPath.row]
         cell.configureWithTweet(tweet)
+    }
+
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+
+        let tweet = tweets[indexPath.row]
+        return TweetCell.heightOfTweet(tweet)
     }
 }
 
