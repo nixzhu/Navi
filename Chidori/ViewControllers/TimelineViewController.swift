@@ -158,9 +158,12 @@ class TimelineViewController: UITableViewController {
 
         let cell = tableView.dequeueReusableCellWithIdentifier(tweetCellID, forIndexPath: indexPath) as! TweetCell
 
-        configureCell(cell, atIndexPath: indexPath)
-
         return cell
+    }
+
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+
+        configureCell(cell as! TweetCell, atIndexPath: indexPath)
     }
 
     private func configureCell(cell: TweetCell, atIndexPath indexPath: NSIndexPath) {
