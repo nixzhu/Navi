@@ -11,7 +11,7 @@ import CoreImage
 
 typealias Filter = CIImage -> CIImage
 
-func blurWithRadius(radius: Double) -> Filter {
+func blurWithRadius(radius: CGFloat) -> Filter {
 
     return { image in
 

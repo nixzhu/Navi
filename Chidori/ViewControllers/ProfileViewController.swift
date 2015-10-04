@@ -29,13 +29,13 @@ class ProfileViewController: UIViewController {
             return
         }
 
-        let avatarStyle: AvatarStyle = .Free(name: "NIX", transform: { image in
+        let avatarStyle: AvatarStyle = .Free(name: "Chidori", transform: { image in
 
             guard let sourceCIImage = CIImage(image: image) else {
                 return nil
             }
 
-            let filter = blurWithRadius(3) +++ overlayWithColor(UIColor.redColor().colorWithAlphaComponent(0.5))
+            let filter = blurWithRadius(image.size.width / 60) +++ overlayWithColor(UIColor.blueColor().colorWithAlphaComponent(0.1))
 
             let resultCIImage = filter(sourceCIImage)
 
