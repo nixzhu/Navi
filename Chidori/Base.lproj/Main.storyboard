@@ -104,7 +104,13 @@
                             <outlet property="delegate" destination="D2b-wm-8b4" id="mXd-5o-zzO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="bb1-FH-VFW"/>
+                    <navigationItem key="navigationItem" id="bb1-FH-VFW">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="E6F-wK-28F">
+                            <connections>
+                                <action selector="composeTweet:" destination="D2b-wm-8b4" id="Gy6-IV-LIQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2yQ-Un-6uT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

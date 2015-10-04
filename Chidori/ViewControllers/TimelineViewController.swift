@@ -31,92 +31,97 @@ class TimelineViewController: UITableViewController {
                 return
             }
 
-            let homeTimelineURL = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")!
+            syncLatestTweetsWithTwitterAccount(twitterAccount)
+        }
+    }
 
-            let parameters = [
-                "count": 20,
-            ]
+    private func syncLatestTweetsWithTwitterAccount(twitterAccount: ACAccount) {
 
-            let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: homeTimelineURL, parameters: parameters)
-            request.account = twitterAccount
+        let homeTimelineURL = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")!
 
-            request.performRequestWithHandler { [weak self] data, response, error in
+        let parameters = [
+            "count": 20,
+        ]
 
-                guard let
-                    json = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)),
-                    tweetsData = json as? [[NSObject: AnyObject]] else {
-                        print("can not get tweets!")
-                        return
+        let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: homeTimelineURL, parameters: parameters)
+        request.account = twitterAccount
+
+        request.performRequestWithHandler { [weak self] data, response, error in
+
+            guard let
+                json = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)),
+                tweetsData = json as? [[NSObject: AnyObject]] else {
+                    print("can not get tweets!")
+                    return
+            }
+            //print("tweetsData: \(tweetsData)")
+
+            dispatch_async(dispatch_get_main_queue()) {
+
+                guard let realm = try? Realm() else {
+                    return
                 }
-                //print("tweetsData: \(tweetsData)")
 
-                dispatch_async(dispatch_get_main_queue()) {
+                var newTweets = [Tweet]()
 
-                    guard let realm = try? Realm() else {
-                        return
+                tweetsData.forEach({ tweetInfo in
+
+                    guard let
+                        tweetID = tweetInfo["id_str"] as? String,
+                        tweetCreatedDateString = tweetInfo["created_at"] as? String,
+                        message = tweetInfo["text"] as? String,
+                        userInfo = tweetInfo["user"] as? [NSObject: AnyObject],
+                        userID = userInfo["id_str"] as? String,
+                        userCreatedDateString = userInfo["created_at"] as? String,
+                        username = userInfo["screen_name"] as? String,
+                        avatarURLString = userInfo["profile_image_url_https"] as? String else {
+                            return
                     }
 
-                    var newTweets = [Tweet]()
+                    let (justCreated, tweet) = Tweet.getOrCreateWithTweetID(tweetID, inRealm: realm)
 
-                    tweetsData.forEach({ tweetInfo in
+                    if justCreated {
+                        newTweets.append(tweet)
+                    }
 
-                        guard let
-                            tweetID = tweetInfo["id_str"] as? String,
-                            tweetCreatedDateString = tweetInfo["created_at"] as? String,
-                            message = tweetInfo["text"] as? String,
-                            userInfo = tweetInfo["user"] as? [NSObject: AnyObject],
-                            userID = userInfo["id_str"] as? String,
-                            userCreatedDateString = userInfo["created_at"] as? String,
-                            username = userInfo["screen_name"] as? String,
-                            avatarURLString = userInfo["profile_image_url_https"] as? String else {
-                                return
+                    realm.write {
+                        if let unixTime = self?.dateFormatter.dateFromString(tweetCreatedDateString)?.timeIntervalSince1970 {
+                            tweet.createdUnixTime = unixTime
                         }
+                        tweet.message = message
+                    }
 
-                        let (justCreated, tweet) = Tweet.getOrCreateWithTweetID(tweetID, inRealm: realm)
+                    let user = User.getOrCreateWithUserID(userID, inRealm: realm)
 
-                        if justCreated {
-                            newTweets.append(tweet)
+                    realm.write {
+                        if let unixTime = self?.dateFormatter.dateFromString(userCreatedDateString)?.timeIntervalSince1970 {
+                            user.createdUnixTime = unixTime
                         }
+                        user.username = username
+                        user.avatarURLString = avatarURLString
+                    }
 
-                        realm.write {
-                            if let unixTime = self?.dateFormatter.dateFromString(tweetCreatedDateString)?.timeIntervalSince1970 {
-                                tweet.createdUnixTime = unixTime
-                            }
-                            tweet.message = message
-                        }
+                    realm.write {
+                        tweet.creator = user
+                    }
+                })
 
-                        let user = User.getOrCreateWithUserID(userID, inRealm: realm)
+                let insertIndexPaths: [NSIndexPath] = newTweets.map({ [weak self] tweet in
 
-                        realm.write {
-                            if let unixTime = self?.dateFormatter.dateFromString(userCreatedDateString)?.timeIntervalSince1970 {
-                                user.createdUnixTime = unixTime
-                            }
-                            user.username = username
-                            user.avatarURLString = avatarURLString
-                        }
+                    if let row = self?.tweets.indexOf(tweet) {
+                        let indexPath = NSIndexPath(forRow: row, inSection: 0)
+                        return indexPath
+                    }
 
-                        realm.write {
-                            tweet.creator = user
-                        }
-                    })
-
-                    let insertIndexPaths: [NSIndexPath] = newTweets.map({ [weak self] tweet in
-
-                        if let row = self?.tweets.indexOf(tweet) {
-                            let indexPath = NSIndexPath(forRow: row, inSection: 0)
-                            return indexPath
-                        }
-
-                        return nil
+                    return nil
 
                     }).flatMap({ $0 })
 
-                    if insertIndexPaths.count == newTweets.count {
-                        self?.tableView.insertRowsAtIndexPaths(insertIndexPaths, withRowAnimation: .Automatic)
+                if insertIndexPaths.count == newTweets.count {
+                    self?.tableView.insertRowsAtIndexPaths(insertIndexPaths, withRowAnimation: .Automatic)
 
-                    } else {
-                        self?.tableView.reloadData()
-                    }
+                } else {
+                    self?.tableView.reloadData()
                 }
             }
         }
@@ -202,6 +207,27 @@ class TimelineViewController: UITableViewController {
 
                 strongSelf.twitterAccount = twitterAccounts.first as? ACAccount
             }
+        }
+    }
+
+    // MARK: Actions
+
+    @IBAction func composeTweet(sender: UIBarButtonItem) {
+
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
+
+            let tweet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+
+            tweet.completionHandler = { [weak self] result in
+                if result == .Done {
+                    guard let twitterAccount = self?.twitterAccount else {
+                        return
+                    }
+                    self?.syncLatestTweetsWithTwitterAccount(twitterAccount)
+                }
+            }
+
+            presentViewController(tweet, animated: true, completion: nil)
         }
     }
 
