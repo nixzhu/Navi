@@ -137,9 +137,6 @@ class TimelineViewController: UITableViewController {
 
         tableView.registerNib(UINib(nibName: tweetCellID, bundle: nil), forCellReuseIdentifier: tweetCellID)
         tableView.tableFooterView = UIView()
-
-        //tableView.rowHeight = UITableViewAutomaticDimension
-        //tableView.estimatedRowHeight = 80
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -162,9 +159,7 @@ class TimelineViewController: UITableViewController {
         }
     }
 
-
-
-    // MARK: - Table view data source
+    // MARK: - TableView
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 
