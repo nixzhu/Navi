@@ -18,6 +18,8 @@ class AvatarsViewController: UICollectionViewController {
         return self.realm.objects(User).sorted("createdUnixTime", ascending: false)
         }()
 
+    var realmToken: NotificationToken?
+
     private let avatarCellID = "AvatarCell"
 
     override func viewDidLoad() {
@@ -30,11 +32,12 @@ class AvatarsViewController: UICollectionViewController {
         collectionView!.backgroundColor = UIColor.whiteColor()
         collectionView!.registerNib(UINib(nibName: avatarCellID, bundle: nil), forCellWithReuseIdentifier: avatarCellID)
         collectionView!.alwaysBounceVertical = true
-    }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
+        realmToken = realm.addNotificationBlock { notification, realm in
+            dispatch_async(dispatch_get_main_queue()) { [weak self] in
+                self?.collectionView?.reloadData()
+            }
+        }
     }
 
     // MARK: Navigation
