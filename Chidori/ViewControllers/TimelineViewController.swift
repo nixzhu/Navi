@@ -122,7 +122,7 @@ class TimelineViewController: UITableViewController {
                     }).flatMap({ $0 })
 
                 if insertIndexPaths.count == newTweets.count {
-                    self?.tableView.insertRowsAtIndexPaths(insertIndexPaths, withRowAnimation: .Top)
+                    self?.tableView.insertRowsAtIndexPaths(insertIndexPaths, withRowAnimation: .Automatic)
 
                 } else {
                     self?.tableView.reloadData()
