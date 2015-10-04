@@ -7,13 +7,21 @@
 //
 
 import UIKit
+import SafariServices
 import Navi
+
+protocol TweetCellDelegate: NSObjectProtocol {
+
+    func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
+}
 
 class TweetCell: UITableViewCell {
 
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var messageTextView: UITextView!
+
+    weak var delegate: TweetCellDelegate?
 
     static let messageLabelMaxWidth: CGFloat = {
         return UIScreen.mainScreen().bounds.width - (8 + 60 + 8 + 8)
@@ -43,6 +51,7 @@ class TweetCell: UITableViewCell {
         messageTextView.font = UIFont.tweetMessageFont()
         messageTextView.textContainerInset = UIEdgeInsetsZero
         messageTextView.textContainer.lineFragmentPadding = 0
+        messageTextView.delegate = self
     }
 
     func configureWithTweet(tweet: Tweet, messageHeight: CGFloat) {
@@ -59,6 +68,23 @@ class TweetCell: UITableViewCell {
         messageTextView.text = tweet.message
 
         messageTextView.frame.size.height = messageHeight
+    }
+}
+
+// MARK: - UITextViewDelegate
+
+extension TweetCell: UITextViewDelegate {
+
+    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+
+        if #available(iOS 9.0, *) {
+            let vc = SFSafariViewController(URL: URL, entersReaderIfAvailable: true)
+            delegate?.presentViewController(vc, animated: true, completion: nil)
+
+            return false
+        }
+
+        return true
     }
 }
 

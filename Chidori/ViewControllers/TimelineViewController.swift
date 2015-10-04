@@ -247,6 +247,8 @@ class TimelineViewController: UITableViewController {
 
         let cell = tableView.dequeueReusableCellWithIdentifier(tweetCellID, forIndexPath: indexPath) as! TweetCell
 
+        cell.delegate = self
+
         return cell
     }
 
@@ -266,5 +268,10 @@ class TimelineViewController: UITableViewController {
         let tweet = tweets[indexPath.row]
         return heightOfTweet(tweet)
     }
+}
+
+// MARK: - TweetCellDelegate
+
+extension TimelineViewController: TweetCellDelegate {
 }
 
