@@ -111,6 +111,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="7xt-m1-Iad" kind="show" identifier="showProfile" id="BWR-wi-wCU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2yQ-Un-6uT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -157,4 +160,7 @@
             <point key="canvasLocation" x="1019.5" y="-329.5"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="BWR-wi-wCU"/>
+    </inferredMetricsTieBreakers>
 </document>

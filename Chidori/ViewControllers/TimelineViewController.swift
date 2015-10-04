@@ -210,6 +210,17 @@ class TimelineViewController: UITableViewController {
         }
     }
 
+    // MARK: Navigation
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if segue.identifier == "showProfile" {
+
+            let vc = segue.destinationViewController as! ProfileViewController
+            vc.user = sender as? User
+        }
+    }
+
     // MARK: Actions
 
     @IBAction func composeTweet(sender: UIBarButtonItem) {
@@ -245,11 +256,7 @@ class TimelineViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier(tweetCellID, forIndexPath: indexPath) as! TweetCell
-
-        cell.delegate = self
-
-        return cell
+        return tableView.dequeueReusableCellWithIdentifier(tweetCellID, forIndexPath: indexPath) as! TweetCell
     }
 
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -261,6 +268,16 @@ class TimelineViewController: UITableViewController {
 
         let tweet = tweets[indexPath.row]
         cell.configureWithTweet(tweet, messageHeight: heightOfMessageInTweet(tweet))
+
+        cell.delegate = self
+
+        cell.showProfile = { [weak self] in
+
+            guard let user = self?.tweets[indexPath.row].creator else {
+                return
+            }
+            self?.performSegueWithIdentifier("showProfile", sender: user)
+        }
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

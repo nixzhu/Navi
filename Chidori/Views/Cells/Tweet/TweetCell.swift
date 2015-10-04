@@ -23,6 +23,8 @@ class TweetCell: UITableViewCell {
 
     weak var delegate: TweetCellDelegate?
 
+    var showProfile: (() -> Void)?
+
     static let messageLabelMaxWidth: CGFloat = {
         return UIScreen.mainScreen().bounds.width - (8 + 60 + 8 + 8)
         }()
@@ -48,11 +50,17 @@ class TweetCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        avatarImageView.userInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: "tryShowProfile:")
+        avatarImageView.addGestureRecognizer(tap)
+
         messageTextView.font = UIFont.tweetMessageFont()
         messageTextView.textContainerInset = UIEdgeInsetsZero
         messageTextView.textContainer.lineFragmentPadding = 0
         messageTextView.delegate = self
     }
+
+    // MARK: Configure
 
     func configureWithTweet(tweet: Tweet, messageHeight: CGFloat) {
 
@@ -68,6 +76,12 @@ class TweetCell: UITableViewCell {
         messageTextView.text = tweet.message
 
         messageTextView.frame.size.height = messageHeight
+    }
+
+    // MARK: Acions
+
+    func tryShowProfile(tap: UITapGestureRecognizer) {
+        showProfile?()
     }
 }
 
