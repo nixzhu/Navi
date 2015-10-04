@@ -78,7 +78,7 @@ extension TweetCell: UITextViewDelegate {
     func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
 
         if #available(iOS 9.0, *) {
-            let vc = SFSafariViewController(URL: URL, entersReaderIfAvailable: true)
+            let vc = SFSafariViewController(URL: URL)
             delegate?.presentViewController(vc, animated: true, completion: nil)
 
             return false
