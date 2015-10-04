@@ -130,6 +130,8 @@ class TimelineViewController: UITableViewController {
 
     let tweetCellID = "TweetCell"
 
+    // MARK: Heights
+
     private var tweetHeightHash = [String: CGFloat]()
 
     func heightOfTweet(tweet: Tweet) -> CGFloat {
@@ -149,6 +151,28 @@ class TimelineViewController: UITableViewController {
             return height
         }
     }
+
+    private var tweetMessageHeightHash = [String: CGFloat]()
+
+    func heightOfMessageInTweet(tweet: Tweet) -> CGFloat {
+
+        let key = tweet.tweetID
+
+        if let height = tweetMessageHeightHash[key] {
+            return height
+
+        } else {
+            let height = TweetCell.heightOfTweetMessage(tweet.message)
+
+            if !key.isEmpty {
+                tweetMessageHeightHash[key] = height
+            }
+
+            return height
+        }
+    }
+
+    // MARK: Life Circle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -208,7 +232,7 @@ class TimelineViewController: UITableViewController {
     private func configureCell(cell: TweetCell, atIndexPath indexPath: NSIndexPath) {
 
         let tweet = tweets[indexPath.row]
-        cell.configureWithTweet(tweet)
+        cell.configureWithTweet(tweet, messageHeight: heightOfMessageInTweet(tweet))
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

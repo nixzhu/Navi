@@ -43,7 +43,7 @@ class TweetCell: UITableViewCell {
         messageLabel.font = UIFont.tweetMessageFont()
     }
 
-    func configureWithTweet(tweet: Tweet) {
+    func configureWithTweet(tweet: Tweet, messageHeight: CGFloat) {
 
         if let user = tweet.creator {
             let userAvatar = UserAvatar(userID: user.userID, avatarStyle: roundAvatarStyle)
@@ -53,8 +53,10 @@ class TweetCell: UITableViewCell {
             avatarImageView.image = nil
         }
 
-        usernameLabel.text = tweet.creator?.username
+        usernameLabel.text = "@" + (tweet.creator?.username ?? "")
         messageLabel.text = tweet.message
+
+        messageLabel.frame.size.height = messageHeight
     }
 }
 
