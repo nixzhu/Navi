@@ -123,6 +123,8 @@ class TimelineViewController: UITableViewController {
                 } else {
                     self?.tableView.reloadData()
                 }
+
+                self?.refreshControl?.endRefreshing()
             }
         }
     }
@@ -188,6 +190,11 @@ class TimelineViewController: UITableViewController {
 
         tableView.registerNib(UINib(nibName: tweetCellID, bundle: nil), forCellReuseIdentifier: tweetCellID)
         tableView.tableFooterView = UIView()
+
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "syncLatestTweets", forControlEvents: .ValueChanged)
+
+        self.refreshControl = refreshControl
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -223,6 +230,14 @@ class TimelineViewController: UITableViewController {
 
     // MARK: Actions
 
+    func syncLatestTweets() {
+
+        guard let twitterAccount = twitterAccount else {
+            return
+        }
+        syncLatestTweetsWithTwitterAccount(twitterAccount)
+    }
+
     @IBAction func composeTweet(sender: UIBarButtonItem) {
 
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
@@ -231,10 +246,7 @@ class TimelineViewController: UITableViewController {
 
             tweet.completionHandler = { [weak self] result in
                 if result == .Done {
-                    guard let twitterAccount = self?.twitterAccount else {
-                        return
-                    }
-                    self?.syncLatestTweetsWithTwitterAccount(twitterAccount)
+                    self?.syncLatestTweets()
                 }
             }
 
