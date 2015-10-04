@@ -27,14 +27,14 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What a wonderful day!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cjo-nw-lbh">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="What a wonderful day!" textAlignment="natural" id="epm-xh-awM">
                         <rect key="frame" x="76" y="37" width="236" height="31"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                    </textView>
                 </subviews>
                 <animations/>
             </tableViewCellContentView>
@@ -42,7 +42,7 @@
             <inset key="separatorInset" minX="75" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="avatarImageView" destination="bVz-qY-eXV" id="UAh-ij-qyW"/>
-                <outlet property="messageLabel" destination="cjo-nw-lbh" id="npC-Ic-vUS"/>
+                <outlet property="messageTextView" destination="epm-xh-awM" id="Im7-p6-WCb"/>
                 <outlet property="usernameLabel" destination="Caq-Xz-zZG" id="khS-o5-6JL"/>
             </connections>
             <point key="canvasLocation" x="395" y="452"/>

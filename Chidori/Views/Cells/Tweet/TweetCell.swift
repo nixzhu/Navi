@@ -13,7 +13,7 @@ class TweetCell: UITableViewCell {
 
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var messageTextView: UITextView!
 
     static let messageLabelMaxWidth: CGFloat = {
         return UIScreen.mainScreen().bounds.width - (8 + 60 + 8 + 8)
@@ -40,7 +40,9 @@ class TweetCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        messageLabel.font = UIFont.tweetMessageFont()
+        messageTextView.font = UIFont.tweetMessageFont()
+        messageTextView.textContainerInset = UIEdgeInsetsZero
+        messageTextView.textContainer.lineFragmentPadding = 0
     }
 
     func configureWithTweet(tweet: Tweet, messageHeight: CGFloat) {
@@ -54,9 +56,9 @@ class TweetCell: UITableViewCell {
         }
 
         usernameLabel.text = "@" + (tweet.creator?.username ?? "")
-        messageLabel.text = tweet.message
+        messageTextView.text = tweet.message
 
-        messageLabel.frame.size.height = messageHeight
+        messageTextView.frame.size.height = messageHeight
     }
 }
 
