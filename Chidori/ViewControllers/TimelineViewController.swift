@@ -34,7 +34,7 @@ class TimelineViewController: UITableViewController {
             let homeTimelineURL = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")!
 
             let parameters = [
-                "count": 50,
+                "count": 20,
             ]
 
             let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: homeTimelineURL, parameters: parameters)
@@ -56,6 +56,8 @@ class TimelineViewController: UITableViewController {
                         return
                     }
 
+                    var newTweets = [Tweet]()
+
                     tweetsData.forEach({ tweetInfo in
 
                         guard let
@@ -70,7 +72,11 @@ class TimelineViewController: UITableViewController {
                                 return
                         }
 
-                        let tweet = Tweet.getOrCreateWithTweetID(tweetID, inRealm: realm)
+                        let (justCreated, tweet) = Tweet.getOrCreateWithTweetID(tweetID, inRealm: realm)
+
+                        if justCreated {
+                            newTweets.append(tweet)
+                        }
 
                         realm.write {
                             if let unixTime = self?.dateFormatter.dateFromString(tweetCreatedDateString)?.timeIntervalSince1970 {
@@ -94,7 +100,23 @@ class TimelineViewController: UITableViewController {
                         }
                     })
 
-                    self?.tableView.reloadData()
+                    let insertIndexPaths: [NSIndexPath] = newTweets.map({ [weak self] tweet in
+
+                        if let row = self?.tweets.indexOf(tweet) {
+                            let indexPath = NSIndexPath(forRow: row, inSection: 0)
+                            return indexPath
+                        }
+
+                        return nil
+
+                    }).flatMap({ $0 })
+
+                    if insertIndexPaths.count == newTweets.count {
+                        self?.tableView.insertRowsAtIndexPaths(insertIndexPaths, withRowAnimation: .Automatic)
+
+                    } else {
+                        self?.tableView.reloadData()
+                    }
                 }
             }
         }
