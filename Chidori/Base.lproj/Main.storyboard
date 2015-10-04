@@ -8,7 +8,7 @@
         <!--Avatars View Controller-->
         <scene sceneID="5xy-C8-uKb">
             <objects>
-                <collectionViewController storyboardIdentifier="AvatarsViewController" id="ZlE-CT-bEb" customClass="AvatarsViewController" customModule="Chidori" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="ZlE-CT-bEb" customClass="AvatarsViewController" customModule="Chidori" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5CY-xe-fgI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,12 +32,12 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uq4-X8-SRa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1507.5" y="442.5"/>
+            <point key="canvasLocation" x="1507.5" y="530.5"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="F3K-RN-H4o">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" id="7xt-m1-Iad" customClass="ProfileViewController" customModule="Chidori" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7xt-m1-Iad" customClass="ProfileViewController" customModule="Chidori" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Azw-lB-xIg"/>
                         <viewControllerLayoutGuide type="bottom" id="7o4-xU-DVz"/>
@@ -68,7 +68,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kqT-Te-MA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1997.5" y="442.5"/>
+            <point key="canvasLocation" x="2001.5" y="530.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XP0-cU-D9L">
@@ -88,12 +88,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X51-tw-wuO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1019.5" y="442.5"/>
+            <point key="canvasLocation" x="1019.5" y="530.5"/>
         </scene>
         <!--Timeline View Controller-->
         <scene sceneID="kJs-tN-2IS">
             <objects>
-                <tableViewController storyboardIdentifier="TimelineViewController" id="D2b-wm-8b4" customClass="TimelineViewController" customModule="Chidori" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="D2b-wm-8b4" customClass="TimelineViewController" customModule="Chidori" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="77" sectionHeaderHeight="28" sectionFooterHeight="28" id="weJ-Tp-VPe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -119,10 +119,10 @@
             </objects>
             <point key="canvasLocation" x="1507.5" y="-329.5"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="0b3-2n-kNG">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Ver-4S-cqo" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Ver-4S-cqo" customClass="TabBarViewController" customModule="Chidori" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="bMe-h2-Uxa">
@@ -161,6 +161,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BWR-wi-wCU"/>
+        <segue reference="ndy-An-H73"/>
     </inferredMetricsTieBreakers>
 </document>
