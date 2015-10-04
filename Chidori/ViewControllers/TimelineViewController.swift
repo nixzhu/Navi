@@ -67,6 +67,7 @@ class TimelineViewController: UITableViewController {
                 }
 
                 var newTweets = [Tweet]()
+                var newUsers = [User]()
 
                 tweetsData.forEach({ tweetInfo in
 
@@ -82,9 +83,9 @@ class TimelineViewController: UITableViewController {
                             return
                     }
 
-                    let (justCreated, tweet) = Tweet.getOrCreateWithTweetID(tweetID, inRealm: realm)
+                    let (tweetJustCreated, tweet) = Tweet.getOrCreateWithTweetID(tweetID, inRealm: realm)
 
-                    if justCreated {
+                    if tweetJustCreated {
                         newTweets.append(tweet)
                     }
 
@@ -95,7 +96,11 @@ class TimelineViewController: UITableViewController {
                         tweet.message = message
                     }
 
-                    let user = User.getOrCreateWithUserID(userID, inRealm: realm)
+                    let (userJustCreated, user) = User.getOrCreateWithUserID(userID, inRealm: realm)
+
+                    if userJustCreated {
+                        newUsers.append(user)
+                    }
 
                     realm.write {
                         if let unixTime = self?.dateFormatter.dateFromString(userCreatedDateString)?.timeIntervalSince1970 {
@@ -126,6 +131,10 @@ class TimelineViewController: UITableViewController {
 
                 } else {
                     self?.tableView.reloadData()
+                }
+
+                if !newUsers.isEmpty {
+                    NSNotificationCenter.defaultCenter().postNotificationName(Config.Notification.newUsers, object: newUsers)
                 }
             }
         }
@@ -197,10 +206,6 @@ class TimelineViewController: UITableViewController {
         refreshControl.addTarget(self, action: "syncLatestTweets", forControlEvents: .ValueChanged)
 
         self.refreshControl = refreshControl
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
 
         let twitterType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
 

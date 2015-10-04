@@ -17,7 +17,8 @@ struct UserAvatar {
     let avatarStyle: AvatarStyle
 
     var user: User {
-        return User.getOrCreateWithUserID(userID, inRealm: try! Realm())
+        let (_, user) = User.getOrCreateWithUserID(userID, inRealm: try! Realm())
+        return user
     }
 }
 

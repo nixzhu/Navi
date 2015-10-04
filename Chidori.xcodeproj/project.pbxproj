@@ -12,6 +12,7 @@
 		502A2D4B1BB7A19300B3A6B1 /* UIImage+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */; settings = {ASSET_TAGS = (); }; };
 		5057A2921BBFE5C700D3A876 /* UIFont+Chidori.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A2911BBFE5C700D3A876 /* UIFont+Chidori.swift */; settings = {ASSET_TAGS = (); }; };
 		5057A2951BC0F08E00D3A876 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A2941BC0F08E00D3A876 /* TabBarViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		5057A29B1BC13D8100D3A876 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A29A1BC13D8100D3A876 /* Config.swift */; settings = {ASSET_TAGS = (); }; };
 		505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */; };
 		505A55E41BB63CFD00159CD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505A55E21BB63CFD00159CD0 /* Main.storyboard */; };
 		505A55E61BB63CFD00159CD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 505A55E51BB63CFD00159CD0 /* Assets.xcassets */; };
@@ -84,6 +85,7 @@
 		502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Navi.swift"; sourceTree = "<group>"; };
 		5057A2911BBFE5C700D3A876 /* UIFont+Chidori.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Chidori.swift"; path = "Extensions/UIFont+Chidori.swift"; sourceTree = "<group>"; };
 		5057A2941BC0F08E00D3A876 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarViewController.swift; path = ViewControllers/TabBarViewController.swift; sourceTree = "<group>"; };
+		5057A29A1BC13D8100D3A876 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Helpers/Config.swift; sourceTree = "<group>"; };
 		505A55DB1BB63CFD00159CD0 /* Chidori.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chidori.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		505A55E31BB63CFD00159CD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				50970CB01BBE9ECA001BFB19 /* Filter.swift */,
+				5057A29A1BC13D8100D3A876 /* Config.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				5057A2951BC0F08E00D3A876 /* TabBarViewController.swift in Sources */,
 				500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */,
 				50970C9E1BBD9151001BFB19 /* TimelineViewController.swift in Sources */,
+				5057A29B1BC13D8100D3A876 /* Config.swift in Sources */,
 				505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */,
 				5057A2921BBFE5C700D3A876 /* UIFont+Chidori.swift in Sources */,
 				505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */,

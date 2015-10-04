@@ -18,9 +18,11 @@ class AvatarsViewController: UICollectionViewController {
         return self.realm.objects(User).sorted("createdUnixTime", ascending: false)
         }()
 
-    var realmToken: NotificationToken?
-
     private let avatarCellID = "AvatarCell"
+
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +35,13 @@ class AvatarsViewController: UICollectionViewController {
         collectionView!.registerNib(UINib(nibName: avatarCellID, bundle: nil), forCellWithReuseIdentifier: avatarCellID)
         collectionView!.alwaysBounceVertical = true
 
-        realmToken = realm.addNotificationBlock { notification, realm in
-            dispatch_async(dispatch_get_main_queue()) { [weak self] in
-                self?.collectionView?.reloadData()
-            }
-        }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCollectionView:", name: Config.Notification.newUsers, object: nil)
+    }
+
+    // MARK: Actions
+
+    func updateCollectionView(notification: NSNotification) {
+        collectionView?.reloadData()
     }
 
     // MARK: Navigation
