@@ -48,6 +48,10 @@ class TimelineViewController: UITableViewController {
 
         request.performRequestWithHandler { [weak self] data, response, error in
 
+            defer {
+                self?.refreshControl?.endRefreshing()
+            }
+
             guard let
                 json = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)),
                 tweetsData = json as? [[NSObject: AnyObject]] else {
@@ -118,13 +122,11 @@ class TimelineViewController: UITableViewController {
                     }).flatMap({ $0 })
 
                 if insertIndexPaths.count == newTweets.count {
-                    self?.tableView.insertRowsAtIndexPaths(insertIndexPaths, withRowAnimation: .Automatic)
+                    self?.tableView.insertRowsAtIndexPaths(insertIndexPaths, withRowAnimation: .Top)
 
                 } else {
                     self?.tableView.reloadData()
                 }
-
-                self?.refreshControl?.endRefreshing()
             }
         }
     }
@@ -283,11 +285,7 @@ class TimelineViewController: UITableViewController {
 
         cell.delegate = self
 
-        cell.showProfile = { [weak self] in
-
-            guard let user = self?.tweets[indexPath.row].creator else {
-                return
-            }
+        cell.showProfile = { [weak self] user in
             self?.performSegueWithIdentifier("showProfile", sender: user)
         }
     }

@@ -23,7 +23,8 @@ class TweetCell: UITableViewCell {
 
     weak var delegate: TweetCellDelegate?
 
-    var showProfile: (() -> Void)?
+    var tweet: Tweet?
+    var showProfile: ((ofUser: User) -> Void)?
 
     static let messageLabelMaxWidth: CGFloat = {
         return UIScreen.mainScreen().bounds.width - (8 + 60 + 8 + 8)
@@ -64,6 +65,8 @@ class TweetCell: UITableViewCell {
 
     func configureWithTweet(tweet: Tweet, messageHeight: CGFloat) {
 
+        self.tweet = tweet
+
         if let user = tweet.creator {
             let userAvatar = UserAvatar(userID: user.userID, avatarStyle: roundAvatarStyle)
             avatarImageView.navi_setAvatar(userAvatar)
@@ -81,7 +84,9 @@ class TweetCell: UITableViewCell {
     // MARK: Acions
 
     func tryShowProfile(tap: UITapGestureRecognizer) {
-        showProfile?()
+        if let user = tweet?.creator {
+            showProfile?(ofUser: user)
+        }
     }
 }
 
