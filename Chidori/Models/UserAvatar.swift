@@ -11,19 +11,13 @@ import Navi
 
 private let screenScale = UIScreen.mainScreen().scale
 
-class UserAvatar {
+struct UserAvatar {
 
     let userID: String
     let avatarStyle: AvatarStyle
 
     var user: User {
         return User.getOrCreateWithUserID(userID, inRealm: try! Realm())
-    }
-
-    init(userID: String, avatarStyle: AvatarStyle) {
-
-        self.userID = userID
-        self.avatarStyle = avatarStyle
     }
 }
 
@@ -46,6 +40,7 @@ extension UserAvatar: Navi.Avatar {
 
                 if pathExtension == "" {
                     return URL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(name)
+
                 } else {
                     return URL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(name + "." + pathExtension)
                 }

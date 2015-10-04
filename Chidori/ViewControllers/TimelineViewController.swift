@@ -108,6 +108,26 @@ class TimelineViewController: UITableViewController {
 
     let tweetCellID = "TweetCell"
 
+    private var tweetHeightHash = [String: CGFloat]()
+
+    func heightOfTweet(tweet: Tweet) -> CGFloat {
+
+        let key = tweet.tweetID
+
+        if let height = tweetHeightHash[key] {
+            return height
+
+        } else {
+            let height = TweetCell.heightOfTweet(tweet)
+
+            if !key.isEmpty {
+                tweetHeightHash[key] = height
+            }
+
+            return height
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -177,7 +197,7 @@ class TimelineViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 
         let tweet = tweets[indexPath.row]
-        return TweetCell.heightOfTweet(tweet)
+        return heightOfTweet(tweet)
     }
 }
 
