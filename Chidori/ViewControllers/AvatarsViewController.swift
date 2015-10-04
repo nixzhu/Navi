@@ -48,7 +48,7 @@ class AvatarsViewController: UICollectionViewController {
         }
     }
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionView
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 
@@ -64,17 +64,25 @@ class AvatarsViewController: UICollectionViewController {
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(avatarCellID, forIndexPath: indexPath) as! AvatarCell
 
-        let user = users[indexPath.row]
+        return cell
+    }
+
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+
+        configureCell(cell as! AvatarCell, atIndexPath: indexPath)
+    }
+
+    private func configureCell(cell: AvatarCell, atIndexPath indexPath: NSIndexPath) {
+
+        let user = users[indexPath.item]
         let userAvatar = UserAvatar(userID: user.userID, avatarStyle: squareAvatarStyle)
 
         cell.configureWithAvatar(userAvatar)
-
-        return cell
     }
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
-        let user = users[indexPath.row]
+        let user = users[indexPath.item]
         performSegueWithIdentifier("showProfile", sender: user)
     }
 }
