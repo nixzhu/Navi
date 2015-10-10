@@ -20,7 +20,7 @@ Swift 2.0, iOS 8.0
 	``` swift
 	protocol Avatar {
 
-	    var URL: NSURL { get }
+	    var URL: NSURL? { get }
 	    var style: AvatarStyle { get }
 	    var placeholderImage: UIImage? { get }
 	    var localOriginalImage: UIImage? { get }
@@ -45,13 +45,13 @@ Check the demo for more information.
 ### CocoaPods
 
 ```ruby
-pod 'Navi', '~> 0.3.1'
+pod 'Navi', '~> 0.3.2'
 ```
 
 ### Carthage
 
 ```ogdl
-github "nixzhu/Navi" >= 0.3.1
+github "nixzhu/Navi" >= 0.3.2
 ```
 
 ## Contact
