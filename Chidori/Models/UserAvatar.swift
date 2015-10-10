@@ -27,7 +27,7 @@ let roundAvatarStyle: AvatarStyle = .RoundedRectangle(size: CGSize(width: 60, he
 
 extension UserAvatar: Navi.Avatar {
 
-    var URL: NSURL {
+    var URL: NSURL? {
 
         // try construct original URL from normal one
 
@@ -40,15 +40,15 @@ extension UserAvatar: Navi.Avatar {
                 let name = underscoreParts[0]
 
                 if pathExtension == "" {
-                    return URL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(name)
+                    return URL.URLByDeletingLastPathComponent?.URLByAppendingPathComponent(name)
 
                 } else {
-                    return URL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(name + "." + pathExtension)
+                    return URL.URLByDeletingLastPathComponent?.URLByAppendingPathComponent(name + "." + pathExtension)
                 }
             }
         }
 
-        return NSURL(string: user.avatarURLString)!
+        return NSURL(string: user.avatarURLString)
     }
 
     var style: AvatarStyle {

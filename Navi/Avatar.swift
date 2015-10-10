@@ -59,7 +59,7 @@ public enum AvatarStyle: Equatable {
 
 public protocol Avatar {
 
-    var URL: NSURL { get }
+    var URL: NSURL? { get }
     var style: AvatarStyle { get }
     var placeholderImage: UIImage? { get }
     var localOriginalImage: UIImage? { get }
@@ -71,7 +71,7 @@ public protocol Avatar {
 extension Avatar {
 
     var key: String {
-        return style.hashString + URL.absoluteString
+        return style.hashString + (URL?.absoluteString ?? "")
     }
 }
 

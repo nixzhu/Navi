@@ -96,6 +96,17 @@ public class AvatarPod {
 
     public class func wakeAvatar(avatar: Avatar, completion: Completion) {
 
+        guard let URL = avatar.URL else {
+
+            if let placeholderImage = avatar.placeholderImage {
+                completion(placeholderImage)
+            } else {
+                completion(UIImage())
+            }
+
+            return
+        }
+
         let request = Request(avatar: avatar, completion: completion)
 
         let key = request.key
@@ -120,8 +131,6 @@ public class AvatarPod {
                     dispatch_async(dispatch_get_main_queue()) {
 
                         sharedInstance.requestPool.addRequest(request)
-
-                        let URL = avatar.URL
 
                         if sharedInstance.requestPool.requestsWithURL(URL).count > 1 {
                             // do nothing
