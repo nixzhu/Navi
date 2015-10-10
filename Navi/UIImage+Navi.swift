@@ -60,7 +60,8 @@ extension UIImage {
         CGContextDrawImage(bitmapContext, drawTransposed ? transposedRect : newRect, CGImage)
 
         if let newCGImage = CGBitmapContextCreateImage(bitmapContext) {
-            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: imageOrientation)
+            let image = UIImage(CGImage: newCGImage, scale: screenScale, orientation: imageOrientation)
+            return image
         }
 
         return nil
@@ -116,14 +117,15 @@ extension UIImage {
             drawTransposed = false
         }
 
-        return resizeToSize(size, withTransform: transformForOrientationWithSize(size), drawTransposed: drawTransposed, interpolationQuality: interpolationQuality)
+        let image = resizeToSize(size, withTransform: transformForOrientationWithSize(size), drawTransposed: drawTransposed, interpolationQuality: interpolationQuality)
+        return image
     }
 
     func cropWithBounds(bounds: CGRect) -> UIImage? {
 
         if let newCGImage = CGImageCreateWithImageInRect(CGImage, bounds) {
-
-            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: imageOrientation)
+            let image = UIImage(CGImage: newCGImage, scale: screenScale, orientation: imageOrientation)
+            return image
         }
 
         return nil
@@ -156,7 +158,8 @@ extension UIImage {
 
         let bounds = CGRect(x: originalX, y: originalY, width: pixelSize.width / ratio, height: pixelSize.height / ratio)
 
-        return cropWithBounds(bounds)?.resizeToSize(size, withInterpolationQuality: .Default)
+        let image = cropWithBounds(bounds)?.resizeToSize(size, withInterpolationQuality: .Default)
+        return image
     }
 }
 
@@ -216,7 +219,8 @@ extension UIImage {
         CGContextDrawImage(bitmapContext, imageRect, image.CGImage)
 
         if let newCGImage = CGBitmapContextCreateImage(bitmapContext) {
-            return UIImage(CGImage: newCGImage, scale: screenScale, orientation: imageOrientation)
+            let image = UIImage(CGImage: newCGImage, scale: screenScale, orientation: imageOrientation)
+            return image
         }
 
         return nil
@@ -254,7 +258,8 @@ extension UIImage {
         CGContextDrawImage(offscreenContext, CGRect(origin: CGPointZero, size: pixelSize), CGImage)
         
         if let alphaCGImage = CGBitmapContextCreateImage(offscreenContext) {
-            return UIImage(CGImage: alphaCGImage, scale: screenScale, orientation: imageOrientation)
+            let image = UIImage(CGImage: alphaCGImage, scale: screenScale, orientation: imageOrientation)
+            return image
 
         } else {
             return self
