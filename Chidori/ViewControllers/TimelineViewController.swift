@@ -53,6 +53,7 @@ class TimelineViewController: UITableViewController {
             }
 
             guard let
+                data = data,
                 json = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)),
                 tweetsData = json as? [[NSObject: AnyObject]] else {
                     print("can not get tweets!")

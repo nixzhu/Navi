@@ -9,15 +9,15 @@
 import UIKit
 
 // ref http://vocaro.com/trevor/blog/2009/10/12/resize-a-uiimage-the-right-way/
-// but with better scale handle
+// but with better scale logic
 
 private let screenScale = UIScreen.mainScreen().scale
 
 // MARK: - API
 
-extension UIImage {
+public extension UIImage {
 
-    func avatarImageWithStyle(avatarStyle: AvatarStyle) -> UIImage {
+    public func navi_avatarImageWithStyle(avatarStyle: AvatarStyle) -> UIImage {
 
         var avatarImage: UIImage?
 
@@ -27,10 +27,10 @@ extension UIImage {
             return self
 
         case .Rectangle(let size):
-            avatarImage = centerCropWithSize(size)
+            avatarImage = navi_centerCropWithSize(size)
 
         case .RoundedRectangle(let size, let cornerRadius, let borderWidth):
-            avatarImage = centerCropWithSize(size)?.roundWithCornerRadius(cornerRadius, borderWidth: borderWidth)
+            avatarImage = navi_centerCropWithSize(size)?.navi_roundWithCornerRadius(cornerRadius, borderWidth: borderWidth)
 
         case .Free(_, let transform):
             avatarImage = transform(self)
@@ -42,9 +42,9 @@ extension UIImage {
 
 // MARK: - Resize
 
-extension UIImage {
+public extension UIImage {
 
-    func resizeToSize(size: CGSize, withTransform transform: CGAffineTransform, drawTransposed: Bool, interpolationQuality: CGInterpolationQuality) -> UIImage? {
+    public func navi_resizeToSize(size: CGSize, withTransform transform: CGAffineTransform, drawTransposed: Bool, interpolationQuality: CGInterpolationQuality) -> UIImage? {
 
         let pixelSize = CGSize(width: size.width * screenScale, height: size.height * screenScale)
 
@@ -67,7 +67,7 @@ extension UIImage {
         return nil
     }
 
-    func transformForOrientationWithSize(size: CGSize) -> CGAffineTransform {
+    public func navi_transformForOrientationWithSize(size: CGSize) -> CGAffineTransform {
 
         var transform = CGAffineTransformIdentity
 
@@ -106,7 +106,7 @@ extension UIImage {
         return transform
     }
 
-    func resizeToSize(size: CGSize, withInterpolationQuality interpolationQuality: CGInterpolationQuality) -> UIImage? {
+    public func navi_resizeToSize(size: CGSize, withInterpolationQuality interpolationQuality: CGInterpolationQuality) -> UIImage? {
 
         let drawTransposed: Bool
 
@@ -117,11 +117,11 @@ extension UIImage {
             drawTransposed = false
         }
 
-        let image = resizeToSize(size, withTransform: transformForOrientationWithSize(size), drawTransposed: drawTransposed, interpolationQuality: interpolationQuality)
+        let image = navi_resizeToSize(size, withTransform: navi_transformForOrientationWithSize(size), drawTransposed: drawTransposed, interpolationQuality: interpolationQuality)
         return image
     }
 
-    func cropWithBounds(bounds: CGRect) -> UIImage? {
+    public func navi_cropWithBounds(bounds: CGRect) -> UIImage? {
 
         if let newCGImage = CGImageCreateWithImageInRect(CGImage, bounds) {
             let image = UIImage(CGImage: newCGImage, scale: screenScale, orientation: imageOrientation)
@@ -131,7 +131,7 @@ extension UIImage {
         return nil
     }
 
-    func centerCropWithSize(size: CGSize) -> UIImage? {
+    public func navi_centerCropWithSize(size: CGSize) -> UIImage? {
 
         let pixelSize = CGSize(width: size.width * screenScale, height: size.height * screenScale)
 
@@ -158,16 +158,16 @@ extension UIImage {
 
         let bounds = CGRect(x: originalX, y: originalY, width: pixelSize.width / ratio, height: pixelSize.height / ratio)
 
-        let image = cropWithBounds(bounds)?.resizeToSize(size, withInterpolationQuality: .Default)
+        let image = navi_cropWithBounds(bounds)?.navi_resizeToSize(size, withInterpolationQuality: .Default)
         return image
     }
 }
 
 // MARK: - Round
 
-extension UIImage {
+public extension UIImage {
 
-    private func CGContextAddRoundedRect(context: CGContext, rect: CGRect, ovalWidth: CGFloat, ovalHeight: CGFloat) {
+    private func navi_CGContextAddRoundedRect(context: CGContext, rect: CGRect, ovalWidth: CGFloat, ovalHeight: CGFloat) {
 
         if ovalWidth <= 0 || ovalHeight <= 0 {
             CGContextAddRect(context, rect)
@@ -193,9 +193,9 @@ extension UIImage {
         }
     }
 
-    func roundWithCornerRadius(cornerRadius: CGFloat, borderWidth: CGFloat) -> UIImage? {
+    public func navi_roundWithCornerRadius(cornerRadius: CGFloat, borderWidth: CGFloat) -> UIImage? {
 
-        let image = imageWithAlpha()
+        let image = navi_imageWithAlpha()
 
         let cornerRadius = cornerRadius * screenScale
         let borderWidth = borderWidth * screenScale
@@ -209,7 +209,7 @@ extension UIImage {
         CGContextBeginPath(bitmapContext)
 
         let rect = CGRect(x: borderWidth, y: borderWidth, width: pixelSize.width - borderWidth * 2, height: pixelSize.height - borderWidth * 2)
-        CGContextAddRoundedRect(bitmapContext, rect: rect, ovalWidth: cornerRadius, ovalHeight: cornerRadius)
+        navi_CGContextAddRoundedRect(bitmapContext, rect: rect, ovalWidth: cornerRadius, ovalHeight: cornerRadius)
 
         CGContextClosePath(bitmapContext)
 
@@ -229,9 +229,9 @@ extension UIImage {
 
 // MARK: - Alpha
 
-extension UIImage {
+public extension UIImage {
 
-    func hasAlpha() -> Bool {
+    public func navi_hasAlpha() -> Bool {
 
         let alpha = CGImageGetAlphaInfo(CGImage)
 
@@ -245,9 +245,9 @@ extension UIImage {
         }
     }
 
-    func imageWithAlpha() -> UIImage {
+    public func navi_imageWithAlpha() -> UIImage {
 
-        if hasAlpha() {
+        if navi_hasAlpha() {
             return self
         }
 

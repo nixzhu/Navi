@@ -73,7 +73,7 @@ public class AvatarPod {
 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
 
-                    let avatarImage = image.avatarImageWithStyle(request.avatar.style)
+                    let avatarImage = image.navi_avatarImageWithStyle(request.avatar.style)
 
                     dispatch_async(dispatch_get_main_queue()) {
 
