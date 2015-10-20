@@ -18,7 +18,7 @@ public class AvatarPod {
 
     let cache = NSCache()
 
-    public typealias Completion = UIImage -> Void
+    public typealias Completion = (finished: Bool, image: UIImage) -> Void
 
     struct Request: Equatable {
 
@@ -59,6 +59,10 @@ public class AvatarPod {
                 }
             })
         }
+
+        mutating func removeAllRequests() {
+            requests = []
+        }
     }
 
     private var requestPool = RequestPool()
@@ -77,7 +81,7 @@ public class AvatarPod {
 
                     dispatch_async(dispatch_get_main_queue()) {
 
-                        request.completion(avatarImage)
+                        request.completion(finished: true, image: avatarImage)
                     }
 
                     self.cache.setObject(avatarImage, forKey: request.key)
@@ -98,11 +102,7 @@ public class AvatarPod {
 
         guard let URL = avatar.URL else {
 
-            if let placeholderImage = avatar.placeholderImage {
-                completion(placeholderImage)
-            } else {
-                completion(UIImage())
-            }
+            completion(finished: false, image: avatar.placeholderImage ?? UIImage())
 
             return
         }
@@ -112,11 +112,11 @@ public class AvatarPod {
         let key = request.key
 
         if let image = sharedInstance.cache.objectForKey(key) as? UIImage {
-            completion(image)
+            completion(finished: true, image: image)
 
         } else {
             if let placeholderImage = avatar.placeholderImage {
-                completion(placeholderImage)
+                completion(finished: false, image: placeholderImage)
             }
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
@@ -124,7 +124,7 @@ public class AvatarPod {
                 if let image = avatar.localStyledImage {
 
                     dispatch_async(dispatch_get_main_queue()) {
-                        completion(image)
+                        completion(finished: true, image: image)
                     }
 
                 } else {
@@ -157,6 +157,13 @@ public class AvatarPod {
                 }
             }
         }
+    }
+
+    public class func clear() {
+
+        sharedInstance.requestPool.removeAllRequests()
+
+        sharedInstance.cache.removeAllObjects()
     }
 }
 
