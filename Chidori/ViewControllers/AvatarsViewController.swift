@@ -24,7 +24,7 @@ extension YepAvatar: Navi.Avatar {
         return roundAvatarStyle
     }
     var placeholderImage: UIImage? {
-        return nil
+        return UIImage(named: "round_avatar_placeholder")
     }
     var localOriginalImage: UIImage? {
         return nil
