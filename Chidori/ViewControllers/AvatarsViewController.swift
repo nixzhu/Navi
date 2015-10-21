@@ -65,6 +65,11 @@ class AvatarsViewController: UICollectionViewController {
         "https://yep-avatars.s3.cn-north-1.amazonaws.com.cn/4c59a970-2e3d-452a-aa2b-00f46ac0512f",
     ]
 
+    let alphaAvatarURLStrings = [
+        "http://7xkdk4.com2.z0.glb.qiniucdn.com/pics/avatars/u5561381442825024.jpg?imageView2/1/w/128/h/128",
+        "http://7xkszy.com2.z0.glb.qiniucdn.com/pics/avatars/u8516711441533445.jpg?imageView2/1/w/128/h/128",
+    ]
+
     private let avatarCellID = "AvatarCell"
 
     deinit {
@@ -107,11 +112,12 @@ class AvatarsViewController: UICollectionViewController {
     enum Section: Int {
         case User
         case Yep
+        case Alpha
     }
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 
-        return 2
+        return 3
     }
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -123,6 +129,9 @@ class AvatarsViewController: UICollectionViewController {
 
         case Section.Yep.rawValue:
             return yepAvatarURLStrings.count
+
+        case Section.Alpha.rawValue:
+            return alphaAvatarURLStrings.count
 
         default:
             return 0
@@ -152,6 +161,11 @@ class AvatarsViewController: UICollectionViewController {
 
         case Section.Yep.rawValue:
             let avatarURLString = yepAvatarURLStrings[indexPath.item]
+            let yepAvatar = YepAvatar(avatarURL: NSURL(string: avatarURLString)!)
+            cell.configureWithAvatar(yepAvatar)
+
+        case Section.Alpha.rawValue:
+            let avatarURLString = alphaAvatarURLStrings[indexPath.item]
             let yepAvatar = YepAvatar(avatarURL: NSURL(string: avatarURLString)!)
             cell.configureWithAvatar(yepAvatar)
 

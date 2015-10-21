@@ -253,7 +253,9 @@ public extension UIImage {
 
         let pixelSize = CGSize(width: self.size.width * screenScale, height: self.size.height * screenScale)
 
-        let offscreenContext = CGBitmapContextCreate(nil, Int(pixelSize.width), Int(pixelSize.height), CGImageGetBitsPerComponent(CGImage), 0, CGImageGetColorSpace(CGImage), CGBitmapInfo(rawValue: CGBitmapInfo.ByteOrderDefault.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue).rawValue)
+        let bitmapInfo = CGBitmapInfo(rawValue: CGBitmapInfo.ByteOrderDefault.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue)
+
+        let offscreenContext = CGBitmapContextCreate(nil, Int(pixelSize.width), Int(pixelSize.height), CGImageGetBitsPerComponent(CGImage), 0, CGColorSpaceCreateDeviceRGB(), bitmapInfo.rawValue)
         
         CGContextDrawImage(offscreenContext, CGRect(origin: CGPointZero, size: pixelSize), CGImage)
         
