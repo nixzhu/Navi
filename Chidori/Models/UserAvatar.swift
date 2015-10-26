@@ -110,7 +110,7 @@ extension UserAvatar: Navi.Avatar {
 
             let avatar = Avatar.getOrCreateWithAvatarURLString(user.avatarURLString, inRealm: realm)
 
-            realm.write {
+            let _ = try? realm.write {
                 self.user.avatar = avatar
             }
         }
@@ -118,7 +118,7 @@ extension UserAvatar: Navi.Avatar {
         if let avatar = user.avatar {
 
             if avatar.originalAvatarData.length == 0, let data = UIImageJPEGRepresentation(originalImage, 1.0) {
-                realm.write {
+                let _ = try? realm.write {
                     avatar.originalAvatarData = data
                 }
             }
@@ -128,7 +128,7 @@ extension UserAvatar: Navi.Avatar {
             case .Rectangle:
 
                 if avatar.miniSquareAvatarData.length == 0, let data = UIImageJPEGRepresentation(styledImage, 1.0) {
-                    realm.write {
+                    let _ = try? realm.write {
                         avatar.miniSquareAvatarData = data
                     }
                 }
@@ -136,7 +136,7 @@ extension UserAvatar: Navi.Avatar {
             case .RoundedRectangle:
 
                 if avatar.miniRoundAvatarData.length == 0, let data = UIImagePNGRepresentation(styledImage) {
-                    realm.write {
+                    let _ = try? realm.write {
                         avatar.miniRoundAvatarData = data
                     }
                 }

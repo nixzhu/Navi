@@ -90,7 +90,7 @@ class TimelineViewController: UITableViewController {
                         newTweets.append(tweet)
                     }
 
-                    realm.write {
+                    let _ = try? realm.write {
                         if let unixTime = self?.dateFormatter.dateFromString(tweetCreatedDateString)?.timeIntervalSince1970 {
                             tweet.createdUnixTime = unixTime
                         }
@@ -103,7 +103,7 @@ class TimelineViewController: UITableViewController {
                         newUsers.append(user)
                     }
 
-                    realm.write {
+                    let _ = try? realm.write {
                         if let unixTime = self?.dateFormatter.dateFromString(userCreatedDateString)?.timeIntervalSince1970 {
                             user.createdUnixTime = unixTime
                         }
@@ -111,7 +111,7 @@ class TimelineViewController: UITableViewController {
                         user.avatarURLString = avatarURLString
                     }
 
-                    realm.write {
+                    let _ = try? realm.write {
                         tweet.creator = user
                     }
                 })

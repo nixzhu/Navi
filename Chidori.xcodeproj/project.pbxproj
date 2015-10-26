@@ -7,36 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826971BB841A3007D6993 /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		5008269A1BB84330007D6993 /* UserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826991BB84330007D6993 /* UserAvatar.swift */; settings = {ASSET_TAGS = (); }; };
-		502A2D4B1BB7A19300B3A6B1 /* UIImage+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */; settings = {ASSET_TAGS = (); }; };
-		5057A2921BBFE5C700D3A876 /* UIFont+Chidori.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A2911BBFE5C700D3A876 /* UIFont+Chidori.swift */; settings = {ASSET_TAGS = (); }; };
-		5057A2951BC0F08E00D3A876 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A2941BC0F08E00D3A876 /* TabBarViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		5057A29B1BC13D8100D3A876 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A29A1BC13D8100D3A876 /* Config.swift */; settings = {ASSET_TAGS = (); }; };
+		500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826971BB841A3007D6993 /* ProfileViewController.swift */; };
+		5008269A1BB84330007D6993 /* UserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826991BB84330007D6993 /* UserAvatar.swift */; };
+		502A2D4B1BB7A19300B3A6B1 /* UIImage+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */; };
+		5057A2921BBFE5C700D3A876 /* UIFont+Chidori.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A2911BBFE5C700D3A876 /* UIFont+Chidori.swift */; };
+		5057A2951BC0F08E00D3A876 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A2941BC0F08E00D3A876 /* TabBarViewController.swift */; };
+		5057A29B1BC13D8100D3A876 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A29A1BC13D8100D3A876 /* Config.swift */; };
 		505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */; };
 		505A55E41BB63CFD00159CD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505A55E21BB63CFD00159CD0 /* Main.storyboard */; };
 		505A55E61BB63CFD00159CD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 505A55E51BB63CFD00159CD0 /* Assets.xcassets */; };
 		505A55E91BB63CFD00159CD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505A55E71BB63CFD00159CD0 /* LaunchScreen.storyboard */; };
 		505A55F81BB63F2E00159CD0 /* Navi.h in Headers */ = {isa = PBXBuildFile; fileRef = 505A55F71BB63F2E00159CD0 /* Navi.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		505A55FF1BB63F2E00159CD0 /* Navi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505A55F51BB63F2E00159CD0 /* Navi.framework */; settings = {ASSET_TAGS = (); }; };
+		505A55FF1BB63F2E00159CD0 /* Navi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505A55F51BB63F2E00159CD0 /* Navi.framework */; };
 		505A56061BB63F2E00159CD0 /* NaviTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A56051BB63F2E00159CD0 /* NaviTests.swift */; };
 		505A560A1BB63F2E00159CD0 /* Navi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505A55F51BB63F2E00159CD0 /* Navi.framework */; };
 		505A560B1BB63F2E00159CD0 /* Navi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 505A55F51BB63F2E00159CD0 /* Navi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		505A56141BB6404800159CD0 /* AvatarPod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A56131BB6404800159CD0 /* AvatarPod.swift */; settings = {ASSET_TAGS = (); }; };
-		505A56181BB640E600159CD0 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A56171BB640E500159CD0 /* Avatar.swift */; settings = {ASSET_TAGS = (); }; };
-		505A561A1BB6559800159CD0 /* AvatarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A56191BB6559800159CD0 /* AvatarsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A561C1BB6566F00159CD0 /* AvatarCell.swift */; settings = {ASSET_TAGS = (); }; };
-		505A561F1BB6566F00159CD0 /* AvatarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505A561D1BB6566F00159CD0 /* AvatarCell.xib */; settings = {ASSET_TAGS = (); }; };
-		50970C9C1BBD252D001BFB19 /* UIImageView+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970C9B1BBD252D001BFB19 /* UIImageView+Navi.swift */; settings = {ASSET_TAGS = (); }; };
-		50970C9E1BBD9151001BFB19 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970C9D1BBD9151001BFB19 /* TimelineViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */; settings = {ASSET_TAGS = (); }; };
-		50970CAE1BBDA4BA001BFB19 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */; settings = {ASSET_TAGS = (); }; };
-		50970CB11BBE9ECA001BFB19 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CB01BBE9ECA001BFB19 /* Filter.swift */; settings = {ASSET_TAGS = (); }; };
+		505A56141BB6404800159CD0 /* AvatarPod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A56131BB6404800159CD0 /* AvatarPod.swift */; };
+		505A56181BB640E600159CD0 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A56171BB640E500159CD0 /* Avatar.swift */; };
+		505A561A1BB6559800159CD0 /* AvatarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A56191BB6559800159CD0 /* AvatarsViewController.swift */; };
+		505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A561C1BB6566F00159CD0 /* AvatarCell.swift */; };
+		505A561F1BB6566F00159CD0 /* AvatarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505A561D1BB6566F00159CD0 /* AvatarCell.xib */; };
+		50970C9C1BBD252D001BFB19 /* UIImageView+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970C9B1BBD252D001BFB19 /* UIImageView+Navi.swift */; };
+		50970C9E1BBD9151001BFB19 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970C9D1BBD9151001BFB19 /* TimelineViewController.swift */; };
+		50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */; };
+		50970CAE1BBDA4BA001BFB19 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */; };
+		50970CB11BBE9ECA001BFB19 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CB01BBE9ECA001BFB19 /* Filter.swift */; };
 		50970CCC1BBEF957001BFB19 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50970CCB1BBEF957001BFB19 /* Realm.framework */; };
 		50970CCD1BBEF957001BFB19 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 50970CCB1BBEF957001BFB19 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		50970CCF1BBEF95D001BFB19 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50970CCE1BBEF95D001BFB19 /* RealmSwift.framework */; };
 		50970CD01BBEF95D001BFB19 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 50970CCE1BBEF95D001BFB19 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		50970CD41BBEFA3F001BFB19 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CD31BBEFA3F001BFB19 /* Models.swift */; settings = {ASSET_TAGS = (); }; };
+		50970CD41BBEFA3F001BFB19 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CD31BBEFA3F001BFB19 /* Models.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
