@@ -67,6 +67,15 @@ public class AvatarPod {
 
     private var requestPool = RequestPool()
 
+    private func completeRequest(request: Request, withStyledImage styledImage: UIImage) {
+
+        dispatch_async(dispatch_get_main_queue()) {
+            request.completion(finished: true, image: styledImage)
+        }
+
+        cache.setObject(styledImage, forKey: request.key)
+    }
+
     private func completeRequestsWithURL(URL: NSURL, image: UIImage) {
 
         dispatch_async(dispatch_get_main_queue()) {
@@ -77,18 +86,13 @@ public class AvatarPod {
 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
 
-                    let avatarImage = image.navi_avatarImageWithStyle(request.avatar.style)
+                    let styledImage = image.navi_avatarImageWithStyle(request.avatar.style)
 
-                    dispatch_async(dispatch_get_main_queue()) {
-
-                        request.completion(finished: true, image: avatarImage)
-                    }
-
-                    self.cache.setObject(avatarImage, forKey: request.key)
+                    self.completeRequest(request, withStyledImage: styledImage)
 
                     // save images to local
 
-                    request.avatar.saveOriginalImage(image, styledImage: avatarImage)
+                    request.avatar.saveOriginalImage(image, styledImage: styledImage)
                 }
             })
 
@@ -121,11 +125,8 @@ public class AvatarPod {
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
 
-                if let image = avatar.localStyledImage {
-
-                    dispatch_async(dispatch_get_main_queue()) {
-                        completion(finished: true, image: image)
-                    }
+                if let styledImage = avatar.localStyledImage {
+                    sharedInstance.completeRequest(request, withStyledImage: styledImage)
 
                 } else {
                     dispatch_async(dispatch_get_main_queue()) {
@@ -158,11 +159,11 @@ public class AvatarPod {
             }
         }
     }
-
+    
     public class func clear() {
-
+        
         sharedInstance.requestPool.removeAllRequests()
-
+        
         sharedInstance.cache.removeAllObjects()
     }
 }
