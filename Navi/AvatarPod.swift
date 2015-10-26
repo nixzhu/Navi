@@ -76,6 +76,8 @@ public class AvatarPod {
         cache.setObject(styledImage, forKey: request.key)
     }
 
+    private let cacheQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)
+
     private func completeRequestsWithURL(URL: NSURL, image: UIImage) {
 
         dispatch_async(dispatch_get_main_queue()) {
@@ -84,7 +86,7 @@ public class AvatarPod {
 
             requests.forEach({ request in
 
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                dispatch_async(self.cacheQueue) {
 
                     let styledImage = image.navi_avatarImageWithStyle(request.avatar.style)
 
@@ -123,7 +125,7 @@ public class AvatarPod {
                 completion(finished: false, image: placeholderImage)
             }
 
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            dispatch_async(sharedInstance.cacheQueue) {
 
                 if let styledImage = avatar.localStyledImage {
                     sharedInstance.completeRequest(request, withStyledImage: styledImage)
@@ -137,7 +139,7 @@ public class AvatarPod {
                             // do nothing
 
                         } else {
-                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+                            dispatch_async(sharedInstance.cacheQueue) {
 
                                 if let image = avatar.localOriginalImage {
                                     sharedInstance.completeRequestsWithURL(URL, image: image)
