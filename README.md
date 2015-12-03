@@ -45,13 +45,13 @@ Check the demo for more information.
 ### CocoaPods
 
 ```ruby
-pod 'Navi', '~> 0.3.7'
+pod 'Navi', '~> 0.3.8'
 ```
 
 ### Carthage
 
 ```ogdl
-github "nixzhu/Navi" >= 0.3.7
+github "nixzhu/Navi" >= 0.3.8
 ```
 
 ## Contact
