@@ -20,17 +20,19 @@ public extension UIImageView {
         objc_setAssociatedObject(self, &avatarKeyAssociatedObject, avatarKey, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 
-    public func navi_setAvatar(avatar: Avatar) {
+    public func navi_setAvatar(avatar: Avatar, withFadeTransitionDuration fadeTransitionDuration: NSTimeInterval = 0) {
 
         navi_setAvatarKey(avatar.key)
 
         AvatarPod.wakeAvatar(avatar) { [weak self] _, image in
 
-            guard let avatarKey = self?.navi_avatarKey where avatarKey == avatar.key else {
+            guard let strongSelf = self, avatarKey = strongSelf.navi_avatarKey where avatarKey == avatar.key else {
                 return
             }
 
-            self?.image = image
+            UIView.transitionWithView(strongSelf, duration: fadeTransitionDuration, options: .TransitionCrossDissolve, animations: {
+                self?.image = image
+            }, completion: nil)
         }
     }
 }
