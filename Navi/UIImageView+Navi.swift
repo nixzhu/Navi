@@ -24,15 +24,20 @@ public extension UIImageView {
 
         navi_setAvatarKey(avatar.key)
 
-        AvatarPod.wakeAvatar(avatar) { [weak self] _, image in
+        AvatarPod.wakeAvatar(avatar) { [weak self] finished, image, cacheType in
 
             guard let strongSelf = self, avatarKey = strongSelf.navi_avatarKey where avatarKey == avatar.key else {
                 return
             }
 
-            UIView.transitionWithView(strongSelf, duration: fadeTransitionDuration, options: .TransitionCrossDissolve, animations: {
+            if finished && cacheType != .Memory {
+                UIView.transitionWithView(strongSelf, duration: fadeTransitionDuration, options: .TransitionCrossDissolve, animations: {
+                    self?.image = image
+                }, completion: nil)
+
+            } else {
                 self?.image = image
-            }, completion: nil)
+            }
         }
     }
 }

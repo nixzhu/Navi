@@ -18,7 +18,13 @@ public class AvatarPod {
 
     let cache = NSCache()
 
-    public typealias Completion = (finished: Bool, image: UIImage) -> Void
+    public enum CacheType {
+        case Memory
+        case Disk
+        case Cloud
+    }
+
+    public typealias Completion = (finished: Bool, image: UIImage, cacheType: CacheType) -> Void
 
     struct Request: Equatable {
 
@@ -67,10 +73,10 @@ public class AvatarPod {
 
     private var requestPool = RequestPool()
 
-    private func completeRequest(request: Request, withStyledImage styledImage: UIImage) {
+    private func completeRequest(request: Request, withStyledImage styledImage: UIImage, cacheType: CacheType) {
 
         dispatch_async(dispatch_get_main_queue()) {
-            request.completion(finished: true, image: styledImage)
+            request.completion(finished: true, image: styledImage, cacheType: cacheType)
         }
 
         cache.setObject(styledImage, forKey: request.key)
@@ -78,7 +84,7 @@ public class AvatarPod {
 
     private let cacheQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)
 
-    private func completeRequestsWithURL(URL: NSURL, image: UIImage) {
+    private func completeRequestsWithURL(URL: NSURL, image: UIImage, cacheType: CacheType) {
 
         dispatch_async(dispatch_get_main_queue()) {
 
@@ -90,7 +96,7 @@ public class AvatarPod {
 
                     let styledImage = image.navi_avatarImageWithStyle(request.avatar.style)
 
-                    self.completeRequest(request, withStyledImage: styledImage)
+                    self.completeRequest(request, withStyledImage: styledImage, cacheType: cacheType)
 
                     // save images to local
 
@@ -108,7 +114,7 @@ public class AvatarPod {
 
         guard let URL = avatar.URL else {
 
-            completion(finished: false, image: avatar.placeholderImage ?? UIImage())
+            completion(finished: false, image: avatar.placeholderImage ?? UIImage(), cacheType: .Memory)
 
             return
         }
@@ -118,17 +124,17 @@ public class AvatarPod {
         let key = request.key
 
         if let image = sharedInstance.cache.objectForKey(key) as? UIImage {
-            completion(finished: true, image: image)
+            completion(finished: true, image: image, cacheType: .Memory)
 
         } else {
             if let placeholderImage = avatar.placeholderImage {
-                completion(finished: false, image: placeholderImage)
+                completion(finished: false, image: placeholderImage, cacheType: .Memory)
             }
 
             dispatch_async(sharedInstance.cacheQueue) {
 
                 if let styledImage = avatar.localStyledImage {
-                    sharedInstance.completeRequest(request, withStyledImage: styledImage)
+                    sharedInstance.completeRequest(request, withStyledImage: styledImage, cacheType: .Disk)
 
                 } else {
                     dispatch_async(dispatch_get_main_queue()) {
@@ -142,11 +148,11 @@ public class AvatarPod {
                             dispatch_async(sharedInstance.cacheQueue) {
 
                                 if let image = avatar.localOriginalImage {
-                                    sharedInstance.completeRequestsWithURL(URL, image: image)
+                                    sharedInstance.completeRequestsWithURL(URL, image: image, cacheType: .Disk)
 
                                 } else {
                                     if let data = NSData(contentsOfURL: URL), image = UIImage(data: data) {
-                                        sharedInstance.completeRequestsWithURL(URL, image: image)
+                                        sharedInstance.completeRequestsWithURL(URL, image: image, cacheType: .Cloud)
 
                                     } else {
                                         dispatch_async(dispatch_get_main_queue()) {
