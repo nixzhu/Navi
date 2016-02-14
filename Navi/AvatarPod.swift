@@ -16,6 +16,9 @@ public class AvatarPod {
 
     static let sharedInstance = AvatarPod()
 
+    private init() {
+    }
+
     let cache = NSCache()
 
     public enum CacheType {
