@@ -82,11 +82,13 @@ public class AvatarPod {
         cache.setObject(styledImage, forKey: request.key)
     }
 
-    private let cacheQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)
+    private let requestQueue = dispatch_queue_create("com.nixWork.Navi.requestQueue", DISPATCH_QUEUE_SERIAL)
+
+    private let cacheQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
 
     private func completeRequestsWithURL(URL: NSURL, image: UIImage, cacheType: CacheType) {
 
-        dispatch_async(dispatch_get_main_queue()) {
+        dispatch_async(requestQueue) {
 
             let requests = self.requestPool.requestsWithURL(URL)
 
@@ -137,7 +139,7 @@ public class AvatarPod {
                     sharedInstance.completeRequest(request, withStyledImage: styledImage, cacheType: .Disk)
 
                 } else {
-                    dispatch_async(dispatch_get_main_queue()) {
+                    dispatch_async(sharedInstance.requestQueue) {
 
                         sharedInstance.requestPool.addRequest(request)
 
@@ -155,7 +157,7 @@ public class AvatarPod {
                                         sharedInstance.completeRequestsWithURL(URL, image: image, cacheType: .Cloud)
 
                                     } else {
-                                        dispatch_async(dispatch_get_main_queue()) {
+                                        dispatch_async(sharedInstance.requestQueue) {
                                             sharedInstance.requestPool.removeRequestsWithURL(URL)
                                         }
                                     }
