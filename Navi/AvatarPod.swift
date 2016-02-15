@@ -10,9 +10,11 @@ import UIKit
 
 public class AvatarPod {
 
-    static let sharedInstance = AvatarPod()
+    private static let sharedInstance = AvatarPod()
 
-    let cache = NSCache()
+    private let cache = NSCache()
+
+    private lazy var session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
 
     public enum CacheType {
         case Memory
@@ -164,14 +166,20 @@ public class AvatarPod {
                                     sharedInstance.completeRequestsWithURL(URL, image: image, cacheType: .Disk)
 
                                 } else {
-                                    if let data = NSData(contentsOfURL: URL), image = UIImage(data: data) {
-                                        sharedInstance.completeRequestsWithURL(URL, image: image, cacheType: .Cloud)
+                                    let task = sharedInstance.session.dataTaskWithURL(URL) { data, response, error in
 
-                                    } else {
-                                        dispatch_async(sharedInstance.requestQueue) {
-                                            sharedInstance.requestPool.removeRequestsWithURL(URL)
+                                        guard error == nil, let data = data, image = UIImage(data: data) else {
+                                            dispatch_async(sharedInstance.requestQueue) {
+                                                sharedInstance.requestPool.removeRequestsWithURL(URL)
+                                            }
+
+                                            return
                                         }
+
+                                        sharedInstance.completeRequestsWithURL(URL, image: image, cacheType: .Cloud)
                                     }
+                                    
+                                    task.resume()
                                 }
                             }
                         }
