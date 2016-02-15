@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name        = "Navi"
-  s.version     = "0.4.1"
+  s.version     = "0.4.2"
   s.summary     = "Focus on avatar caching."
 
   s.description = <<-DESC
