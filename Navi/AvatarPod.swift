@@ -111,13 +111,20 @@ public class AvatarPod {
 
                 requests.forEach({ request in
 
-                    let styledImage = image.navi_avatarImageWithStyle(request.avatar.style)
+                    // if can find styledImage in cache, no need to generate it again or save
 
-                    self.completeRequest(request, withStyledImage: styledImage, cacheType: cacheType)
+                    if let styledImage = self.cache.objectForKey(request.key) as? UIImage {
+                        self.completeRequest(request, withStyledImage: styledImage, cacheType: cacheType)
 
-                    // save images to local
+                    } else {
+                        let styledImage = image.navi_avatarImageWithStyle(request.avatar.style)
 
-                    request.avatar.saveOriginalImage(image, styledImage: styledImage)
+                        self.completeRequest(request, withStyledImage: styledImage, cacheType: cacheType)
+
+                        // save images to local
+
+                        request.avatar.saveOriginalImage(image, styledImage: styledImage)
+                    }
                 })
             }
 
