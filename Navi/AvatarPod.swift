@@ -8,16 +8,9 @@
 
 import UIKit
 
-func ==(lhs: AvatarPod.Request, rhs: AvatarPod.Request) -> Bool {
-    return lhs.key == rhs.key
-}
-
 public class AvatarPod {
 
     static let sharedInstance = AvatarPod()
-
-    private init() {
-    }
 
     let cache = NSCache()
 
@@ -29,52 +22,73 @@ public class AvatarPod {
 
     public typealias Completion = (finished: Bool, image: UIImage, cacheType: CacheType) -> Void
 
-    struct Request: Equatable {
+    private struct Request {
 
         let avatar: Avatar
         let completion: Completion
+
+        var URL: NSURL? {
+            return avatar.URL
+        }
 
         var key: String {
             return avatar.key
         }
     }
 
-    private struct RequestPool {
+    private class RequestTank {
 
-        private var requests: [Request]
+        let URL: NSURL
+        var requests: [Request] = []
 
-        init() {
-
-            self.requests = [Request]()
+        init(URL: NSURL) {
+            self.URL = URL
         }
+    }
 
-        mutating func addRequest(request: Request) {
+    private class RequestPool {
 
-            requests.append(request)
+        private var requestTanks = [NSURL: RequestTank]()
+
+        func addRequest(request: Request) {
+
+            guard let URL = request.URL else {
+                return
+            }
+
+            if let requestTank = requestTanks[URL] {
+                requestTank.requests.append(request)
+
+            } else {
+                let requestTank = RequestTank(URL: URL)
+                requestTanks[URL] = requestTank
+                requestTank.requests.append(request)
+            }
         }
 
         func requestsWithURL(URL: NSURL) -> [Request] {
 
-            return requests.filter({ $0.avatar.URL == URL })
+            guard let requestTank = requestTanks[URL] else {
+                return []
+            }
+
+            return requestTank.requests
         }
 
-        mutating func removeRequestsWithURL(URL: NSURL) {
+        func removeRequestsWithURL(URL: NSURL) {
 
-            let requestsToRemove = requests.filter({ $0.avatar.URL == URL })
-
-            requestsToRemove.forEach({
-                if let index = requests.indexOf($0) {
-                    requests.removeAtIndex(index)
-                }
-            })
+            requestTanks.removeValueForKey(URL)
         }
 
-        mutating func removeAllRequests() {
-            requests = []
+        func removeAllRequests() {
+            requestTanks.removeAll()
         }
     }
 
     private var requestPool = RequestPool()
+
+    private let requestQueue = dispatch_queue_create("com.nixWork.Navi.requestQueue", DISPATCH_QUEUE_SERIAL)
+    private let cacheQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
 
     private func completeRequest(request: Request, withStyledImage styledImage: UIImage, cacheType: CacheType) {
 
@@ -85,19 +99,15 @@ public class AvatarPod {
         cache.setObject(styledImage, forKey: request.key)
     }
 
-    private let requestQueue = dispatch_queue_create("com.nixWork.Navi.requestQueue", DISPATCH_QUEUE_SERIAL)
-
-    private let cacheQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
-
     private func completeRequestsWithURL(URL: NSURL, image: UIImage, cacheType: CacheType) {
 
         dispatch_async(requestQueue) {
 
             let requests = self.requestPool.requestsWithURL(URL)
 
-            requests.forEach({ request in
+            dispatch_async(self.cacheQueue) {
 
-                dispatch_async(self.cacheQueue) {
+                requests.forEach({ request in
 
                     let styledImage = image.navi_avatarImageWithStyle(request.avatar.style)
 
@@ -106,8 +116,8 @@ public class AvatarPod {
                     // save images to local
 
                     request.avatar.saveOriginalImage(image, styledImage: styledImage)
-                }
-            })
+                })
+            }
 
             self.requestPool.removeRequestsWithURL(URL)
         }
@@ -118,9 +128,7 @@ public class AvatarPod {
     public class func wakeAvatar(avatar: Avatar, completion: Completion) {
 
         guard let URL = avatar.URL else {
-
             completion(finished: false, image: avatar.placeholderImage ?? UIImage(), cacheType: .Memory)
-
             return
         }
 
