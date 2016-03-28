@@ -52,7 +52,7 @@ class TweetCell: UITableViewCell {
         super.awakeFromNib()
 
         avatarImageView.userInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: "tryShowProfile:")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(TweetCell.tryShowProfile(_:)))
         avatarImageView.addGestureRecognizer(tap)
 
         messageTextView.font = UIFont.tweetMessageFont()

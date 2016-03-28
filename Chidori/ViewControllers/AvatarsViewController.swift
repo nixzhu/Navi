@@ -87,7 +87,7 @@ class AvatarsViewController: UICollectionViewController {
         collectionView!.registerNib(UINib(nibName: avatarCellID, bundle: nil), forCellWithReuseIdentifier: avatarCellID)
         collectionView!.alwaysBounceVertical = true
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCollectionView:", name: Config.Notification.newUsers, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AvatarsViewController.updateCollectionView(_:)), name: Config.Notification.newUsers, object: nil)
     }
 
     // MARK: Actions

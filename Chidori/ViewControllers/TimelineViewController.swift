@@ -204,7 +204,7 @@ class TimelineViewController: UITableViewController {
         tableView.tableFooterView = UIView()
 
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "syncLatestTweets", forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(TimelineViewController.syncLatestTweets), forControlEvents: .ValueChanged)
 
         self.refreshControl = refreshControl
 
