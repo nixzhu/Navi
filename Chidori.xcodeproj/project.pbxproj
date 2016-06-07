@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826971BB841A3007D6993 /* ProfileViewController.swift */; };
 		5008269A1BB84330007D6993 /* UserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826991BB84330007D6993 /* UserAvatar.swift */; };
-		5028C5D71CA9387C00879A95 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5028C5D51CA9387C00879A95 /* Realm.framework */; };
-		5028C5D81CA9387C00879A95 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5028C5D61CA9387C00879A95 /* RealmSwift.framework */; };
-		5028C5D91CA9391E00879A95 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5028C5D61CA9387C00879A95 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5028C5DA1CA939F000879A95 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5028C5D51CA9387C00879A95 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		502A2D4B1BB7A19300B3A6B1 /* UIImage+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */; };
 		5057A2921BBFE5C700D3A876 /* UIFont+Chidori.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A2911BBFE5C700D3A876 /* UIFont+Chidori.swift */; };
 		5057A2951BC0F08E00D3A876 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A2941BC0F08E00D3A876 /* TabBarViewController.swift */; };
@@ -36,7 +32,6 @@
 		50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */; };
 		50970CAE1BBDA4BA001BFB19 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */; };
 		50970CB11BBE9ECA001BFB19 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CB01BBE9ECA001BFB19 /* Filter.swift */; };
-		50970CD41BBEFA3F001BFB19 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CD31BBEFA3F001BFB19 /* Models.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,8 +65,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5028C5DA1CA939F000879A95 /* Realm.framework in Embed Frameworks */,
-				5028C5D91CA9391E00879A95 /* RealmSwift.framework in Embed Frameworks */,
 				505A560B1BB63F2E00159CD0 /* Navi.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -82,8 +75,6 @@
 /* Begin PBXFileReference section */
 		500826971BB841A3007D6993 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = ViewControllers/ProfileViewController.swift; sourceTree = "<group>"; };
 		500826991BB84330007D6993 /* UserAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAvatar.swift; path = Models/UserAvatar.swift; sourceTree = "<group>"; };
-		5028C5D51CA9387C00879A95 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Chidori/Realm/Realm.framework; sourceTree = "<group>"; };
-		5028C5D61CA9387C00879A95 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Chidori/Realm/RealmSwift.framework; sourceTree = "<group>"; };
 		502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Navi.swift"; sourceTree = "<group>"; };
 		5057A2911BBFE5C700D3A876 /* UIFont+Chidori.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Chidori.swift"; path = "Extensions/UIFont+Chidori.swift"; sourceTree = "<group>"; };
 		5057A2941BC0F08E00D3A876 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarViewController.swift; path = ViewControllers/TabBarViewController.swift; sourceTree = "<group>"; };
@@ -110,7 +101,6 @@
 		50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetCell.swift; path = Views/Cells/Tweet/TweetCell.swift; sourceTree = "<group>"; };
 		50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetCell.xib; path = Views/Cells/Tweet/TweetCell.xib; sourceTree = "<group>"; };
 		50970CB01BBE9ECA001BFB19 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Helpers/Filter.swift; sourceTree = "<group>"; };
-		50970CD31BBEFA3F001BFB19 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Models.swift; path = Chidori/Realm/Models.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,9 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5028C5D71CA9387C00879A95 /* Realm.framework in Frameworks */,
 				505A560A1BB63F2E00159CD0 /* Navi.framework in Frameworks */,
-				5028C5D81CA9387C00879A95 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,9 +264,6 @@
 		50970CD11BBEF966001BFB19 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				5028C5D51CA9387C00879A95 /* Realm.framework */,
-				5028C5D61CA9387C00879A95 /* RealmSwift.framework */,
-				50970CD31BBEFA3F001BFB19 /* Models.swift */,
 			);
 			name = Realm;
 			path = ..;
@@ -447,7 +432,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50970CD41BBEFA3F001BFB19 /* Models.swift in Sources */,
 				5008269A1BB84330007D6993 /* UserAvatar.swift in Sources */,
 				5057A2951BC0F08E00D3A876 /* TabBarViewController.swift in Sources */,
 				500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */,
@@ -639,6 +623,7 @@
 		505A560C1BB63F2E00159CD0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -661,6 +646,7 @@
 		505A560D1BB63F2E00159CD0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
