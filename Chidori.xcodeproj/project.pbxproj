@@ -27,6 +27,9 @@
 		505A561A1BB6559800159CD0 /* AvatarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A56191BB6559800159CD0 /* AvatarsViewController.swift */; };
 		505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A561C1BB6566F00159CD0 /* AvatarCell.swift */; };
 		505A561F1BB6566F00159CD0 /* AvatarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505A561D1BB6566F00159CD0 /* AvatarCell.xib */; };
+		507902381D06AE9500D846F5 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507902371D06AE9500D846F5 /* Models.swift */; };
+		5079023A1D06AF1B00D846F5 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507902391D06AF1B00D846F5 /* Realm.framework */; };
+		5079023C1D06AF2000D846F5 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5079023B1D06AF2000D846F5 /* RealmSwift.framework */; };
 		50970C9C1BBD252D001BFB19 /* UIImageView+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970C9B1BBD252D001BFB19 /* UIImageView+Navi.swift */; };
 		50970C9E1BBD9151001BFB19 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970C9D1BBD9151001BFB19 /* TimelineViewController.swift */; };
 		50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */; };
@@ -96,6 +99,9 @@
 		505A56191BB6559800159CD0 /* AvatarsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarsViewController.swift; path = ViewControllers/AvatarsViewController.swift; sourceTree = "<group>"; };
 		505A561C1BB6566F00159CD0 /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarCell.swift; path = Views/Cells/Avatar/AvatarCell.swift; sourceTree = "<group>"; };
 		505A561D1BB6566F00159CD0 /* AvatarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AvatarCell.xib; path = Views/Cells/Avatar/AvatarCell.xib; sourceTree = "<group>"; };
+		507902371D06AE9500D846F5 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Models.swift; path = Realm/Models.swift; sourceTree = "<group>"; };
+		507902391D06AF1B00D846F5 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		5079023B1D06AF2000D846F5 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		50970C9B1BBD252D001BFB19 /* UIImageView+Navi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Navi.swift"; sourceTree = "<group>"; };
 		50970C9D1BBD9151001BFB19 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineViewController.swift; path = ViewControllers/TimelineViewController.swift; sourceTree = "<group>"; };
 		50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetCell.swift; path = Views/Cells/Tweet/TweetCell.swift; sourceTree = "<group>"; };
@@ -109,6 +115,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				505A560A1BB63F2E00159CD0 /* Navi.framework in Frameworks */,
+				5079023A1D06AF1B00D846F5 /* Realm.framework in Frameworks */,
+				5079023C1D06AF2000D846F5 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +157,8 @@
 		505A55D21BB63CFC00159CD0 = {
 			isa = PBXGroup;
 			children = (
+				5079023B1D06AF2000D846F5 /* RealmSwift.framework */,
+				507902391D06AF1B00D846F5 /* Realm.framework */,
 				505A55DD1BB63CFD00159CD0 /* Chidori */,
 				505A55F61BB63F2E00159CD0 /* Navi */,
 				505A56041BB63F2E00159CD0 /* NaviTests */,
@@ -264,6 +274,7 @@
 		50970CD11BBEF966001BFB19 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
+				507902371D06AE9500D846F5 /* Models.swift */,
 			);
 			name = Realm;
 			path = ..;
@@ -292,6 +303,7 @@
 				505A55D91BB63CFD00159CD0 /* Resources */,
 				505A56111BB63F2E00159CD0 /* Embed Frameworks */,
 				50970CD21BBEF9C6001BFB19 /* ShellScript */,
+				5079023D1D06AF3C00D846F5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -412,6 +424,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5079023D1D06AF3C00D846F5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		50970CD21BBEF9C6001BFB19 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -435,6 +462,7 @@
 				5008269A1BB84330007D6993 /* UserAvatar.swift in Sources */,
 				5057A2951BC0F08E00D3A876 /* TabBarViewController.swift in Sources */,
 				500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */,
+				507902381D06AE9500D846F5 /* Models.swift in Sources */,
 				50970C9E1BBD9151001BFB19 /* TimelineViewController.swift in Sources */,
 				5057A29B1BC13D8100D3A876 /* Config.swift in Sources */,
 				505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */,
@@ -596,11 +624,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Chidori/Realm",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Chidori/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nixWork.Chidori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -612,11 +642,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Chidori/Realm",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Chidori/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nixWork.Chidori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
