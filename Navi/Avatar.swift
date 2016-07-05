@@ -68,9 +68,9 @@ public protocol Avatar {
     func saveOriginalImage(originalImage: UIImage, styledImage: UIImage)
 }
 
-extension Avatar {
+public extension Avatar {
 
-    var key: String {
+    public var key: String {
         return style.hashString + (URL?.absoluteString ?? "")
     }
 }
