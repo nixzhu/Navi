@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name        = "Navi"
-  s.version     = "0.4.3"
+  s.version     = "0.4.4"
   s.summary     = "Focus on avatar caching."
 
   s.description = <<-DESC
@@ -16,7 +16,6 @@ Pod::Spec.new do |s|
   s.social_media_url  = "https://twitter.com/nixzhu"
 
   s.ios.deployment_target   = "8.0"
-  # s.osx.deployment_target = "10.7"
 
   s.source          = { :git => "https://github.com/nixzhu/Navi.git", :tag => s.version }
   s.source_files    = "Navi/*.swift"
