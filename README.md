@@ -11,7 +11,9 @@ The name of **Navi** from movie [Avatar](https://en.wikipedia.org/wiki/Avatar_(2
 
 ## Requirements
 
-Swift 2.3, iOS 8.0
+Swift 3.0, iOS 8.0
+
+(Swift 2.3, use version 0.5.0)
 
 ## Usage
 
@@ -42,16 +44,16 @@ Check the demo for more information.
 
 ## Installation
 
-### CocoaPods
-
-```ruby
-pod 'Navi', '~> 0.5.0'
-```
-
 ### Carthage
 
 ```ogdl
-github "nixzhu/Navi" >= 0.5.0
+github "nixzhu/Navi" >= 1.0.0
+```
+
+### CocoaPods
+
+```ruby
+pod 'Navi', '~> 1.0.0'
 ```
 
 ## Contact
