@@ -32,7 +32,7 @@ public extension UIImage {
         case .roundedRectangle(let size, let cornerRadius, let borderWidth):
             avatarImage = navi_centerCropWithSize(size)?.navi_roundWithCornerRadius(cornerRadius, borderWidth: borderWidth)
 
-        case .free(_, let transform):
+        case .freeform(_, let transform):
             avatarImage = transform(self)
         }
 
