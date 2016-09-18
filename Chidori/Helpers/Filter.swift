@@ -62,7 +62,11 @@ func overlayWithColor(_ color: UIColor) -> Filter {
     }
 }
 
-infix operator +++ { associativity left }
+precedencegroup FilterPrecedence {
+    associativity: left
+}
+
+infix operator +++: FilterPrecedence
 
 func +++(filterA: @escaping Filter, filterB: @escaping Filter) -> Filter {
     return { image in
