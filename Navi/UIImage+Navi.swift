@@ -179,7 +179,7 @@ public extension UIImage {
 
 public extension UIImage {
 
-    fileprivate func navi_CGContextAddRoundedRect(_ context: CGContext, rect: CGRect, ovalWidth: CGFloat, ovalHeight: CGFloat) {
+    fileprivate func navi_cgContextAddRoundedRect(_ context: CGContext, rect: CGRect, ovalWidth: CGFloat, ovalHeight: CGFloat) {
 
         if ovalWidth <= 0 || ovalHeight <= 0 {
             context.addRect(rect)
@@ -195,10 +195,10 @@ public extension UIImage {
             let fh = rect.height / ovalHeight
 
             context.move(to: CGPoint(x: fw, y: fh/2))
-            CGContextAddArcToPoint(context, fw, fh, fw/2, fh, 1)
-            CGContextAddArcToPoint(context, 0, fh, 0, fh/2, 1)
-            CGContextAddArcToPoint(context, 0, 0, fw/2, 0, 1)
-            CGContextAddArcToPoint(context, fw, 0, fw, fh/2, 1)
+            context.addArc(tangent1End: CGPoint(x: fw, y: fh), tangent2End: CGPoint(x: fw/2, y: fh), radius: 1)
+            context.addArc(tangent1End: CGPoint(x: 0, y: fh), tangent2End: CGPoint(x: 0, y: fh/2), radius: 1)
+            context.addArc(tangent1End: CGPoint(x: 0, y: 0), tangent2End: CGPoint(x: fw/2, y: 0), radius: 1)
+            context.addArc(tangent1End: CGPoint(x: fw, y: 0), tangent2End: CGPoint(x: fw, y: fh/2), radius: 1)
             context.closePath()
 
             context.restoreGState()
@@ -227,7 +227,7 @@ public extension UIImage {
         bitmapContext.beginPath()
 
         let rect = CGRect(x: borderWidth, y: borderWidth, width: pixelSize.width - borderWidth * 2, height: pixelSize.height - borderWidth * 2)
-        navi_CGContextAddRoundedRect(bitmapContext, rect: rect, ovalWidth: cornerRadius, ovalHeight: cornerRadius)
+        navi_cgContextAddRoundedRect(bitmapContext, rect: rect, ovalWidth: cornerRadius, ovalHeight: cornerRadius)
 
         bitmapContext.closePath()
 
