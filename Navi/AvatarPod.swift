@@ -12,7 +12,7 @@ open class AvatarPod {
 
     fileprivate static let sharedInstance = AvatarPod()
 
-    fileprivate let cache = NSCache()
+    fileprivate let cache = NSCache<NSString, UIImage>()
 
     fileprivate lazy var session = URLSession(configuration: URLSessionConfiguration.default)
 
@@ -90,7 +90,7 @@ open class AvatarPod {
     fileprivate var requestPool = RequestPool()
 
     fileprivate let requestQueue = DispatchQueue(label: "com.nixWork.Navi.requestQueue", attributes: [])
-    fileprivate let cacheQueue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background)
+    fileprivate let cacheQueue = DispatchQueue.global(qos: .background)
 
     fileprivate func completeRequest(_ request: Request, withStyledImage styledImage: UIImage, cacheType: CacheType) {
 
@@ -98,7 +98,7 @@ open class AvatarPod {
             request.completion(true, styledImage, cacheType)
         }
 
-        cache.setObject(styledImage, forKey: request.key)
+        cache.setObject(styledImage, forKey: request.key as NSString)
     }
 
     fileprivate func completeRequestsWithURL(_ URL: Foundation.URL, image: UIImage, cacheType: CacheType) {
@@ -113,7 +113,7 @@ open class AvatarPod {
 
                     // if can find styledImage in cache, no need to generate it again or save
 
-                    if let styledImage = self.cache.object(forKey: request.key) as? UIImage {
+                    if let styledImage = self.cache.object(forKey: request.key as NSString) {
                         self.completeRequest(request, withStyledImage: styledImage, cacheType: cacheType)
 
                     } else {
@@ -143,10 +143,8 @@ open class AvatarPod {
 
         let request = Request(avatar: avatar, completion: completion)
 
-        let key = request.key
-
-        if let image = sharedInstance.cache.object(forKey: key) as? UIImage {
-            completion(finished: true, image: image, cacheType: .memory)
+        if let image = sharedInstance.cache.object(forKey: request.key as NSString) {
+            completion(true, image, .memory)
 
         } else {
             if let placeholderImage = avatar.placeholderImage {
