@@ -11,6 +11,7 @@ import Navi
 
 class ProfileViewController: UIViewController {
 
+    /*
     var user: User?
 
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -46,5 +47,6 @@ class ProfileViewController: UIViewController {
 
         avatarImageView.navi_setAvatar(userAvatar)
     }
+     */
 }
 

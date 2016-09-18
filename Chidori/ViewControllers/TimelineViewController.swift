@@ -9,11 +9,11 @@
 import UIKit
 import Accounts
 import Social
-import RealmSwift
 import Navi
 
 class TimelineViewController: UITableViewController {
 
+    /*
     lazy var accountStore = ACAccountStore()
 
     private lazy var dateFormatter: NSDateFormatter = {
@@ -23,7 +23,7 @@ class TimelineViewController: UITableViewController {
         formatter.formatterBehavior = .Behavior10_4
         formatter.dateFormat = "EEE MMM dd HH:mm:ss Z yyyy"
         return formatter
-        }()
+    }()
 
     var twitterAccount: ACAccount? {
         willSet {
@@ -301,6 +301,7 @@ class TimelineViewController: UITableViewController {
         let tweet = tweets[indexPath.row]
         return heightOfTweet(tweet)
     }
+     */
 }
 
 // MARK: - TweetCellDelegate

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 import Navi
 
 struct YepAvatar {
@@ -21,7 +20,7 @@ extension YepAvatar: Navi.Avatar {
         return avatarURL
     }
     var style: AvatarStyle {
-        return roundAvatarStyle
+        return .RoundedRectangle(size: CGSize(width: 60, height: 60), cornerRadius: 30, borderWidth: 0)
     }
     var placeholderImage: UIImage? {
         return UIImage(named: "round_avatar_placeholder")
@@ -38,12 +37,6 @@ extension YepAvatar: Navi.Avatar {
 }
 
 class AvatarsViewController: UICollectionViewController {
-
-    var realm: Realm!
-
-    lazy var users: Results<User> = {
-        return self.realm.objects(User).sorted("createdUnixTime", ascending: false)
-        }()
 
     let yepAvatarURLStrings = [
         "https://yep-avatars.s3.cn-north-1.amazonaws.com.cn/84c9a0a9-c6eb-4495-9b50-0d551749956a",
@@ -79,8 +72,6 @@ class AvatarsViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        realm = try! Realm()
-
         title = "Avatars"
 
         collectionView!.backgroundColor = UIColor.whiteColor()
@@ -96,21 +87,9 @@ class AvatarsViewController: UICollectionViewController {
         collectionView?.reloadData()
     }
 
-    // MARK: Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
-        if segue.identifier == "showProfile" {
-
-            let vc = segue.destinationViewController as! ProfileViewController
-            vc.user = sender as? User
-        }
-    }
-
     // MARK: - UICollectionView
 
     enum Section: Int {
-        case User
         case Yep
         case Alpha
     }
@@ -123,9 +102,6 @@ class AvatarsViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         switch section {
-
-        case Section.User.rawValue:
-            return users.count
 
         case Section.Yep.rawValue:
             return yepAvatarURLStrings.count
@@ -154,11 +130,6 @@ class AvatarsViewController: UICollectionViewController {
 
         switch indexPath.section {
 
-        case Section.User.rawValue:
-            let user = users[indexPath.item]
-            let userAvatar = UserAvatar(userID: user.userID, avatarStyle: squareAvatarStyle)
-            cell.configureWithAvatar(userAvatar)
-
         case Section.Yep.rawValue:
             let avatarURLString = yepAvatarURLStrings[indexPath.item]
             let yepAvatar = YepAvatar(avatarURL: NSURL(string: avatarURLString)!)
@@ -168,19 +139,6 @@ class AvatarsViewController: UICollectionViewController {
             let avatarURLString = alphaAvatarURLStrings[indexPath.item]
             let yepAvatar = YepAvatar(avatarURL: NSURL(string: avatarURLString)!)
             cell.configureWithAvatar(yepAvatar)
-
-        default:
-            break
-        }
-    }
-
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
-        switch indexPath.section {
-
-        case Section.User.rawValue:
-            let user = users[indexPath.item]
-            performSegueWithIdentifier("showProfile", sender: user)
 
         default:
             break

@@ -23,6 +23,7 @@ class TweetCell: UITableViewCell {
 
     weak var delegate: TweetCellDelegate?
 
+    /*
     var tweet: Tweet?
     var showProfile: ((ofUser: User) -> Void)?
 
@@ -88,6 +89,7 @@ class TweetCell: UITableViewCell {
             showProfile?(ofUser: user)
         }
     }
+     */
 }
 
 // MARK: - UITextViewDelegate
