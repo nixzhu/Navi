@@ -9,16 +9,16 @@
 import UIKit
 import CoreImage
 
-typealias Filter = CIImage -> CIImage
+typealias Filter = (CIImage) -> CIImage
 
-func blurWithRadius(radius: CGFloat) -> Filter {
+func blurWithRadius(_ radius: CGFloat) -> Filter {
 
     return { image in
 
         let parameters = [
             kCIInputRadiusKey: radius,
             kCIInputImageKey: image,
-        ]
+        ] as [String : Any]
 
         let filter = CIFilter(name: "CIGaussianBlur", withInputParameters: parameters)
 
@@ -26,7 +26,7 @@ func blurWithRadius(radius: CGFloat) -> Filter {
     }
 }
 
-func colorGenerator(color: UIColor) -> Filter {
+func colorGenerator(_ color: UIColor) -> Filter {
 
     return { _ in
 
@@ -40,7 +40,7 @@ func colorGenerator(color: UIColor) -> Filter {
     }
 }
 
-func compositeSourceOver(overlay: CIImage) -> Filter {
+func compositeSourceOver(_ overlay: CIImage) -> Filter {
     return { image in
         let parameters = [
             kCIInputBackgroundImageKey: image,
@@ -51,11 +51,11 @@ func compositeSourceOver(overlay: CIImage) -> Filter {
 
         let cropRect = image.extent
 
-        return filter!.outputImage!.imageByCroppingToRect(cropRect)
+        return filter!.outputImage!.cropping(to: cropRect)
     }
 }
 
-func overlayWithColor(color: UIColor) -> Filter {
+func overlayWithColor(_ color: UIColor) -> Filter {
     return { image in
         let overlay = colorGenerator(color)(image)
         return compositeSourceOver(overlay)(image)
@@ -64,7 +64,7 @@ func overlayWithColor(color: UIColor) -> Filter {
 
 infix operator +++ { associativity left }
 
-func +++(filterA: Filter, filterB: Filter) -> Filter {
+func +++(filterA: @escaping Filter, filterB: @escaping Filter) -> Filter {
     return { image in
         return filterB(filterA(image))
     }

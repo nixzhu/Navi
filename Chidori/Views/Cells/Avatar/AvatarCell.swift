@@ -16,10 +16,10 @@ class AvatarCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        imageView.contentMode = .Center
+        imageView.contentMode = .center
     }
 
-    func configureWithAvatar(avatar: Navi.Avatar) {
+    func configureWithAvatar(_ avatar: Navi.Avatar) {
 
         imageView.navi_setAvatar(avatar, withFadeTransitionDuration: 0.25)
     }

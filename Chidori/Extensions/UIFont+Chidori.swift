@@ -11,6 +11,6 @@ import UIKit
 extension UIFont {
 
     class func tweetMessageFont() -> UIFont {
-        return UIFont.systemFontOfSize(15)
+        return UIFont.systemFont(ofSize: 15)
     }
 }

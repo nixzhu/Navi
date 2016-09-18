@@ -12,26 +12,26 @@ private var avatarKeyAssociatedObject: Void?
 
 public extension UIImageView {
 
-    private var navi_avatarKey: String? {
+    fileprivate var navi_avatarKey: String? {
         return objc_getAssociatedObject(self, &avatarKeyAssociatedObject) as? String
     }
 
-    private func navi_setAvatarKey(avatarKey: String) {
+    fileprivate func navi_setAvatarKey(_ avatarKey: String) {
         objc_setAssociatedObject(self, &avatarKeyAssociatedObject, avatarKey, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 
-    public func navi_setAvatar(avatar: Avatar, withFadeTransitionDuration fadeTransitionDuration: NSTimeInterval = 0) {
+    public func navi_setAvatar(_ avatar: Avatar, withFadeTransitionDuration fadeTransitionDuration: TimeInterval = 0) {
 
         navi_setAvatarKey(avatar.key)
 
         AvatarPod.wakeAvatar(avatar) { [weak self] finished, image, cacheType in
 
-            guard let strongSelf = self, avatarKey = strongSelf.navi_avatarKey where avatarKey == avatar.key else {
+            guard let strongSelf = self, let avatarKey = strongSelf.navi_avatarKey , avatarKey == avatar.key else {
                 return
             }
 
-            if finished && cacheType != .Memory {
-                UIView.transitionWithView(strongSelf, duration: fadeTransitionDuration, options: .TransitionCrossDissolve, animations: {
+            if finished && cacheType != .memory {
+                UIView.transition(with: strongSelf, duration: fadeTransitionDuration, options: .transitionCrossDissolve, animations: {
                     self?.image = image
                 }, completion: nil)
 

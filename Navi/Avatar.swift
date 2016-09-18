@@ -12,16 +12,16 @@ public func ==(lhs: AvatarStyle, rhs: AvatarStyle) -> Bool {
 
     switch (lhs, rhs) {
 
-    case (.Original, .Original):
+    case (.original, .original):
         return true
 
-    case (.Rectangle(let sizeA), .Rectangle(let sizeB)) where sizeA == sizeB:
+    case (.rectangle(let sizeA), .rectangle(let sizeB)) where sizeA == sizeB:
         return true
 
-    case (.RoundedRectangle(let sizeA, let cornerRadiusA, let borderWidthA), .RoundedRectangle(let sizeB, let cornerRadiusB, let borderWidthB)) where (sizeA == sizeB && cornerRadiusA == cornerRadiusB && borderWidthA == borderWidthB):
+    case (.roundedRectangle(let sizeA, let cornerRadiusA, let borderWidthA), .roundedRectangle(let sizeB, let cornerRadiusB, let borderWidthB)) where (sizeA == sizeB && cornerRadiusA == cornerRadiusB && borderWidthA == borderWidthB):
         return true
 
-    case (.Free(let nameA, _), .Free(let nameB, _)) where nameA == nameB:
+    case (.free(let nameA, _), .free(let nameB, _)) where nameA == nameB:
         return true
 
     default:
@@ -31,27 +31,27 @@ public func ==(lhs: AvatarStyle, rhs: AvatarStyle) -> Bool {
 
 public enum AvatarStyle: Equatable {
 
-    case Original
-    case Rectangle(size: CGSize)
-    case RoundedRectangle(size: CGSize, cornerRadius: CGFloat, borderWidth: CGFloat)
+    case original
+    case rectangle(size: CGSize)
+    case roundedRectangle(size: CGSize, cornerRadius: CGFloat, borderWidth: CGFloat)
 
-    public typealias Transform = UIImage -> UIImage?
-    case Free(name: String, transform: Transform)
+    public typealias Transform = (UIImage) -> UIImage?
+    case free(name: String, transform: Transform)
 
     var hashString: String {
 
         switch self {
 
-        case .Original:
+        case .original:
             return "Original-"
 
-        case .Rectangle(let size):
+        case .rectangle(let size):
             return "Rectangle-\(size)-"
 
-        case .RoundedRectangle(let size, let cornerRadius, let borderWidth):
+        case .roundedRectangle(let size, let cornerRadius, let borderWidth):
             return "RoundedRectangle-\(size)-\(cornerRadius)-\(borderWidth)-"
 
-        case .Free(let name, _):
+        case .free(let name, _):
             return "Free-\(name)-"
         }
     }
@@ -59,13 +59,13 @@ public enum AvatarStyle: Equatable {
 
 public protocol Avatar {
 
-    var URL: NSURL? { get }
+    var URL: Foundation.URL? { get }
     var style: AvatarStyle { get }
     var placeholderImage: UIImage? { get }
     var localOriginalImage: UIImage? { get }
     var localStyledImage: UIImage? { get }
 
-    func saveOriginalImage(originalImage: UIImage, styledImage: UIImage)
+    func saveOriginalImage(_ originalImage: UIImage, styledImage: UIImage)
 }
 
 public extension Avatar {

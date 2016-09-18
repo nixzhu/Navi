@@ -11,16 +11,16 @@ import Navi
 
 struct YepAvatar {
 
-    let avatarURL: NSURL
+    let avatarURL: Foundation.URL
 }
 
 extension YepAvatar: Navi.Avatar {
 
-    var URL: NSURL? {
+    var URL: Foundation.URL? {
         return avatarURL
     }
     var style: AvatarStyle {
-        return .RoundedRectangle(size: CGSize(width: 60, height: 60), cornerRadius: 30, borderWidth: 0)
+        return .roundedRectangle(size: CGSize(width: 60, height: 60), cornerRadius: 30, borderWidth: 0)
     }
     var placeholderImage: UIImage? {
         return UIImage(named: "round_avatar_placeholder")
@@ -32,7 +32,7 @@ extension YepAvatar: Navi.Avatar {
         return nil
     }
 
-    func saveOriginalImage(originalImage: UIImage, styledImage: UIImage) {
+    func saveOriginalImage(_ originalImage: UIImage, styledImage: UIImage) {
     }
 }
 
@@ -63,10 +63,10 @@ class AvatarsViewController: UICollectionViewController {
         "http://7xkszy.com2.z0.glb.qiniucdn.com/pics/avatars/u8516711441533445.jpg?imageView2/1/w/128/h/128",
     ]
 
-    private let avatarCellID = "AvatarCell"
+    fileprivate let avatarCellID = "AvatarCell"
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidLoad() {
@@ -74,40 +74,40 @@ class AvatarsViewController: UICollectionViewController {
 
         title = "Avatars"
 
-        collectionView!.backgroundColor = UIColor.whiteColor()
-        collectionView!.registerNib(UINib(nibName: avatarCellID, bundle: nil), forCellWithReuseIdentifier: avatarCellID)
+        collectionView!.backgroundColor = UIColor.white
+        collectionView!.register(UINib(nibName: avatarCellID, bundle: nil), forCellWithReuseIdentifier: avatarCellID)
         collectionView!.dataSource = self
         collectionView!.alwaysBounceVertical = true
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AvatarsViewController.updateCollectionView(_:)), name: Config.Notification.newUsers, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AvatarsViewController.updateCollectionView(_:)), name: NSNotification.Name(rawValue: Config.Notification.newUsers), object: nil)
     }
 
     // MARK: Actions
 
-    func updateCollectionView(notification: NSNotification) {
+    func updateCollectionView(_ notification: Notification) {
         collectionView?.reloadData()
     }
 
     // MARK: - UICollectionView
 
     enum Section: Int {
-        case Yep
-        case Alpha
+        case yep
+        case alpha
     }
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
 
         return 3
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         switch section {
 
-        case Section.Yep.rawValue:
+        case Section.yep.rawValue:
             return yepAvatarURLStrings.count
 
-        case Section.Alpha.rawValue:
+        case Section.alpha.rawValue:
             return alphaAvatarURLStrings.count
 
         default:
@@ -115,30 +115,30 @@ class AvatarsViewController: UICollectionViewController {
         }
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(avatarCellID, forIndexPath: indexPath) as! AvatarCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: avatarCellID, for: indexPath) as! AvatarCell
 
         return cell
     }
 
-    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
         configureCell(cell as! AvatarCell, atIndexPath: indexPath)
     }
 
-    private func configureCell(cell: AvatarCell, atIndexPath indexPath: NSIndexPath) {
+    fileprivate func configureCell(_ cell: AvatarCell, atIndexPath indexPath: IndexPath) {
 
-        switch indexPath.section {
+        switch (indexPath as NSIndexPath).section {
 
-        case Section.Yep.rawValue:
-            let avatarURLString = yepAvatarURLStrings[indexPath.item]
-            let yepAvatar = YepAvatar(avatarURL: NSURL(string: avatarURLString)!)
+        case Section.yep.rawValue:
+            let avatarURLString = yepAvatarURLStrings[(indexPath as NSIndexPath).item]
+            let yepAvatar = YepAvatar(avatarURL: URL(string: avatarURLString)!)
             cell.configureWithAvatar(yepAvatar)
 
-        case Section.Alpha.rawValue:
-            let avatarURLString = alphaAvatarURLStrings[indexPath.item]
-            let yepAvatar = YepAvatar(avatarURL: NSURL(string: avatarURLString)!)
+        case Section.alpha.rawValue:
+            let avatarURLString = alphaAvatarURLStrings[(indexPath as NSIndexPath).item]
+            let yepAvatar = YepAvatar(avatarURL: URL(string: avatarURLString)!)
             cell.configureWithAvatar(yepAvatar)
 
         default:
