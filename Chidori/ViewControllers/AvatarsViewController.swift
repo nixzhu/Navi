@@ -76,6 +76,7 @@ class AvatarsViewController: UICollectionViewController {
 
         collectionView!.backgroundColor = UIColor.whiteColor()
         collectionView!.registerNib(UINib(nibName: avatarCellID, bundle: nil), forCellWithReuseIdentifier: avatarCellID)
+        collectionView!.dataSource = self
         collectionView!.alwaysBounceVertical = true
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AvatarsViewController.updateCollectionView(_:)), name: Config.Notification.newUsers, object: nil)

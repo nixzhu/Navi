@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500826971BB841A3007D6993 /* ProfileViewController.swift */; };
 		502A2D4B1BB7A19300B3A6B1 /* UIImage+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */; };
 		5057A2921BBFE5C700D3A876 /* UIFont+Chidori.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A2911BBFE5C700D3A876 /* UIFont+Chidori.swift */; };
-		5057A2951BC0F08E00D3A876 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A2941BC0F08E00D3A876 /* TabBarViewController.swift */; };
 		5057A29B1BC13D8100D3A876 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5057A29A1BC13D8100D3A876 /* Config.swift */; };
 		505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */; };
 		505A55E41BB63CFD00159CD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 505A55E21BB63CFD00159CD0 /* Main.storyboard */; };
@@ -25,9 +23,6 @@
 		505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A561C1BB6566F00159CD0 /* AvatarCell.swift */; };
 		505A561F1BB6566F00159CD0 /* AvatarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505A561D1BB6566F00159CD0 /* AvatarCell.xib */; };
 		50970C9C1BBD252D001BFB19 /* UIImageView+Navi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970C9B1BBD252D001BFB19 /* UIImageView+Navi.swift */; };
-		50970C9E1BBD9151001BFB19 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970C9D1BBD9151001BFB19 /* TimelineViewController.swift */; };
-		50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */; };
-		50970CAE1BBDA4BA001BFB19 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */; };
 		50970CB11BBE9ECA001BFB19 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50970CB01BBE9ECA001BFB19 /* Filter.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,10 +51,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		500826971BB841A3007D6993 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = ViewControllers/ProfileViewController.swift; sourceTree = "<group>"; };
 		502A2D4A1BB7A19300B3A6B1 /* UIImage+Navi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Navi.swift"; sourceTree = "<group>"; };
 		5057A2911BBFE5C700D3A876 /* UIFont+Chidori.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Chidori.swift"; path = "Extensions/UIFont+Chidori.swift"; sourceTree = "<group>"; };
-		5057A2941BC0F08E00D3A876 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBarViewController.swift; path = ViewControllers/TabBarViewController.swift; sourceTree = "<group>"; };
 		5057A29A1BC13D8100D3A876 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Helpers/Config.swift; sourceTree = "<group>"; };
 		505A55DB1BB63CFD00159CD0 /* Chidori.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chidori.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		505A55DE1BB63CFD00159CD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,9 +69,6 @@
 		505A561C1BB6566F00159CD0 /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarCell.swift; path = Views/Cells/Avatar/AvatarCell.swift; sourceTree = "<group>"; };
 		505A561D1BB6566F00159CD0 /* AvatarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AvatarCell.xib; path = Views/Cells/Avatar/AvatarCell.xib; sourceTree = "<group>"; };
 		50970C9B1BBD252D001BFB19 /* UIImageView+Navi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Navi.swift"; sourceTree = "<group>"; };
-		50970C9D1BBD9151001BFB19 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineViewController.swift; path = ViewControllers/TimelineViewController.swift; sourceTree = "<group>"; };
-		50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetCell.swift; path = Views/Cells/Tweet/TweetCell.swift; sourceTree = "<group>"; };
-		50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetCell.xib; path = Views/Cells/Tweet/TweetCell.xib; sourceTree = "<group>"; };
 		50970CB01BBE9ECA001BFB19 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Helpers/Filter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,10 +149,7 @@
 		505A561B1BB6559D00159CD0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				5057A2941BC0F08E00D3A876 /* TabBarViewController.swift */,
-				50970C9D1BBD9151001BFB19 /* TimelineViewController.swift */,
 				505A56191BB6559800159CD0 /* AvatarsViewController.swift */,
-				500826971BB841A3007D6993 /* ProfileViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -179,7 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				505A56221BB6568700159CD0 /* Avatar */,
-				50970CAF1BBDA4BD001BFB19 /* Tweet */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -191,15 +177,6 @@
 				505A561D1BB6566F00159CD0 /* AvatarCell.xib */,
 			);
 			name = Avatar;
-			sourceTree = "<group>";
-		};
-		50970CAF1BBDA4BD001BFB19 /* Tweet */ = {
-			isa = PBXGroup;
-			children = (
-				50970CAB1BBDA4BA001BFB19 /* TweetCell.swift */,
-				50970CAC1BBDA4BA001BFB19 /* TweetCell.xib */,
-			);
-			name = Tweet;
 			sourceTree = "<group>";
 		};
 		50970CB21BBE9ECE001BFB19 /* Helpers */ = {
@@ -311,7 +288,6 @@
 				505A55E61BB63CFD00159CD0 /* Assets.xcassets in Resources */,
 				505A561F1BB6566F00159CD0 /* AvatarCell.xib in Resources */,
 				505A55E41BB63CFD00159CD0 /* Main.storyboard in Resources */,
-				50970CAE1BBDA4BA001BFB19 /* TweetCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,14 +305,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5057A2951BC0F08E00D3A876 /* TabBarViewController.swift in Sources */,
-				500826981BB841A4007D6993 /* ProfileViewController.swift in Sources */,
-				50970C9E1BBD9151001BFB19 /* TimelineViewController.swift in Sources */,
 				5057A29B1BC13D8100D3A876 /* Config.swift in Sources */,
 				505A55DF1BB63CFD00159CD0 /* AppDelegate.swift in Sources */,
 				5057A2921BBFE5C700D3A876 /* UIFont+Chidori.swift in Sources */,
 				505A561E1BB6566F00159CD0 /* AvatarCell.swift in Sources */,
-				50970CAD1BBDA4BA001BFB19 /* TweetCell.swift in Sources */,
 				50970CB11BBE9ECA001BFB19 /* Filter.swift in Sources */,
 				505A561A1BB6559800159CD0 /* AvatarsViewController.swift in Sources */,
 			);
@@ -477,11 +449,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8D957V42M6;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Chidori/Realm",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Chidori/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nixWork.Chidori;
@@ -497,11 +465,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8D957V42M6;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Chidori/Realm",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Chidori/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nixWork.Chidori;
