@@ -61,6 +61,7 @@ class AvatarsViewController: UICollectionViewController {
     let alphaAvatarURLStrings = [
         "http://7xkdk4.com2.z0.glb.qiniucdn.com/pics/avatars/u5561381442825024.jpg?imageView2/1/w/128/h/128",
         "http://7xkszy.com2.z0.glb.qiniucdn.com/pics/avatars/u8516711441533445.jpg?imageView2/1/w/128/h/128",
+        "http://q.qlogo.cn/qqapp/1103866037/C31B48C64369A93E57E6B971F41246DE/100",
     ]
 
     fileprivate let avatarCellID = "AvatarCell"
