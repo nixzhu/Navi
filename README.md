@@ -1,11 +1,11 @@
 <p>
-<a href="http://cocoadocs.org/docsets/Navi"><img src="https://img.shields.io/cocoapods/v/Navi.svg?style=flat"></a> 
-<a href="https://github.com/Carthage/Carthage/"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a> 
+<a href="http://cocoadocs.org/docsets/Navi"><img src="https://img.shields.io/cocoapods/v/Navi.svg?style=flat"></a>
+<a href="https://github.com/Carthage/Carthage/"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
 </p>
 
 # Navi
 
-Navi is designed for avatar caching, with style. 
+Navi is designed for avatar caching, with style.
 
 The name of **Navi** from movie [Avatar](https://en.wikipedia.org/wiki/Avatar_(2009_film)).
 
@@ -22,13 +22,13 @@ Swift 3.0, iOS 8.0
 	``` swift
 	protocol Avatar {
 
-	    var URL: NSURL? { get }
+	    var url: URL? { get }
 	    var style: AvatarStyle { get }
 	    var placeholderImage: UIImage? { get }
 	    var localOriginalImage: UIImage? { get }
 	    var localStyledImage: UIImage? { get }
 
-	    func saveOriginalImage(originalImage: UIImage, styledImage: UIImage)
+	    func save(originalImage: UIImage, styledImage: UIImage)
 	}
 	```
 
@@ -47,13 +47,13 @@ Check the demo for more information.
 ### Carthage
 
 ```ogdl
-github "nixzhu/Navi" >= 1.0.0
+github "nixzhu/Navi" >= 1.1.0
 ```
 
 ### CocoaPods
 
 ```ruby
-pod 'Navi', '~> 1.0.0'
+pod 'Navi', '~> 1.1.0'
 ```
 
 ## Contact
