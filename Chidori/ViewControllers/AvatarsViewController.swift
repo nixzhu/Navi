@@ -11,16 +11,20 @@ import Navi
 
 struct YepAvatar {
 
-    let avatarURL: Foundation.URL
+    let avatarURL: URL
 }
 
 extension YepAvatar: Navi.Avatar {
 
-    var URL: Foundation.URL? {
+    var url: URL? {
         return avatarURL
     }
     var style: AvatarStyle {
-        return .roundedRectangle(size: CGSize(width: 60, height: 60), cornerRadius: 30, borderWidth: 0)
+        return .roundedRectangle(
+            size: CGSize(width: 60, height: 60),
+            cornerRadius: 30,
+            borderWidth: 0
+        )
     }
     var placeholderImage: UIImage? {
         return UIImage(named: "round_avatar_placeholder")
@@ -32,7 +36,8 @@ extension YepAvatar: Navi.Avatar {
         return nil
     }
 
-    func saveOriginalImage(_ originalImage: UIImage, styledImage: UIImage) {
+    func save(originalImage: UIImage, styledImage: UIImage) {
+        // TODO: save images
     }
 }
 
@@ -98,7 +103,7 @@ class AvatarsViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
 
-        return 3
+        return 2
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

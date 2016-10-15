@@ -8,13 +8,13 @@
 
 import UIKit
 
-open class AvatarPod {
+final public class AvatarPod {
 
-    fileprivate static let sharedInstance = AvatarPod()
+    private static let sharedInstance = AvatarPod()
 
-    fileprivate let cache = NSCache<NSString, UIImage>()
+    private let cache = NSCache<NSString, UIImage>()
 
-    fileprivate lazy var session = URLSession(configuration: URLSessionConfiguration.default)
+    private lazy var session = URLSession(configuration: URLSessionConfiguration.default)
 
     public enum CacheType {
         case memory
@@ -24,13 +24,13 @@ open class AvatarPod {
 
     public typealias Completion = (_ finished: Bool, _ image: UIImage, _ cacheType: CacheType) -> Void
 
-    fileprivate struct Request {
+    private struct Request {
 
         let avatar: Avatar
         let completion: Completion
 
-        var URL: Foundation.URL? {
-            return avatar.URL as URL?
+        var url: URL? {
+            return avatar.url
         }
 
         var key: String {
@@ -38,32 +38,32 @@ open class AvatarPod {
         }
     }
 
-    fileprivate class RequestTank {
+    private class RequestTank {
 
-        let URL: Foundation.URL
+        let url: URL
         var requests: [Request] = []
 
-        init(URL: Foundation.URL) {
-            self.URL = URL
+        init(url: URL) {
+            self.url = url
         }
     }
 
-    fileprivate class RequestPool {
+    private class RequestPool {
 
         fileprivate var requestTanks = [URL: RequestTank]()
 
         func addRequest(_ request: Request) {
 
-            guard let URL = request.URL else {
+            guard let url = request.url else {
                 return
             }
 
-            if let requestTank = requestTanks[URL] {
+            if let requestTank = requestTanks[url] {
                 requestTank.requests.append(request)
 
             } else {
-                let requestTank = RequestTank(URL: URL)
-                requestTanks[URL] = requestTank
+                let requestTank = RequestTank(url: url)
+                requestTanks[url] = requestTank
                 requestTank.requests.append(request)
             }
         }
@@ -87,12 +87,12 @@ open class AvatarPod {
         }
     }
 
-    fileprivate var requestPool = RequestPool()
+    private var requestPool = RequestPool()
 
-    fileprivate let requestQueue = DispatchQueue(label: "com.nixWork.Navi.requestQueue", attributes: [])
-    fileprivate let cacheQueue = DispatchQueue.global(qos: .background)
+    private let requestQueue = DispatchQueue(label: "com.nixWork.Navi.requestQueue", attributes: [])
+    private let cacheQueue = DispatchQueue.global(qos: .background)
 
-    fileprivate func completeRequest(_ request: Request, withStyledImage styledImage: UIImage, cacheType: CacheType) {
+    private func completeRequest(_ request: Request, withStyledImage styledImage: UIImage, cacheType: CacheType) {
 
         DispatchQueue.main.async {
             request.completion(true, styledImage, cacheType)
@@ -101,7 +101,7 @@ open class AvatarPod {
         cache.setObject(styledImage, forKey: request.key as NSString)
     }
 
-    fileprivate func completeRequestsWithURL(_ URL: Foundation.URL, image: UIImage, cacheType: CacheType) {
+    private func completeRequestsWithURL(_ URL: Foundation.URL, image: UIImage, cacheType: CacheType) {
 
         requestQueue.async {
 
@@ -123,7 +123,7 @@ open class AvatarPod {
 
                         // save images to local
 
-                        request.avatar.saveOriginalImage(image, styledImage: styledImage)
+                        request.avatar.save(originalImage: image, styledImage: styledImage)
                     }
                 })
             }
@@ -134,9 +134,9 @@ open class AvatarPod {
 
     // MARK: - API
 
-    open class func wakeAvatar(_ avatar: Avatar, completion: @escaping Completion) {
+    public class func wakeAvatar(_ avatar: Avatar, completion: @escaping Completion) {
 
-        guard let URL = avatar.URL else {
+        guard let url = avatar.url else {
             completion(false, avatar.placeholderImage ?? UIImage(), .memory)
             return
         }
@@ -161,27 +161,27 @@ open class AvatarPod {
 
                         sharedInstance.requestPool.addRequest(request)
 
-                        if sharedInstance.requestPool.requestsWithURL(URL as URL).count > 1 {
+                        if sharedInstance.requestPool.requestsWithURL(url).count > 1 {
                             // do nothing
 
                         } else {
                             sharedInstance.cacheQueue.async {
 
                                 if let image = avatar.localOriginalImage {
-                                    sharedInstance.completeRequestsWithURL(URL as URL, image: image, cacheType: .disk)
+                                    sharedInstance.completeRequestsWithURL(url, image: image, cacheType: .disk)
 
                                 } else {
-                                    let task = sharedInstance.session.dataTask(with: URL, completionHandler: { data, response, error in
+                                    let task = sharedInstance.session.dataTask(with: url, completionHandler: { data, response, error in
 
                                         guard error == nil, let data = data, let image = UIImage(data: data) else {
                                             sharedInstance.requestQueue.async {
-                                                sharedInstance.requestPool.removeRequestsWithURL(URL)
+                                                sharedInstance.requestPool.removeRequestsWithURL(url)
                                             }
 
                                             return
                                         }
 
-                                        sharedInstance.completeRequestsWithURL(URL, image: image, cacheType: .cloud)
+                                        sharedInstance.completeRequestsWithURL(url, image: image, cacheType: .cloud)
                                     }) 
                                     
                                     task.resume()
@@ -194,7 +194,7 @@ open class AvatarPod {
         }
     }
     
-    open class func clear() {
+    public class func clear() {
         
         sharedInstance.requestPool.removeAllRequests()
         

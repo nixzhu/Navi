@@ -8,28 +8,7 @@
 
 import Foundation
 
-public func ==(lhs: AvatarStyle, rhs: AvatarStyle) -> Bool {
-
-    switch (lhs, rhs) {
-
-    case (.original, .original):
-        return true
-
-    case (.rectangle(let sizeA), .rectangle(let sizeB)) where sizeA == sizeB:
-        return true
-
-    case (.roundedRectangle(let sizeA, let cornerRadiusA, let borderWidthA), .roundedRectangle(let sizeB, let cornerRadiusB, let borderWidthB)) where (sizeA == sizeB && cornerRadiusA == cornerRadiusB && borderWidthA == borderWidthB):
-        return true
-
-    case (.freeform(let nameA, _), .freeform(let nameB, _)) where nameA == nameB:
-        return true
-
-    default:
-        return false
-    }
-}
-
-public enum AvatarStyle: Equatable {
+public enum AvatarStyle {
 
     case original
     case rectangle(size: CGSize)
@@ -37,6 +16,9 @@ public enum AvatarStyle: Equatable {
 
     public typealias Transform = (UIImage) -> UIImage?
     case freeform(name: String, transform: Transform)
+}
+
+extension AvatarStyle {
 
     var hashString: String {
 
@@ -52,26 +34,50 @@ public enum AvatarStyle: Equatable {
             return "RoundedRectangle-\(size)-\(cornerRadius)-\(borderWidth)-"
 
         case .freeform(let name, _):
-            return "Free-\(name)-"
+            return "Freeform-\(name)-"
+        }
+    }
+}
+
+extension AvatarStyle: Equatable {
+
+    public static func ==(lhs: AvatarStyle, rhs: AvatarStyle) -> Bool {
+
+        switch (lhs, rhs) {
+
+        case (.original, .original):
+            return true
+
+        case (.rectangle(let sizeA), .rectangle(let sizeB)) where sizeA == sizeB:
+            return true
+
+        case (.roundedRectangle(let sizeA, let cornerRadiusA, let borderWidthA), .roundedRectangle(let sizeB, let cornerRadiusB, let borderWidthB)) where (sizeA == sizeB && cornerRadiusA == cornerRadiusB && borderWidthA == borderWidthB):
+            return true
+
+        case (.freeform(let nameA, _), .freeform(let nameB, _)) where nameA == nameB:
+            return true
+            
+        default:
+            return false
         }
     }
 }
 
 public protocol Avatar {
 
-    var URL: Foundation.URL? { get }
+    var url: URL? { get }
     var style: AvatarStyle { get }
     var placeholderImage: UIImage? { get }
     var localOriginalImage: UIImage? { get }
     var localStyledImage: UIImage? { get }
 
-    func saveOriginalImage(_ originalImage: UIImage, styledImage: UIImage)
+    func save(originalImage: UIImage, styledImage: UIImage)
 }
 
 public extension Avatar {
 
     public var key: String {
-        return style.hashString + (URL?.absoluteString ?? "")
+        return style.hashString + (url?.absoluteString ?? "")
     }
 }
 
