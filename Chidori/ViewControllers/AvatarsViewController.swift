@@ -90,7 +90,7 @@ class AvatarsViewController: UICollectionViewController {
 
     // MARK: Actions
 
-    func updateCollectionView(_ notification: Notification) {
+    @objc func updateCollectionView(_ notification: Notification) {
         collectionView?.reloadData()
     }
 

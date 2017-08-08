@@ -51,7 +51,7 @@ func compositeSourceOver(_ overlay: CIImage) -> Filter {
 
         let cropRect = image.extent
 
-        return filter!.outputImage!.cropping(to: cropRect)
+        return filter!.outputImage!.cropped(to: cropRect)
     }
 }
 
